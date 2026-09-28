@@ -20,7 +20,10 @@ const photos = await getCollection('photos');
   <TabsIdeaLists lists={lists} />
 
   <section aria-labelledby="shoppable-heading" class="max-w-xl mx-auto px-4 py-6">
-    <h2 id="shoppable-heading" class="text-lg font-bold mb-3 text-ink-900">En situation</h2>
+    <h2 id="shoppable-heading" class="mb-3 flex items-center gap-2 text-lg font-extrabold text-ink-900">
+      <span class="h-5 w-1.5 rounded-full bg-gradient-to-b from-brand-500 to-accent-500" aria-hidden="true" />
+      En situation
+    </h2>
     <p class="mb-3 text-sm text-neutral-600">Touchez les pastilles sur les photos pour voir les produits.</p>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       {photos.map((photo) => <ShoppablePhoto photo={photo} />)}

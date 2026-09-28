@@ -9,19 +9,19 @@ const rows = [
 ];
 ---
 
-<div class="overflow-x-auto rounded-lg border border-neutral-200">
+<div class="overflow-hidden rounded-2xl border border-neutral-100 shadow-sm">
   <table class="w-full text-sm">
     <caption class="sr-only">Grille indicative des commissions Amazon Partenaires par catégorie</caption>
     <thead>
-      <tr class="bg-neutral-100 text-left">
-        <th scope="col" class="px-3 py-2 font-bold text-ink-900">Catégorie</th>
-        <th scope="col" class="px-3 py-2 font-bold text-ink-900 whitespace-nowrap">Commission</th>
+      <tr class="bg-gradient-to-r from-brand-600 to-accent-600 text-left">
+        <th scope="col" class="px-3 py-2.5 font-bold text-white">Catégorie</th>
+        <th scope="col" class="px-3 py-2.5 font-bold text-white whitespace-nowrap">Commission</th>
       </tr>
     </thead>
     <tbody>
       {
         rows.map((row, i) => (
-          <tr class={i % 2 === 0 ? 'bg-white' : 'bg-neutral-50'}>
+          <tr class={i % 2 === 0 ? 'bg-white' : 'bg-brand-50/50'}>
             <td class="px-3 py-2 text-ink-900">{row.category}</td>
             <td class="px-3 py-2 font-semibold text-brand-600 whitespace-nowrap">{row.rate}</td>
           </tr>

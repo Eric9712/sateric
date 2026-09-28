@@ -12,23 +12,25 @@ const { title, price, image, affiliateUrl, listTitle, isStarterProduct = false }
 const priceLabel = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(price);
 ---
 
-<article class="relative flex flex-col rounded-xl border border-neutral-200 bg-white shadow-sm overflow-hidden">
+<article class="group relative flex flex-col overflow-hidden rounded-2xl border border-neutral-100 bg-white shadow-sm transition-shadow hover:shadow-lg">
   {
     isStarterProduct && (
-      <span class="absolute top-2 left-2 z-10 rounded-full bg-brand-500 px-2 py-0.5 text-xs font-bold text-white shadow">
-        Coup de cœur
+      <span class="absolute top-2 left-2 z-10 inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-brand-600 to-accent-600 px-2.5 py-1 text-xs font-bold text-white shadow-md">
+        🔥 Coup de cœur
       </span>
     )
   }
-  <img
-    src={image}
-    alt={title}
-    width="600"
-    height="600"
-    loading="lazy"
-    decoding="async"
-    class="aspect-square w-full object-cover"
-  />
+  <div class="overflow-hidden bg-neutral-50">
+    <img
+      src={image}
+      alt={title}
+      width="600"
+      height="600"
+      loading="lazy"
+      decoding="async"
+      class="aspect-square w-full object-cover transition-transform duration-300 group-hover:scale-105"
+    />
+  </div>
   <div class="flex flex-1 flex-col gap-1 p-3">
     <h3 class="text-sm font-semibold text-ink-900 line-clamp-2">{title}</h3>
     <p class="text-base font-bold text-brand-600">{priceLabel}</p>
@@ -41,7 +43,7 @@ const priceLabel = new Intl.NumberFormat('fr-FR', { style: 'currency', currency:
       data-product-title={title}
       data-list-title={listTitle}
       data-product-price={price}
-      class="tap-target mt-auto inline-flex items-center justify-center rounded-lg bg-brand-500 px-3 py-2 text-sm font-bold text-white active:bg-brand-700"
+      class="tap-target mt-auto inline-flex items-center justify-center rounded-full bg-gradient-to-r from-brand-600 to-accent-600 px-3 py-2 text-sm font-bold text-white shadow-sm transition-transform active:scale-95"
     >
       Voir le prix sur Amazon
     </a>

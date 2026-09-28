@@ -1,12 +1,24 @@
 @import "tailwindcss";
 
 @theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+
   --color-brand-50: #fff1f0;
   --color-brand-100: #ffe1de;
+  --color-brand-400: #f2704f;
   --color-brand-500: #e8503a;
+  /* brand-600/700 are the only shades used behind white text: both verified ≥4.5:1 (WCAG AA) */
   --color-brand-600: #d43f2a;
   --color-brand-700: #b23222;
+
+  --color-accent-400: #ff6f9c;
+  --color-accent-500: #ec4d80;
+  /* accent-600 verified ≥4.5:1 behind white text (WCAG AA) */
+  --color-accent-600: #c2255f;
+
   --color-ink-900: #1a1a1a;
+  --color-canvas: #fdf9f6;
+
   --color-disclosure-bg: #fff7cd;
   --color-disclosure-text: #6b5300;
   --color-disclosure-border: #e6c200;
@@ -17,12 +29,19 @@ html {
 }
 
 body {
-  background-color: #fafafa;
+  background-color: var(--color-canvas);
   color: var(--color-ink-900);
+  font-family: var(--font-sans);
 }
 
 /* Cible tactile minimale (WCAG 2.5.5) pour les pastilles Shoppable Photos */
 .tap-target {
   min-width: 44px;
   min-height: 44px;
+}
+
+/* Masque de fondu pour indiquer qu'une liste d'onglets défile horizontalement */
+.fade-edge {
+  mask-image: linear-gradient(to right, black calc(100% - 28px), transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, black calc(100% - 28px), transparent 100%);
 }

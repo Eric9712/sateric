@@ -26,8 +26,10 @@ Cette vidéo contient des liens affiliés Amazon. En tant que Partenaire Amazon,
   description="Mécanique des cookies, grille de commissions, règles Amazon Partenaires et cadre légal français (loi influenceurs, DGCCRF) expliqués simplement."
 >
   <div class="max-w-xl mx-auto px-4 py-8 flex flex-col gap-10">
-    <header>
-      <a href="/" class="text-sm font-semibold text-brand-600">&larr; Retour à la boutique</a>
+    <header class="rounded-2xl bg-gradient-to-br from-brand-50 to-accent-400/10 p-5">
+      <a href="/" class="inline-flex items-center gap-1 text-sm font-semibold text-brand-600">
+        <span aria-hidden="true">&larr;</span> Retour à la boutique
+      </a>
       <h1 class="mt-2 text-2xl font-extrabold text-ink-900">Guide pratique &amp; réglementation</h1>
       <p class="mt-2 text-sm text-neutral-600">
         Ce que je respecte en tant que Partenaire Amazon, et ce que dit la loi française sur la publicité
@@ -36,17 +38,20 @@ Cette vidéo contient des liens affiliés Amazon. En tant que Partenaire Amazon,
     </header>
 
     <section aria-labelledby="cookies-heading" class="flex flex-col gap-3">
-      <h2 id="cookies-heading" class="text-lg font-bold text-ink-900">Mécanique des cookies</h2>
-      <ul class="flex flex-col gap-2 text-sm text-neutral-700">
-        <li>
+      <h2 id="cookies-heading" class="flex items-center gap-2 text-lg font-extrabold text-ink-900">
+        <span class="h-5 w-1.5 rounded-full bg-gradient-to-b from-brand-500 to-accent-500" aria-hidden="true" />
+        Mécanique des cookies
+      </h2>
+      <ul class="flex flex-col gap-2.5 text-sm text-neutral-700">
+        <li class="rounded-xl border border-neutral-100 bg-white p-3 shadow-sm">
           <strong class="text-ink-900">Cookie de 24 heures :</strong> commissionnement sur la totalité du panier
           validé durant cette période, même sur des produits hors vitrine.
         </li>
-        <li>
+        <li class="rounded-xl border border-neutral-100 bg-white p-3 shadow-sm">
           <strong class="text-ink-900">Extension panier à 90 jours :</strong> la commission est conservée si
           l'article est ajouté au panier sous 24h et validé dans les 89 jours suivants.
         </li>
-        <li>
+        <li class="rounded-xl border border-neutral-100 bg-white p-3 shadow-sm">
           <strong class="text-ink-900">Écrasement du cookie :</strong> la commission est attribuée au dernier
           lien d'affiliation cliqué avant le paiement.
         </li>
@@ -54,13 +59,19 @@ Cette vidéo contient des liens affiliés Amazon. En tant que Partenaire Amazon,
     </section>
 
     <section aria-labelledby="commissions-heading" class="flex flex-col gap-3">
-      <h2 id="commissions-heading" class="text-lg font-bold text-ink-900">Grille indicative des commissions</h2>
+      <h2 id="commissions-heading" class="flex items-center gap-2 text-lg font-extrabold text-ink-900">
+        <span class="h-5 w-1.5 rounded-full bg-gradient-to-b from-brand-500 to-accent-500" aria-hidden="true" />
+        Grille indicative des commissions
+      </h2>
       <CommissionTable />
     </section>
 
     <section aria-labelledby="interdictions-heading" class="flex flex-col gap-3">
-      <h2 id="interdictions-heading" class="text-lg font-bold text-ink-900">Règles d'interdiction strictes (Amazon)</h2>
-      <ul class="flex flex-col gap-2 text-sm text-neutral-700 list-disc list-inside">
+      <h2 id="interdictions-heading" class="flex items-center gap-2 text-lg font-extrabold text-ink-900">
+        <span class="h-5 w-1.5 rounded-full bg-gradient-to-b from-brand-500 to-accent-500" aria-hidden="true" />
+        Règles d'interdiction strictes (Amazon)
+      </h2>
+      <ul class="flex flex-col gap-2 text-sm text-neutral-700 list-disc list-inside rounded-xl border border-neutral-100 bg-white p-4 shadow-sm">
         <li>Achats personnels ou incitation aux proches/famille : strictement interdits.</li>
         <li>
           Diffusion sur des canaux privés (e-mails privés, newsletters fermées, SMS, groupes Telegram/WhatsApp
@@ -70,7 +81,10 @@ Cette vidéo contient des liens affiliés Amazon. En tant que Partenaire Amazon,
     </section>
 
     <section aria-labelledby="legal-heading" class="flex flex-col gap-3">
-      <h2 id="legal-heading" class="text-lg font-bold text-ink-900">Cadre légal français (Loi influenceurs / DGCCRF)</h2>
+      <h2 id="legal-heading" class="flex items-center gap-2 text-lg font-extrabold text-ink-900">
+        <span class="h-5 w-1.5 rounded-full bg-gradient-to-b from-brand-500 to-accent-500" aria-hidden="true" />
+        Cadre légal français (Loi influenceurs / DGCCRF)
+      </h2>
       <p class="text-sm text-neutral-700">
         Mentions obligatoires : <strong class="text-ink-900">« Collaboration commerciale »</strong> ou <strong class="text-ink-900">« Publicité »</strong>. Les formulations imprécises comme <em>ad</em>, <em>collab</em> ou <em>partner</em> seules sont interdites.
       </p>
@@ -85,7 +99,10 @@ Cette vidéo contient des liens affiliés Amazon. En tant que Partenaire Amazon,
     </section>
 
     <section aria-labelledby="templates-heading" class="flex flex-col gap-3">
-      <h2 id="templates-heading" class="text-lg font-bold text-ink-900">Modèles de mentions prêts à l'emploi</h2>
+      <h2 id="templates-heading" class="flex items-center gap-2 text-lg font-extrabold text-ink-900">
+        <span class="h-5 w-1.5 rounded-full bg-gradient-to-b from-brand-500 to-accent-500" aria-hidden="true" />
+        Modèles de mentions prêts à l'emploi
+      </h2>
       <div class="flex flex-col gap-3">
         <CopyableTemplate label="Story" text={storyTemplate} />
         <CopyableTemplate label="Reel / TikTok / Short" text={reelTemplate} />
