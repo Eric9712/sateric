@@ -10,7 +10,7 @@ const { lists } = Astro.props;
 ---
 
 <section aria-labelledby="idea-lists-heading" class="px-4 py-6">
-  <div class="max-w-xl mx-auto rounded-3xl bg-white p-4 shadow-sm ring-1 ring-black/5">
+  <div class="max-w-xl lg:max-w-5xl mx-auto rounded-3xl bg-white p-4 lg:p-6 shadow-sm ring-1 ring-black/5">
     <h2 id="idea-lists-heading" class="mb-3 flex items-center gap-2 text-lg font-extrabold text-ink-900">
       <span class="h-5 w-1.5 rounded-full bg-gradient-to-b from-brand-500 to-accent-500" aria-hidden="true" />
       Mes listes d'idées
@@ -40,7 +40,7 @@ const { lists } = Astro.props;
       lists.map((list, i) => (
         <div role="tabpanel" id={`panel-${list.id}`} aria-labelledby={`tab-${list.id}`} hidden={i !== 0} class="pt-4">
           <p class="mb-3 text-sm text-neutral-500">{list.data.title}</p>
-          <div class="grid grid-cols-3 gap-2 sm:gap-3 lg:grid-cols-4 lg:gap-4">
+          <div class="grid grid-cols-3 gap-2 sm:gap-3 lg:grid-cols-5 lg:gap-4">
             {list.data.products.map((product) => (
               <ProductCard
                 title={product.title}
