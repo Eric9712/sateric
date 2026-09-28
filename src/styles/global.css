@@ -39,9 +39,3 @@ body {
   min-width: 44px;
   min-height: 44px;
 }
-
-/* Masque de fondu pour indiquer qu'une liste d'onglets défile horizontalement */
-.fade-edge {
-  mask-image: linear-gradient(to right, black calc(100% - 28px), transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, black calc(100% - 28px), transparent 100%);
-}

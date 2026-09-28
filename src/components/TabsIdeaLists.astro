@@ -16,30 +16,24 @@ const { lists } = Astro.props;
       Mes listes d'idées
     </h2>
 
-    <div class="relative -mx-4">
-      <div
-        role="tablist"
-        aria-label="Listes thématiques"
-        class="fade-edge flex gap-2 overflow-x-auto pb-2 px-4"
-      >
-        {
-          lists.map((list, i) => (
-            <button
-              type="button"
-              role="tab"
-              id={`tab-${list.id}`}
-              aria-controls={`panel-${list.id}`}
-              aria-selected={i === 0 ? 'true' : 'false'}
-              tabindex={i === 0 ? 0 : -1}
-              data-tab-trigger
-              data-active={i === 0 ? 'true' : 'false'}
-              class="tap-target shrink-0 whitespace-nowrap rounded-full border border-neutral-200 bg-white px-4 text-sm font-semibold text-ink-900 shadow-sm transition-all data-[active=true]:border-transparent data-[active=true]:bg-gradient-to-r data-[active=true]:from-brand-600 data-[active=true]:to-accent-600 data-[active=true]:text-white data-[active=true]:shadow-md data-[active=true]:scale-[1.03]"
-            >
-              {list.data.icon} {list.data.tabLabel ?? list.data.title}
-            </button>
-          ))
-        }
-      </div>
+    <div role="tablist" aria-label="Listes thématiques" class="flex flex-wrap gap-2">
+      {
+        lists.map((list, i) => (
+          <button
+            type="button"
+            role="tab"
+            id={`tab-${list.id}`}
+            aria-controls={`panel-${list.id}`}
+            aria-selected={i === 0 ? 'true' : 'false'}
+            tabindex={i === 0 ? 0 : -1}
+            data-tab-trigger
+            data-active={i === 0 ? 'true' : 'false'}
+            class="tap-target whitespace-nowrap rounded-full border border-neutral-200 bg-white px-4 text-sm font-semibold text-ink-900 shadow-sm transition-all data-[active=true]:border-transparent data-[active=true]:bg-gradient-to-r data-[active=true]:from-brand-600 data-[active=true]:to-accent-600 data-[active=true]:text-white data-[active=true]:shadow-md data-[active=true]:scale-[1.03]"
+          >
+            {list.data.icon} {list.data.tabLabel ?? list.data.title}
+          </button>
+        ))
+      }
     </div>
 
     {
