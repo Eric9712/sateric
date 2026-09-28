@@ -46,7 +46,7 @@ const { lists } = Astro.props;
       lists.map((list, i) => (
         <div role="tabpanel" id={`panel-${list.id}`} aria-labelledby={`tab-${list.id}`} hidden={i !== 0} class="pt-4">
           <p class="mb-3 text-sm text-neutral-500">{list.data.title}</p>
-          <div class="grid grid-cols-2 gap-3">
+          <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
             {list.data.products.map((product) => (
               <ProductCard
                 title={product.title}
