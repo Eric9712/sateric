@@ -40,19 +40,46 @@ const { lists } = Astro.props;
       lists.map((list, i) => (
         <div role="tabpanel" id={`panel-${list.id}`} aria-labelledby={`tab-${list.id}`} hidden={i !== 0} class="pt-4">
           <p class="mb-3 text-sm text-neutral-500">{list.data.title}</p>
-          <div class="grid grid-cols-3 gap-2 sm:gap-3 lg:grid-cols-5 lg:gap-4">
-            {list.data.products.map((product) => (
-              <ProductCard
-                title={product.title}
-                price={product.price}
-                originalPrice={product.originalPrice}
-                image={product.image}
-                affiliateUrl={product.affiliateUrl}
-                listTitle={list.data.title}
-                isStarterProduct={product.isStarterProduct}
-              />
-            ))}
-          </div>
+
+          {list.data.subIdeas.length > 0 ? (
+            <div class="flex flex-col gap-6">
+              {list.data.subIdeas.map((subIdea) => (
+                <div>
+                  <h3 class="mb-2 flex items-center gap-1.5 text-sm font-bold text-ink-900">
+                    <span class="h-3.5 w-1 rounded-full bg-accent-500" aria-hidden="true" />
+                    {subIdea.title}
+                  </h3>
+                  <div class="grid grid-cols-3 gap-2 sm:gap-3 lg:grid-cols-5 lg:gap-4">
+                    {subIdea.products.map((product) => (
+                      <ProductCard
+                        title={product.title}
+                        price={product.price}
+                        originalPrice={product.originalPrice}
+                        image={product.image}
+                        affiliateUrl={product.affiliateUrl}
+                        listTitle={`${list.data.title} — ${subIdea.title}`}
+                        isStarterProduct={product.isStarterProduct}
+                      />
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div class="grid grid-cols-3 gap-2 sm:gap-3 lg:grid-cols-5 lg:gap-4">
+              {list.data.products.map((product) => (
+                <ProductCard
+                  title={product.title}
+                  price={product.price}
+                  originalPrice={product.originalPrice}
+                  image={product.image}
+                  affiliateUrl={product.affiliateUrl}
+                  listTitle={list.data.title}
+                  isStarterProduct={product.isStarterProduct}
+                />
+              ))}
+            </div>
+          )}
         </div>
       ))
     }

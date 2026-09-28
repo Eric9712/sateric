@@ -2,29 +2,35 @@ title: "Ma boîte à leurres indispensable"
 tabLabel: "Boîte à leurres"
 icon: "🐟"
 order: 2
-products:
-  - title: "Leurres souples assortis (lot de 20)"
-    price: 14.90
-    image: "/images/placeholder-product.svg"
-    affiliateUrl: "https://amzn.to/REMPLACER7"
-    isStarterProduct: true
-  - title: "Cuillères ondulantes (lot de 5)"
-    price: 16.90
-    image: "/images/placeholder-product.svg"
-    affiliateUrl: "https://amzn.to/REMPLACER8"
-  - title: "Poissons nageurs"
-    price: 22.00
-    image: "/images/placeholder-product.svg"
-    affiliateUrl: "https://amzn.to/REMPLACER9"
-  - title: "Boîte de rangement étanche pour leurres"
-    price: 18.90
-    image: "/images/placeholder-product.svg"
-    affiliateUrl: "https://amzn.to/REMPLACER10"
-  - title: "Bas de ligne fluorocarbone"
-    price: 12.99
-    image: "/images/placeholder-product.svg"
-    affiliateUrl: "https://amzn.to/REMPLACER11"
-  - title: "Émerillons agrafés (lot de 50)"
-    price: 7.90
-    image: "/images/placeholder-product.svg"
-    affiliateUrl: "https://amzn.to/REMPLACER12"
+subIdeas:
+  - title: "Leurres souples"
+    products:
+      - title: "Leurres souples assortis (lot de 20)"
+        price: 14.90
+        image: "/images/placeholder-product.svg"
+        affiliateUrl: "https://amzn.to/REMPLACER7"
+        isStarterProduct: true
+      - title: "Bas de ligne fluorocarbone"
+        price: 12.99
+        image: "/images/placeholder-product.svg"
+        affiliateUrl: "https://amzn.to/REMPLACER11"
+  - title: "Leurres durs & cuillères"
+    products:
+      - title: "Cuillères ondulantes (lot de 5)"
+        price: 16.90
+        image: "/images/placeholder-product.svg"
+        affiliateUrl: "https://amzn.to/REMPLACER8"
+      - title: "Poissons nageurs"
+        price: 22.00
+        image: "/images/placeholder-product.svg"
+        affiliateUrl: "https://amzn.to/REMPLACER9"
+  - title: "Rangement"
+    products:
+      - title: "Boîte de rangement étanche pour leurres"
+        price: 18.90
+        image: "/images/placeholder-product.svg"
+        affiliateUrl: "https://amzn.to/REMPLACER10"
+      - title: "Émerillons agrafés (lot de 50)"
+        price: 7.90
+        image: "/images/placeholder-product.svg"
+        affiliateUrl: "https://amzn.to/REMPLACER12"

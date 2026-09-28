@@ -21,7 +21,19 @@ const lists = defineCollection({
     tabLabel: z.string().optional(),
     icon: z.string().optional(),
     order: z.number().default(0),
-    products: z.array(productSchema),
+    // Cas simple : produits directement dans la liste.
+    products: z.array(productSchema).optional().default([]),
+    // Cas avancé : produits groupés par sous-idée (ex. "Leurres souples",
+    // "Leurres durs"...). Si renseigné, prend le pas sur `products` ci-dessus.
+    subIdeas: z
+      .array(
+        z.object({
+          title: z.string(),
+          products: z.array(productSchema),
+        })
+      )
+      .optional()
+      .default([]),
   }),
 });
 

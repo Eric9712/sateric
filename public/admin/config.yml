@@ -53,8 +53,10 @@ collections:
       - label: "Produits"
         name: "products"
         widget: "list"
+        required: false
         summary: "{{title}} — {{price}} €"
-        fields:
+        hint: "Cas simple : produits directement listés ici. Si vous utilisez « Sous-idées » ci-dessous à la place, laissez ce champ vide."
+        fields: &productFields
           - { label: "Titre produit", name: "title", widget: "string" }
           - { label: "Prix indicatif (€)", name: "price", widget: "number", value_type: "float" }
           - {
@@ -74,6 +76,19 @@ collections:
               default: false,
               required: false,
             }
+      - label: "Sous-idées (optionnel)"
+        name: "subIdeas"
+        widget: "list"
+        required: false
+        summary: "{{title}}"
+        hint: "Cas avancé : regroupe les produits par sous-thème à l'intérieur de cette liste (ex. « Leurres souples », « Leurres durs », « Rangement »). Si vous remplissez ceci, le champ « Produits » ci-dessus est ignoré."
+        fields:
+          - { label: "Titre de la sous-idée", name: "title", widget: "string" }
+          - label: "Produits"
+            name: "products"
+            widget: "list"
+            summary: "{{title}} — {{price}} €"
+            fields: *productFields
 
   - name: "photos"
     label: "Shoppable Photos"
