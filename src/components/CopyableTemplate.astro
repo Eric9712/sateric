@@ -1,0 +1,41 @@
+---
+interface Props {
+  label: string;
+  text: string;
+}
+
+const { label, text } = Astro.props;
+---
+
+<div class="rounded-lg border border-neutral-200 bg-white p-3">
+  <div class="flex items-center justify-between gap-2">
+    <h4 class="text-sm font-bold text-ink-900">{label}</h4>
+    <button
+      type="button"
+      data-copy-button
+      data-copy-text={text}
+      class="tap-target shrink-0 rounded-md border border-brand-500 px-2 py-1 text-xs font-bold text-brand-600 active:bg-brand-50"
+    >
+      Copier
+    </button>
+  </div>
+  <p class="mt-2 whitespace-pre-line text-sm text-neutral-700">{text}</p>
+</div>
+
+<script>
+  document.addEventListener('click', async (event) => {
+    const button = (event.target as HTMLElement)?.closest<HTMLButtonElement>('[data-copy-button]');
+    if (!button) return;
+    const text = button.dataset.copyText ?? '';
+    try {
+      await navigator.clipboard.writeText(text);
+      const original = button.textContent;
+      button.textContent = 'Copié !';
+      setTimeout(() => {
+        button.textContent = original;
+      }, 1500);
+    } catch {
+      // Presse-papiers indisponible (contexte non sécurisé, permission refusée) : pas d'action.
+    }
+  });
+</script>

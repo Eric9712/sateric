@@ -1,0 +1,90 @@
+---
+import ProductCard from './ProductCard.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  lists: CollectionEntry<'lists'>[];
+}
+
+const { lists } = Astro.props;
+---
+
+<section aria-labelledby="idea-lists-heading" class="max-w-xl mx-auto px-4 py-6">
+  <h2 id="idea-lists-heading" class="text-lg font-bold mb-3 text-ink-900">Mes listes d'idées</h2>
+
+  <div
+    role="tablist"
+    aria-label="Listes thématiques"
+    class="flex gap-2 overflow-x-auto pb-2 -mx-4 px-4"
+  >
+    {
+      lists.map((list, i) => (
+        <button
+          type="button"
+          role="tab"
+          id={`tab-${list.id}`}
+          aria-controls={`panel-${list.id}`}
+          aria-selected={i === 0 ? 'true' : 'false'}
+          tabindex={i === 0 ? 0 : -1}
+          data-tab-trigger
+          data-active={i === 0 ? 'true' : 'false'}
+          class="tap-target whitespace-nowrap rounded-full border border-neutral-200 bg-white px-4 text-sm font-semibold text-ink-900 data-[active=true]:bg-brand-500 data-[active=true]:text-white data-[active=true]:border-brand-500"
+        >
+          {list.data.icon} {list.data.title}
+        </button>
+      ))
+    }
+  </div>
+
+  {
+    lists.map((list, i) => (
+      <div
+        role="tabpanel"
+        id={`panel-${list.id}`}
+        aria-labelledby={`tab-${list.id}`}
+        hidden={i !== 0}
+        class="grid grid-cols-2 gap-3 pt-4"
+      >
+        {list.data.products.map((product) => (
+          <ProductCard
+            title={product.title}
+            price={product.price}
+            image={product.image}
+            affiliateUrl={product.affiliateUrl}
+            listTitle={list.data.title}
+            isStarterProduct={product.isStarterProduct}
+          />
+        ))}
+      </div>
+    ))
+  }
+</section>
+
+<script>
+  const triggers = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-tab-trigger]'));
+  const panels = Array.from(document.querySelectorAll<HTMLElement>('[role="tabpanel"]'));
+
+  function activate(index: number) {
+    triggers.forEach((trigger, i) => {
+      const active = i === index;
+      trigger.setAttribute('aria-selected', String(active));
+      trigger.dataset.active = String(active);
+      trigger.tabIndex = active ? 0 : -1;
+      if (panels[i]) panels[i].hidden = !active;
+    });
+  }
+
+  triggers.forEach((trigger, index) => {
+    trigger.addEventListener('click', () => activate(index));
+    trigger.addEventListener('keydown', (event) => {
+      let newIndex = index;
+      if (event.key === 'ArrowRight') newIndex = (index + 1) % triggers.length;
+      if (event.key === 'ArrowLeft') newIndex = (index - 1 + triggers.length) % triggers.length;
+      if (newIndex !== index) {
+        event.preventDefault();
+        activate(newIndex);
+        triggers[newIndex].focus();
+      }
+    });
+  });
+</script>

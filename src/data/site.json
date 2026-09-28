@@ -1,0 +1,12 @@
+{
+  "name": "Votre Nom",
+  "handle": "@votrepseudo",
+  "tagline": "Mes recommandations testées et approuvées",
+  "avatar": "/images/avatar-placeholder.svg",
+  "amazonTag": "votretag-21",
+  "socials": [
+    { "platform": "Instagram", "url": "https://instagram.com/votrepseudo" },
+    { "platform": "TikTok", "url": "https://tiktok.com/@votrepseudo" },
+    { "platform": "YouTube", "url": "https://youtube.com/@votrepseudo" }
+  ]
+}

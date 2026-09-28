@@ -1,0 +1,29 @@
+title: "Mes indispensables pour voyager léger en cabine"
+icon: "🧳"
+order: 3
+products:
+  - title: "Flacons de voyage rechargeables (lot)"
+    price: 11.99
+    image: "/images/placeholder-product.svg"
+    affiliateUrl: "https://amzn.to/REMPLACER13"
+    isStarterProduct: true
+  - title: "Organiseurs de valise (cubes de rangement)"
+    price: 17.90
+    image: "/images/placeholder-product.svg"
+    affiliateUrl: "https://amzn.to/REMPLACER14"
+  - title: "Oreiller de voyage ergonomique"
+    price: 21.90
+    image: "/images/placeholder-product.svg"
+    affiliateUrl: "https://amzn.to/REMPLACER15"
+  - title: "Adaptateur de prise universel"
+    price: 15.90
+    image: "/images/placeholder-product.svg"
+    affiliateUrl: "https://amzn.to/REMPLACER16"
+  - title: "Trousse de toilette suspendue"
+    price: 19.99
+    image: "/images/placeholder-product.svg"
+    affiliateUrl: "https://amzn.to/REMPLACER17"
+  - title: "Sac à dos cabine 40x20x25"
+    price: 44.90
+    image: "/images/placeholder-product.svg"
+    affiliateUrl: "https://amzn.to/REMPLACER18"

@@ -1,0 +1,20 @@
+title: "Mon bureau de travail"
+image: "/images/placeholder-photo-bureau.svg"
+imageWidth: 1200
+imageHeight: 1500
+hotspots:
+  - x: 30
+    y: 25
+    title: "Lampe LED articulée"
+    price: 24.99
+    affiliateUrl: "https://amzn.to/REMPLACER25"
+  - x: 68
+    y: 40
+    title: "Écran secondaire portable"
+    price: 129.00
+    affiliateUrl: "https://amzn.to/REMPLACER26"
+  - x: 45
+    y: 72
+    title: "Tapis de souris XXL"
+    price: 14.90
+    affiliateUrl: "https://amzn.to/REMPLACER27"

@@ -1,0 +1,29 @@
+title: "Rénovation cuisine : ce que j'ai acheté sur Amazon"
+icon: "🔨"
+order: 4
+products:
+  - title: "Poignées de meuble (lot de 10)"
+    price: 18.99
+    image: "/images/placeholder-product.svg"
+    affiliateUrl: "https://amzn.to/REMPLACER19"
+    isStarterProduct: true
+  - title: "Peinture rénovation carrelage"
+    price: 45.90
+    image: "/images/placeholder-product.svg"
+    affiliateUrl: "https://amzn.to/REMPLACER20"
+  - title: "Film adhésif effet bois plan de travail"
+    price: 29.90
+    image: "/images/placeholder-product.svg"
+    affiliateUrl: "https://amzn.to/REMPLACER21"
+  - title: "Spots LED encastrables (lot de 6)"
+    price: 34.99
+    image: "/images/placeholder-product.svg"
+    affiliateUrl: "https://amzn.to/REMPLACER22"
+  - title: "Robinet mitigeur évier"
+    price: 59.90
+    image: "/images/placeholder-product.svg"
+    affiliateUrl: "https://amzn.to/REMPLACER23"
+  - title: "Étagères murales industrielles"
+    price: 38.50
+    image: "/images/placeholder-product.svg"
+    affiliateUrl: "https://amzn.to/REMPLACER24"

@@ -1,0 +1,36 @@
+---
+const rows = [
+  { category: 'Mode, vêtements, chaussures et bijoux', rate: '10 % à 12 %' },
+  { category: 'Maison, bricolage, jardin, cuisine', rate: '7 % à 8 %' },
+  { category: 'Beauté, hygiène, soins', rate: '6 % à 7 %' },
+  { category: 'Sports, loisirs, bagages', rate: '5 % à 6 %' },
+  { category: 'Jouets, jeux vidéo, livres physiques', rate: '3 % à 5 %' },
+  { category: 'High-tech, informatique, télévisions, smartphones', rate: '1 % à 3 %' },
+];
+---
+
+<div class="overflow-x-auto rounded-lg border border-neutral-200">
+  <table class="w-full text-sm">
+    <caption class="sr-only">Grille indicative des commissions Amazon Partenaires par catégorie</caption>
+    <thead>
+      <tr class="bg-neutral-100 text-left">
+        <th scope="col" class="px-3 py-2 font-bold text-ink-900">Catégorie</th>
+        <th scope="col" class="px-3 py-2 font-bold text-ink-900 whitespace-nowrap">Commission</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        rows.map((row, i) => (
+          <tr class={i % 2 === 0 ? 'bg-white' : 'bg-neutral-50'}>
+            <td class="px-3 py-2 text-ink-900">{row.category}</td>
+            <td class="px-3 py-2 font-semibold text-brand-600 whitespace-nowrap">{row.rate}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>
+<p class="mt-2 text-xs text-neutral-500">
+  Taux indicatifs, susceptibles d'évoluer : vérifiez toujours la grille officielle à jour dans votre
+  tableau de bord Amazon Partenaires avant publication.
+</p>

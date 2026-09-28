@@ -1,0 +1,44 @@
+---
+import LegalBanner from './LegalBanner.astro';
+import site from '../data/site.json';
+
+const socialIcon: Record<string, string> = {
+  Instagram: '📷',
+  TikTok: '🎵',
+  YouTube: '▶️',
+};
+---
+
+<header>
+  <LegalBanner />
+
+  <div class="max-w-xl mx-auto px-4 pt-8 pb-6 flex flex-col items-center text-center">
+    <img
+      src={site.avatar}
+      alt={`Photo de profil de ${site.name}`}
+      width="96"
+      height="96"
+      class="rounded-full ring-4 ring-brand-100 object-cover"
+      loading="eager"
+    />
+    <h1 class="mt-4 text-xl font-extrabold text-ink-900">{site.name}</h1>
+    <p class="text-brand-600 font-medium">{site.handle}</p>
+    <p class="mt-2 text-sm text-neutral-600 max-w-xs">{site.tagline}</p>
+
+    <nav class="mt-4 flex gap-3" aria-label="Réseaux sociaux">
+      {
+        site.socials.map((s) => (
+          <a
+            href={s.url}
+            target="_blank"
+            rel="noopener"
+            class="tap-target inline-flex items-center justify-center rounded-full bg-white shadow-sm border border-neutral-200 text-lg"
+            aria-label={s.platform}
+          >
+            {socialIcon[s.platform] ?? '🔗'}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,76 @@
+backend:
+  name: github
+  repo: VOTRE-USER/VOTRE-REPO # ex. philouuone/site-influenceur-amazon
+  branch: main
+  base_url: https://sveltia-cms-auth.VOTRE-SOUS-DOMAINE.workers.dev
+  auth_endpoint: auth
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "site"
+    label: "Réglages du site"
+    files:
+      - file: "src/data/site.json"
+        label: "Infos créateur"
+        name: "site"
+        fields:
+          - { label: "Nom / Pseudo", name: "name", widget: "string" }
+          - { label: "Handle réseaux (ex. @pseudo)", name: "handle", widget: "string" }
+          - { label: "Phrase d'accroche", name: "tagline", widget: "string" }
+          - { label: "Avatar", name: "avatar", widget: "image" }
+          - { label: "Tag Amazon (ex. moncompte-21)", name: "amazonTag", widget: "string" }
+          - label: "Réseaux sociaux"
+            name: "socials"
+            widget: "list"
+            fields:
+              - { label: "Plateforme", name: "platform", widget: "select", options: ["Instagram", "TikTok", "YouTube"] }
+              - { label: "URL", name: "url", widget: "string" }
+
+  - name: "lists"
+    label: "Listes d'idées"
+    folder: "src/content/lists"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Titre de la liste", name: "title", widget: "string" }
+      - { label: "Icône (emoji)", name: "icon", widget: "string", required: false }
+      - { label: "Ordre d'affichage", name: "order", widget: "number", value_type: "int", default: 1 }
+      - label: "Produits"
+        name: "products"
+        widget: "list"
+        summary: "{{title}} — {{price}} €"
+        fields:
+          - { label: "Titre produit", name: "title", widget: "string" }
+          - { label: "Prix indicatif (€)", name: "price", widget: "number", value_type: "float" }
+          - { label: "Photo", name: "image", widget: "image" }
+          - { label: "Lien affilié (amzn.to ou amazon.fr)", name: "affiliateUrl", widget: "string" }
+          - {
+              label: "Produit d'appel (< 20 €, à placer en tête de liste)",
+              name: "isStarterProduct",
+              widget: "boolean",
+              default: false,
+              required: false,
+            }
+
+  - name: "photos"
+    label: "Shoppable Photos"
+    folder: "src/content/photos"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Titre", name: "title", widget: "string" }
+      - { label: "Photo", name: "image", widget: "image" }
+      - { label: "Largeur réelle (px)", name: "imageWidth", widget: "number", value_type: "int" }
+      - { label: "Hauteur réelle (px)", name: "imageHeight", widget: "number", value_type: "int" }
+      - label: "Pastilles cliquables"
+        name: "hotspots"
+        widget: "list"
+        summary: "{{title}}"
+        fields:
+          - { label: "Position horizontale (% depuis la gauche)", name: "x", widget: "number", value_type: "float" }
+          - { label: "Position verticale (% depuis le haut)", name: "y", widget: "number", value_type: "float" }
+          - { label: "Titre produit", name: "title", widget: "string" }
+          - { label: "Prix indicatif (€)", name: "price", widget: "number", value_type: "float" }
+          - { label: "Lien affilié", name: "affiliateUrl", widget: "string" }

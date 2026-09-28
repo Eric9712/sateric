@@ -1,0 +1,29 @@
+title: "Mon matériel pour filmer (budget débutant)"
+icon: "🎥"
+order: 1
+products:
+  - title: "Trépied smartphone flexible"
+    price: 15.99
+    image: "/images/placeholder-product.svg"
+    affiliateUrl: "https://amzn.to/REMPLACER1"
+    isStarterProduct: true
+  - title: "Micro-cravate sans fil"
+    price: 39.90
+    image: "/images/placeholder-product.svg"
+    affiliateUrl: "https://amzn.to/REMPLACER2"
+  - title: "Anneau lumineux LED avec support téléphone"
+    price: 32.50
+    image: "/images/placeholder-product.svg"
+    affiliateUrl: "https://amzn.to/REMPLACER3"
+  - title: "Carte microSD 128 Go"
+    price: 18.99
+    image: "/images/placeholder-product.svg"
+    affiliateUrl: "https://amzn.to/REMPLACER4"
+  - title: "Stabilisateur gimbal 3 axes"
+    price: 89.00
+    image: "/images/placeholder-product.svg"
+    affiliateUrl: "https://amzn.to/REMPLACER5"
+  - title: "Batterie externe 10000mAh"
+    price: 24.99
+    image: "/images/placeholder-product.svg"
+    affiliateUrl: "https://amzn.to/REMPLACER6"

@@ -1,0 +1,29 @@
+title: "Ma routine du soir pour peau sèche"
+icon: "🧴"
+order: 2
+products:
+  - title: "Lingettes démaquillantes réutilisables"
+    price: 12.90
+    image: "/images/placeholder-product.svg"
+    affiliateUrl: "https://amzn.to/REMPLACER7"
+    isStarterProduct: true
+  - title: "Huile démaquillante douce"
+    price: 16.50
+    image: "/images/placeholder-product.svg"
+    affiliateUrl: "https://amzn.to/REMPLACER8"
+  - title: "Sérum acide hyaluronique"
+    price: 22.00
+    image: "/images/placeholder-product.svg"
+    affiliateUrl: "https://amzn.to/REMPLACER9"
+  - title: "Crème de nuit réparatrice"
+    price: 28.90
+    image: "/images/placeholder-product.svg"
+    affiliateUrl: "https://amzn.to/REMPLACER10"
+  - title: "Contour des yeux hydratant"
+    price: 19.99
+    image: "/images/placeholder-product.svg"
+    affiliateUrl: "https://amzn.to/REMPLACER11"
+  - title: "Brumisateur d'eau thermale"
+    price: 9.90
+    image: "/images/placeholder-product.svg"
+    affiliateUrl: "https://amzn.to/REMPLACER12"

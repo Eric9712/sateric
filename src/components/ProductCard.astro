@@ -1,0 +1,64 @@
+---
+interface Props {
+  title: string;
+  price: number;
+  image: string;
+  affiliateUrl: string;
+  listTitle: string;
+  isStarterProduct?: boolean;
+}
+
+const { title, price, image, affiliateUrl, listTitle, isStarterProduct = false } = Astro.props;
+const priceLabel = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(price);
+---
+
+<article class="relative flex flex-col rounded-xl border border-neutral-200 bg-white shadow-sm overflow-hidden">
+  {
+    isStarterProduct && (
+      <span class="absolute top-2 left-2 z-10 rounded-full bg-brand-500 px-2 py-0.5 text-xs font-bold text-white shadow">
+        Coup de cœur
+      </span>
+    )
+  }
+  <img
+    src={image}
+    alt={title}
+    width="600"
+    height="600"
+    loading="lazy"
+    decoding="async"
+    class="aspect-square w-full object-cover"
+  />
+  <div class="flex flex-1 flex-col gap-1 p-3">
+    <h3 class="text-sm font-semibold text-ink-900 line-clamp-2">{title}</h3>
+    <p class="text-base font-bold text-brand-600">{priceLabel}</p>
+    <p class="text-[11px] text-neutral-500">Lien affilié</p>
+    <a
+      href={affiliateUrl}
+      target="_blank"
+      rel="sponsored noopener"
+      data-product-click
+      data-product-title={title}
+      data-list-title={listTitle}
+      data-product-price={price}
+      class="tap-target mt-auto inline-flex items-center justify-center rounded-lg bg-brand-500 px-3 py-2 text-sm font-bold text-white active:bg-brand-700"
+    >
+      Voir le prix sur Amazon
+    </a>
+  </div>
+</article>
+
+<script>
+  // Suivi de clic par produit via Cloudflare Zaraz (si activé sur le projet).
+  // Ne fait rien si Zaraz n'est pas encore configuré : voir le guide de déploiement.
+  document.addEventListener('click', (event) => {
+    const target = (event.target as HTMLElement)?.closest<HTMLElement>('[data-product-click]');
+    if (!target) return;
+    const w = window as typeof window & { zaraz?: { track: (name: string, props?: Record<string, unknown>) => void } };
+    w.zaraz?.track('product_click', {
+      product: target.dataset.productTitle,
+      list: target.dataset.listTitle,
+      price: target.dataset.productPrice,
+    });
+  });
+</script>

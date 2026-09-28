@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import TabsIdeaLists from '../components/TabsIdeaLists.astro';
+import ShoppablePhoto from '../components/ShoppablePhoto.astro';
+import Footer from '../components/Footer.astro';
+import site from '../data/site.json';
+
+const lists = (await getCollection('lists')).sort((a, b) => a.data.order - b.data.order);
+const photos = await getCollection('photos');
+---
+
+<BaseLayout
+  title={`${site.name} — Mes recommandations`}
+  description={`Retrouvez toutes les recommandations produits de ${site.name} : matériel, beauté, voyage, maison. Liens affiliés Amazon.`}
+>
+  <Header />
+
+  <TabsIdeaLists lists={lists} />
+
+  <section aria-labelledby="shoppable-heading" class="max-w-xl mx-auto px-4 py-6">
+    <h2 id="shoppable-heading" class="text-lg font-bold mb-3 text-ink-900">En situation</h2>
+    <p class="mb-3 text-sm text-neutral-600">Touchez les pastilles sur les photos pour voir les produits.</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {photos.map((photo) => <ShoppablePhoto photo={photo} />)}
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>

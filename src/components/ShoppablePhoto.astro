@@ -1,0 +1,103 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  photo: CollectionEntry<'photos'>;
+}
+
+const { photo } = Astro.props;
+const { title, image, imageWidth, imageHeight, hotspots } = photo.data;
+const formatPrice = (n: number) => new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(n);
+---
+
+<figure class="relative w-full overflow-hidden rounded-xl bg-neutral-100">
+  <img
+    src={image}
+    alt={title}
+    width={imageWidth}
+    height={imageHeight}
+    loading="lazy"
+    decoding="async"
+    class="w-full h-auto"
+  />
+
+  {
+    hotspots.map((h, i) => (
+      <div class="absolute" style={`left:${h.x}%; top:${h.y}%; transform: translate(-50%, -50%);`}>
+        <button
+          type="button"
+          class="tap-target relative flex items-center justify-center rounded-full bg-white/90 shadow-lg ring-2 ring-brand-500"
+          aria-expanded="false"
+          aria-controls={`hotspot-panel-${photo.id}-${i}`}
+          aria-label={`Voir le produit : ${h.title}`}
+          data-hotspot-trigger
+        >
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-500 opacity-40" />
+          <span class="relative text-brand-600 font-bold" aria-hidden="true">
+            +
+          </span>
+        </button>
+
+        <div
+          id={`hotspot-panel-${photo.id}-${i}`}
+          role="dialog"
+          aria-label={h.title}
+          hidden
+          data-hotspot-panel
+          class="absolute z-20 left-1/2 mt-2 w-44 -translate-x-1/2 rounded-lg border border-neutral-200 bg-white p-3 text-left shadow-xl"
+        >
+          <p class="text-xs font-semibold text-ink-900">{h.title}</p>
+          <p class="text-sm font-bold text-brand-600">{formatPrice(h.price)}</p>
+          <a
+            href={h.affiliateUrl}
+            target="_blank"
+            rel="sponsored noopener"
+            data-product-click
+            data-product-title={h.title}
+            data-list-title={`Photo : ${title}`}
+            data-product-price={h.price}
+            class="tap-target mt-2 flex items-center justify-center rounded-md bg-brand-500 px-2 py-1.5 text-xs font-bold text-white"
+          >
+            Voir sur Amazon
+          </a>
+          <p class="mt-1 text-[10px] text-neutral-500">Lien affilié</p>
+        </div>
+      </div>
+    ))
+  }
+</figure>
+
+<script>
+  function closeAllPanels(except?: HTMLElement) {
+    document.querySelectorAll<HTMLElement>('[data-hotspot-panel]').forEach((panel) => {
+      if (panel === except) return;
+      panel.hidden = true;
+      const trigger = document.querySelector<HTMLElement>(`[aria-controls="${panel.id}"]`);
+      trigger?.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  document.addEventListener('click', (event) => {
+    const target = event.target as HTMLElement;
+    const trigger = target.closest<HTMLButtonElement>('[data-hotspot-trigger]');
+
+    if (trigger) {
+      const panel = document.getElementById(trigger.getAttribute('aria-controls') ?? '');
+      if (panel) {
+        const willOpen = panel.hidden;
+        closeAllPanels();
+        panel.hidden = !willOpen;
+        trigger.setAttribute('aria-expanded', String(willOpen));
+      }
+      return;
+    }
+
+    if (!target.closest('[data-hotspot-panel]')) {
+      closeAllPanels();
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeAllPanels();
+  });
+</script>
