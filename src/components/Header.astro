@@ -19,76 +19,40 @@ const socialStyle: Record<string, { icon: string; class: string }> = {
 };
 ---
 
-<header>
+<header class="border-b border-neutral-100 bg-white">
   <LegalBanner />
 
-  <div class="relative">
-    <div class="relative h-44 overflow-hidden bg-gradient-to-br from-brand-400 via-brand-500 to-accent-600 rounded-b-[2.5rem]">
-      <div class="absolute -left-10 -top-10 h-40 w-40 rounded-full bg-white/20 blur-2xl" aria-hidden="true" />
-      <div class="absolute -right-6 top-6 h-32 w-32 rounded-full bg-accent-400/40 blur-2xl" aria-hidden="true" />
-      <div class="absolute bottom-0 left-1/2 h-24 w-[140%] -translate-x-1/2 rounded-[100%] bg-white/10 blur-xl" aria-hidden="true" />
+  <div class="max-w-xl mx-auto flex items-center gap-4 px-4 py-4">
+    <img
+      src={site.avatar}
+      alt={`Photo de profil de ${site.name}`}
+      width="64"
+      height="64"
+      class="h-16 w-16 shrink-0 rounded-full ring-2 ring-brand-100 object-cover"
+      loading="eager"
+    />
+    <div class="min-w-0 flex-1">
+      <h1 class="truncate text-lg font-extrabold text-ink-900">{site.name}</h1>
+      <p class="truncate text-sm font-semibold text-brand-600">{site.handle}</p>
+      <p class="truncate text-sm text-neutral-500">{site.tagline}</p>
     </div>
-
-    <div class="max-w-xl mx-auto px-4">
-      <div class="-mt-24 rounded-3xl bg-white p-6 pt-16 text-center shadow-xl ring-1 ring-black/5">
-        <div class="relative -mt-24 mb-1 flex justify-center">
-          <div class="rounded-full bg-gradient-to-br from-brand-400 to-accent-500 p-1 shadow-lg">
-            <img
-              src={site.avatar}
-              alt={`Photo de profil de ${site.name}`}
-              width="112"
-              height="112"
-              class="h-28 w-28 rounded-full ring-4 ring-white object-cover"
-              loading="eager"
-            />
-          </div>
-          <span
-            class="absolute bottom-0 right-[calc(50%-56px)] flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-brand-500 to-accent-600 text-white shadow-md ring-4 ring-white"
-            aria-hidden="true"
-            title="Créateur"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20 6 9 17l-5-5" />
-            </svg>
-          </span>
-        </div>
-
-        <h1 class="flex items-center justify-center gap-1.5 text-2xl font-extrabold tracking-tight text-ink-900">
-          {site.name}
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="url(#sparkleGrad)" aria-hidden="true">
-            <defs>
-              <linearGradient id="sparkleGrad" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#e8503a" />
-                <stop offset="100%" stop-color="#ec4d80" />
-              </linearGradient>
-            </defs>
-            <path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2Z" />
-          </svg>
-        </h1>
-        <p class="bg-gradient-to-r from-brand-600 to-accent-600 bg-clip-text font-semibold text-transparent">
-          {site.handle}
-        </p>
-        <p class="mx-auto mt-2 max-w-xs text-sm text-neutral-600">{site.tagline}</p>
-
-        <nav class="mt-5 flex justify-center gap-3" aria-label="Réseaux sociaux">
-          {
-            site.socials.map((s) => {
-              const style = socialStyle[s.platform] ?? { icon: '', class: 'bg-neutral-700' };
-              return (
-                <a
-                  href={s.url}
-                  target="_blank"
-                  rel="noopener"
-                  class={`tap-target inline-flex items-center justify-center rounded-full text-white shadow-md transition-transform active:scale-90 ${style.class}`}
-                  aria-label={s.platform}
-                >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" set:html={style.icon} />
-                </a>
-              );
-            })
-          }
-        </nav>
-      </div>
-    </div>
+    <nav class="flex shrink-0 gap-2" aria-label="Réseaux sociaux">
+      {
+        site.socials.map((s) => {
+          const style = socialStyle[s.platform] ?? { icon: '', class: 'bg-neutral-700' };
+          return (
+            <a
+              href={s.url}
+              target="_blank"
+              rel="noopener"
+              class={`tap-target inline-flex h-9 w-9 items-center justify-center rounded-full text-white transition-transform active:scale-90 ${style.class}`}
+              aria-label={s.platform}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" set:html={style.icon} />
+            </a>
+          );
+        })
+      }
+    </nav>
   </div>
 </header>
