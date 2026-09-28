@@ -1,30 +1,30 @@
-title: "Mon matériel pour filmer (budget débutant)"
-tabLabel: "Matériel vidéo"
-icon: "🎥"
+title: "Ma canne et mon moulinet pour débuter"
+tabLabel: "Canne & moulinet"
+icon: "🎣"
 order: 1
 products:
-  - title: "Trépied smartphone flexible"
-    price: 15.99
+  - title: "Fil de pêche nylon 100m"
+    price: 9.90
     image: "/images/placeholder-product.svg"
     affiliateUrl: "https://amzn.to/REMPLACER1"
     isStarterProduct: true
-  - title: "Micro-cravate sans fil"
-    price: 39.90
+  - title: "Canne télescopique 2,10m"
+    price: 34.90
     image: "/images/placeholder-product.svg"
     affiliateUrl: "https://amzn.to/REMPLACER2"
-  - title: "Anneau lumineux LED avec support téléphone"
-    price: 32.50
+  - title: "Moulinet spinning taille 2000"
+    price: 42.00
     image: "/images/placeholder-product.svg"
     affiliateUrl: "https://amzn.to/REMPLACER3"
-  - title: "Carte microSD 128 Go"
-    price: 18.99
+  - title: "Hameçons assortis (boîte de 100)"
+    price: 11.90
     image: "/images/placeholder-product.svg"
     affiliateUrl: "https://amzn.to/REMPLACER4"
-  - title: "Stabilisateur gimbal 3 axes"
-    price: 89.00
+  - title: "Plombs de pêche assortis"
+    price: 8.50
     image: "/images/placeholder-product.svg"
     affiliateUrl: "https://amzn.to/REMPLACER5"
-  - title: "Batterie externe 10000mAh"
-    price: 24.99
+  - title: "Épuisette pliable"
+    price: 19.90
     image: "/images/placeholder-product.svg"
     affiliateUrl: "https://amzn.to/REMPLACER6"

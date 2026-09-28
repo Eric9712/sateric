@@ -1,7 +1,8 @@
 {
   "name": "Votre Nom",
   "handle": "@votrepseudo",
-  "tagline": "Mes recommandations testées et approuvées",
+  "tagline": "Mon matériel de pêche testé sur le bord de l'eau",
+  "metaDescription": "Retrouvez tout mon matériel de pêche recommandé : cannes, leurres, accessoires bateau/kayak et tenue. Liens affiliés Amazon.",
   "avatar": "/images/avatar-placeholder.svg",
   "amazonTag": "votretag-21",
   "socials": [

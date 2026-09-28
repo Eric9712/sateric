@@ -1,0 +1,20 @@
+title: "Mon spot de pêche"
+image: "/images/placeholder-photo-spot.svg"
+imageWidth: 1200
+imageHeight: 1500
+hotspots:
+  - x: 30
+    y: 25
+    title: "Canne télescopique 2,10m"
+    price: 34.90
+    affiliateUrl: "https://amzn.to/REMPLACER2"
+  - x: 68
+    y: 40
+    title: "Sondeur portable de pêche"
+    price: 59.90
+    affiliateUrl: "https://amzn.to/REMPLACER17"
+  - x: 45
+    y: 72
+    title: "Épuisette pliable"
+    price: 19.90
+    affiliateUrl: "https://amzn.to/REMPLACER6"

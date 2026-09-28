@@ -13,7 +13,7 @@ const photos = await getCollection('photos');
 
 <BaseLayout
   title={`${site.name} — Mes recommandations`}
-  description={`Retrouvez toutes les recommandations produits de ${site.name} : matériel, beauté, voyage, maison. Liens affiliés Amazon.`}
+  description={site.metaDescription}
 >
   <Header />
 

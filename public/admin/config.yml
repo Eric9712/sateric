@@ -19,6 +19,12 @@ collections:
           - { label: "Nom / Pseudo", name: "name", widget: "string" }
           - { label: "Handle réseaux (ex. @pseudo)", name: "handle", widget: "string" }
           - { label: "Phrase d'accroche", name: "tagline", widget: "string" }
+          - {
+              label: "Description SEO (aperçu Google / réseaux)",
+              name: "metaDescription",
+              widget: "text",
+              hint: "Résume le thème de la vitrine en 1-2 phrases. Utile si vous changez de thème plus tard (pêche, beauté, high-tech...) sans toucher au code.",
+            }
           - { label: "Avatar", name: "avatar", widget: "image" }
           - { label: "Tag Amazon (ex. moncompte-21)", name: "amazonTag", widget: "string" }
           - label: "Réseaux sociaux"

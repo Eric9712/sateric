@@ -5,8 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Administration du contenu</title>
     <meta name="robots" content="noindex, nofollow" />
+    <style>
+      /*
+        Cette page est servie telle quelle (hors pipeline Astro/Tailwind),
+        d'où le CSS classique plutôt que des classes utilitaires.
+      */
+      #stats-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 10px 16px;
+        background: linear-gradient(90deg, #d43f2a, #c2255f);
+        color: #fff;
+        font: 600 14px/1.3 system-ui, sans-serif;
+      }
+      #stats-bar a {
+        color: #fff;
+        text-decoration: underline;
+      }
+    </style>
   </head>
   <body>
+    <!--
+      Lien vers les statistiques de visites (Cloudflare Web Analytics).
+      Remplacez href par le lien public de partage de VOTRE dashboard
+      (Cloudflare > Analytics & Logs > Web Analytics > ce site > option
+      de partage public). Voir le guide de déploiement, étape 5.
+    -->
+    <div id="stats-bar">
+      📊 <a href="https://dash.cloudflare.com/" target="_blank" rel="noopener">Voir les statistiques de visites</a>
+    </div>
     <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
   </body>
 </html>

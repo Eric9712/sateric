@@ -1,30 +1,30 @@
-title: "Mes indispensables pour voyager léger en cabine"
-tabLabel: "Voyage léger"
-icon: "🧳"
+title: "Pêche en bateau et en kayak"
+tabLabel: "Bateau & kayak"
+icon: "🚣"
 order: 3
 products:
-  - title: "Flacons de voyage rechargeables (lot)"
-    price: 11.99
+  - title: "Porte-canne pour kayak"
+    price: 17.90
     image: "/images/placeholder-product.svg"
     affiliateUrl: "https://amzn.to/REMPLACER13"
     isStarterProduct: true
-  - title: "Organiseurs de valise (cubes de rangement)"
-    price: 17.90
+  - title: "Gilet de sauvetage homologué"
+    price: 49.90
     image: "/images/placeholder-product.svg"
     affiliateUrl: "https://amzn.to/REMPLACER14"
-  - title: "Oreiller de voyage ergonomique"
-    price: 21.90
+  - title: "Ancre pliable pour kayak"
+    price: 24.90
     image: "/images/placeholder-product.svg"
     affiliateUrl: "https://amzn.to/REMPLACER15"
-  - title: "Adaptateur de prise universel"
-    price: 15.90
+  - title: "Glacière souple étanche"
+    price: 29.90
     image: "/images/placeholder-product.svg"
     affiliateUrl: "https://amzn.to/REMPLACER16"
-  - title: "Trousse de toilette suspendue"
-    price: 19.99
+  - title: "Sondeur portable de pêche"
+    price: 59.90
     image: "/images/placeholder-product.svg"
     affiliateUrl: "https://amzn.to/REMPLACER17"
-  - title: "Sac à dos cabine 40x20x25"
-    price: 44.90
+  - title: "Caisse de rangement étanche pour kayak"
+    price: 34.90
     image: "/images/placeholder-product.svg"
     affiliateUrl: "https://amzn.to/REMPLACER18"
