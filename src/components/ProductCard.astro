@@ -11,9 +11,7 @@ interface Props {
 
 const { title, price, originalPrice, image, affiliateUrl, listTitle, isStarterProduct = false } = Astro.props;
 
-// Prix façon fiche produit : partie entière en grand, centimes en petit —
-// convention e-commerce courante, aucune donnée inventée (juste du typo).
-const [intPart, decPart] = price.toFixed(2).replace('.', ',').split(',');
+const priceLabel = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(price);
 const hasDiscount = typeof originalPrice === 'number' && originalPrice > price;
 const originalPriceLabel = hasDiscount
   ? new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(originalPrice)
@@ -21,17 +19,32 @@ const originalPriceLabel = hasDiscount
 const discountPercent = hasDiscount ? Math.round((1 - price / originalPrice) * 100) : null;
 ---
 
-<article class="group relative flex flex-col overflow-hidden rounded-3xl border border-neutral-100 bg-white shadow-md transition-shadow hover:shadow-xl">
+<!--
+  Toute la carte est le lien (comme une grille de résultats Amazon) : à 3
+  colonnes, un bouton texte séparé ne tiendrait pas. La cible tactile est donc
+  la carte entière (largement > 44x44px), conforme WCAG.
+-->
+<a
+  href={affiliateUrl}
+  target="_blank"
+  rel="sponsored noopener"
+  data-product-click
+  data-product-title={title}
+  data-list-title={listTitle}
+  data-product-price={price}
+  class="group relative flex flex-col overflow-hidden rounded-2xl border border-neutral-100 bg-white shadow-sm transition-all hover:shadow-lg active:scale-[0.97]"
+>
   {
     isStarterProduct && (
-      <span class="absolute top-3 left-3 z-10 inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-brand-600 to-accent-600 px-3 py-1.5 text-sm font-bold text-white shadow-md">
-        🔥 Coup de cœur
+      <span class="absolute top-1.5 left-1.5 z-10 flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-brand-600 to-accent-600 text-xs shadow-md">
+        <span aria-hidden="true">🔥</span>
+        <span class="sr-only">Coup de cœur</span>
       </span>
     )
   }
   {
     hasDiscount && (
-      <span class="absolute top-3 right-3 z-10 inline-flex items-center rounded-full bg-ink-900 px-2.5 py-1 text-xs font-extrabold text-white shadow-md">
+      <span class="absolute top-1.5 right-1.5 z-10 rounded-full bg-ink-900 px-1.5 py-0.5 text-[10px] font-extrabold text-white shadow-md">
         -{discountPercent}%
       </span>
     )
@@ -40,37 +53,22 @@ const discountPercent = hasDiscount ? Math.round((1 - price / originalPrice) * 1
     <img
       src={image}
       alt={title}
-      width="600"
-      height="600"
+      width="400"
+      height="400"
       loading="lazy"
       decoding="async"
       class="aspect-square w-full object-cover transition-transform duration-300 group-hover:scale-105"
     />
   </div>
-  <div class="flex flex-1 flex-col gap-1.5 p-4">
-    <h3 class="text-base font-bold text-ink-900 line-clamp-2">{title}</h3>
-    <p class="flex flex-wrap items-baseline gap-x-2">
-      <span class="flex items-baseline text-brand-600">
-        <span class="text-3xl font-extrabold leading-none">{intPart}</span>
-        <span class="text-base font-bold leading-none">,{decPart}&nbsp;€</span>
-      </span>
-      {hasDiscount && <span class="text-sm text-neutral-400 line-through">{originalPriceLabel}</span>}
-    </p>
-    <p class="text-xs text-neutral-500">Lien affilié</p>
-    <a
-      href={affiliateUrl}
-      target="_blank"
-      rel="sponsored noopener"
-      data-product-click
-      data-product-title={title}
-      data-list-title={listTitle}
-      data-product-price={price}
-      class="tap-target mt-3 inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-brand-600 to-accent-600 px-4 py-3.5 text-base font-bold text-white shadow-sm transition-transform active:scale-95"
-    >
-      Voir le prix sur Amazon
-    </a>
+  <div class="flex flex-1 flex-col gap-0.5 p-2">
+    <h3 class="text-[11px] font-semibold leading-tight text-ink-900 line-clamp-2">{title}</h3>
+    <div class="mt-auto flex flex-wrap items-baseline gap-x-1.5 pt-1">
+      <span class="text-sm font-extrabold text-brand-600">{priceLabel}</span>
+      {hasDiscount && <span class="text-[10px] text-neutral-400 line-through">{originalPriceLabel}</span>}
+    </div>
+    <p class="text-[9px] text-neutral-400">Lien affilié</p>
   </div>
-</article>
+</a>
 
 <script>
   // Suivi de clic par produit via Cloudflare Zaraz (si activé sur le projet).
