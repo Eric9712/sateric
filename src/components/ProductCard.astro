@@ -57,10 +57,17 @@ const priceLabel = new Intl.NumberFormat('fr-FR', { style: 'currency', currency:
     const target = (event.target as HTMLElement)?.closest<HTMLElement>('[data-product-click]');
     if (!target) return;
     const w = window as typeof window & { zaraz?: { track: (name: string, props?: Record<string, unknown>) => void } };
+    let source: string | null = null;
+    try {
+      source = sessionStorage.getItem('trafficSource');
+    } catch {
+      // sessionStorage indisponible : on suit quand même le clic, juste sans la source.
+    }
     w.zaraz?.track('product_click', {
       product: target.dataset.productTitle,
       list: target.dataset.listTitle,
       price: target.dataset.productPrice,
+      source: source ?? 'direct',
     });
   });
 </script>

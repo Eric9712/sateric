@@ -21,9 +21,9 @@ const rows = [
     <tbody>
       {
         rows.map((row, i) => (
-          <tr class={i % 2 === 0 ? 'bg-white' : 'bg-brand-50/50'}>
+          <tr class={i % 2 === 0 ? 'bg-white' : 'bg-brand-50'}>
             <td class="px-3 py-2 text-ink-900">{row.category}</td>
-            <td class="px-3 py-2 font-semibold text-brand-600 whitespace-nowrap">{row.rate}</td>
+            <td class="px-3 py-2 font-semibold text-brand-700 whitespace-nowrap">{row.rate}</td>
           </tr>
         ))
       }
