@@ -2,14 +2,23 @@
 interface Props {
   title: string;
   price: number;
+  originalPrice?: number;
   image: string;
   affiliateUrl: string;
   listTitle: string;
   isStarterProduct?: boolean;
 }
 
-const { title, price, image, affiliateUrl, listTitle, isStarterProduct = false } = Astro.props;
-const priceLabel = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(price);
+const { title, price, originalPrice, image, affiliateUrl, listTitle, isStarterProduct = false } = Astro.props;
+
+// Prix façon fiche produit : partie entière en grand, centimes en petit —
+// convention e-commerce courante, aucune donnée inventée (juste du typo).
+const [intPart, decPart] = price.toFixed(2).replace('.', ',').split(',');
+const hasDiscount = typeof originalPrice === 'number' && originalPrice > price;
+const originalPriceLabel = hasDiscount
+  ? new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(originalPrice)
+  : null;
+const discountPercent = hasDiscount ? Math.round((1 - price / originalPrice) * 100) : null;
 ---
 
 <article class="group relative flex flex-col overflow-hidden rounded-3xl border border-neutral-100 bg-white shadow-md transition-shadow hover:shadow-xl">
@@ -17,6 +26,13 @@ const priceLabel = new Intl.NumberFormat('fr-FR', { style: 'currency', currency:
     isStarterProduct && (
       <span class="absolute top-3 left-3 z-10 inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-brand-600 to-accent-600 px-3 py-1.5 text-sm font-bold text-white shadow-md">
         🔥 Coup de cœur
+      </span>
+    )
+  }
+  {
+    hasDiscount && (
+      <span class="absolute top-3 right-3 z-10 inline-flex items-center rounded-full bg-ink-900 px-2.5 py-1 text-xs font-extrabold text-white shadow-md">
+        -{discountPercent}%
       </span>
     )
   }
@@ -33,7 +49,13 @@ const priceLabel = new Intl.NumberFormat('fr-FR', { style: 'currency', currency:
   </div>
   <div class="flex flex-1 flex-col gap-1.5 p-4">
     <h3 class="text-base font-bold text-ink-900 line-clamp-2">{title}</h3>
-    <p class="text-2xl font-extrabold text-brand-600">{priceLabel}</p>
+    <p class="flex flex-wrap items-baseline gap-x-2">
+      <span class="flex items-baseline text-brand-600">
+        <span class="text-3xl font-extrabold leading-none">{intPart}</span>
+        <span class="text-base font-bold leading-none">,{decPart}&nbsp;€</span>
+      </span>
+      {hasDiscount && <span class="text-sm text-neutral-400 line-through">{originalPriceLabel}</span>}
+    </p>
     <p class="text-xs text-neutral-500">Lien affilié</p>
     <a
       href={affiliateUrl}

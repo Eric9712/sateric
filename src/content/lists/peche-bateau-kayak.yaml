@@ -22,6 +22,7 @@ products:
     affiliateUrl: "https://amzn.to/REMPLACER16"
   - title: "Sondeur portable de pêche"
     price: 59.90
+    originalPrice: 79.90
     image: "/images/placeholder-product.svg"
     affiliateUrl: "https://amzn.to/REMPLACER17"
   - title: "Caisse de rangement étanche pour kayak"

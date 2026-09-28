@@ -57,6 +57,14 @@ collections:
         fields:
           - { label: "Titre produit", name: "title", widget: "string" }
           - { label: "Prix indicatif (€)", name: "price", widget: "number", value_type: "float" }
+          - {
+              label: "Prix de référence avant réduction (€, optionnel)",
+              name: "originalPrice",
+              widget: "number",
+              value_type: "float",
+              required: false,
+              hint: "⚠️ Laissez vide si aucune vraie réduction en cours. Si rempli, ce prix doit être un prix réellement pratiqué sur ce produit dans les 30 derniers jours (réglementation française sur les annonces de réduction de prix) — à mettre à jour régulièrement, jamais laissé au hasard.",
+            }
           - { label: "Photo", name: "image", widget: "image" }
           - { label: "Lien affilié (amzn.to ou amazon.fr)", name: "affiliateUrl", widget: "string" }
           - {

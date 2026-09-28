@@ -10,6 +10,7 @@ products:
     isStarterProduct: true
   - title: "Canne télescopique 2,10m"
     price: 34.90
+    originalPrice: 44.90
     image: "/images/placeholder-product.svg"
     affiliateUrl: "https://amzn.to/REMPLACER2"
   - title: "Moulinet spinning taille 2000"

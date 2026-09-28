@@ -4,6 +4,11 @@ import { glob } from 'astro/loaders';
 const productSchema = z.object({
   title: z.string(),
   price: z.number(),
+  // Prix de référence réel (avant réduction) — optionnel, affiché barré avec le
+  // % d'économie s'il est renseigné. Voir guide de déploiement pour la règle
+  // française du prix de référence (doit refléter le prix réellement pratiqué
+  // dans les 30 derniers jours, à tenir à jour).
+  originalPrice: z.number().optional(),
   image: z.string(),
   affiliateUrl: z.string().url(),
   isStarterProduct: z.boolean().optional().default(false),
