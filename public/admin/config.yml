@@ -34,7 +34,14 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Titre de la liste", name: "title", widget: "string" }
+      - { label: "Titre de la liste (affiché en en-tête)", name: "title", widget: "string" }
+      - {
+          label: "Libellé court (affiché dans l'onglet, ex. « Routine du soir »)",
+          name: "tabLabel",
+          widget: "string",
+          required: false,
+          hint: "Laissez vide pour réutiliser le titre complet — mais un libellé de 1 à 3 mots évite que l'onglet déborde sur mobile.",
+        }
       - { label: "Icône (emoji)", name: "icon", widget: "string", required: false }
       - { label: "Ordre d'affichage", name: "order", widget: "number", value_type: "int", default: 1 }
       - label: "Produits"

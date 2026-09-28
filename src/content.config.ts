@@ -13,6 +13,7 @@ const lists = defineCollection({
   loader: glob({ pattern: '**/*.yaml', base: './src/content/lists' }),
   schema: z.object({
     title: z.string(),
+    tabLabel: z.string().optional(),
     icon: z.string().optional(),
     order: z.number().default(0),
     products: z.array(productSchema),
