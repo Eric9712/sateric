@@ -9,216 +9,175 @@ media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
 
 collections:
-  - name: "site"
-    label: "Vitrine 1 : Réglages"
-    files:
-      - file: "src/data/site.json"
-        label: "Infos créateur"
-        name: "site"
-        fields: &siteFields
-          - { label: "Nom / Pseudo", name: "name", widget: "string" }
-          - { label: "Handle réseaux (ex. @pseudo)", name: "handle", widget: "string" }
-          - { label: "Phrase d'accroche", name: "tagline", widget: "string" }
-          - {
-              label: "Description SEO (aperçu Google / réseaux)",
-              name: "metaDescription",
-              widget: "text",
-              hint: "Résume le thème de la vitrine en 1-2 phrases. Utile si vous changez de thème plus tard (pêche, beauté, high-tech...) sans toucher au code.",
-            }
-          - { label: "Avatar", name: "avatar", widget: "image" }
-          - {
-              label: "Image de partage (réseaux sociaux)",
-              name: "ogImage",
-              widget: "image",
-              required: false,
-              hint: "Aperçu affiché quand le lien du site est partagé ou collé ailleurs (Instagram, WhatsApp, etc.). Format recommandé : 1200×630px. Laissez vide pour garder l'image par défaut.",
-            }
-          - { label: "Tag Amazon (ex. moncompte-21)", name: "amazonTag", widget: "string" }
-          - {
-              label: "Afficher les prix sur le site",
-              name: "showPrices",
-              widget: "boolean",
-              default: false,
-              hint: "⚠️ Laissez désactivé tant que vous n'avez pas accès à la Creators API / Product Advertising API d'Amazon (accès obtenu après 3 ventes qualifiées, voir guide de déploiement étape 0). Sans cet accès, afficher un prix saisi à la main est interdit par l'Operating Agreement Amazon Partenaires — les prix changent en permanence et doivent venir d'un appel en temps réel, jamais d'une valeur fixe. Tant que c'est désactivé, les cartes produits affichent « Voir le prix → » sans montrer de chiffre.",
-            }
-          - label: "Réseaux sociaux"
-            name: "socials"
-            widget: "list"
-            required: false
-            summary: "{{platform}}"
-            hint: "Facultatif : vous pouvez laisser cette liste vide si vous ne voulez afficher aucun réseau social."
-            fields:
-              - {
-                  label: "Plateforme",
-                  name: "platform",
-                  widget: "string",
-                  hint: "Icône et couleur reconnues pour : Instagram, TikTok, YouTube, Facebook, Pinterest, X (Twitter), Snapchat, Twitch. Toute autre valeur tapée ici fonctionne aussi (icône générique).",
-                }
-              - { label: "URL", name: "url", widget: "string" }
-          - label: "Textes de l'interface"
-            name: "uiText"
-            widget: "object"
-            collapsed: true
-            hint: "Tous les libellés affichés sur le site, modifiables ici sans toucher au code."
-            fields:
-              - {
-                  label: "Badge mention légale",
-                  name: "legalBadge",
-                  widget: "string",
-                  hint: "⚠️ Formulation imposée par la loi française (« Collaboration commerciale » ou « Publicité » uniquement — pas « ad », « collab », « partner »).",
-                }
-              - {
-                  label: "Texte de la mention légale Amazon",
-                  name: "legalDisclosure",
-                  widget: "text",
-                  hint: "⚠️ Mention contractuelle Amazon Partenaires — à garder proche du texte d'origine.",
-                }
-              - { label: "Titre section « Listes d'idées »", name: "ideaListsHeading", widget: "string" }
-              - { label: "Titre section « Shoppable Photos »", name: "shoppablePhotosHeading", widget: "string" }
-              - { label: "Sous-titre section « Shoppable Photos »", name: "shoppablePhotosSubtitle", widget: "string" }
-              - { label: "Mention « Lien affilié »", name: "affiliateLinkLabel", widget: "string" }
-              - { label: "Texte du bouton quand le prix est masqué", name: "priceHiddenCta", widget: "string" }
-              - { label: "Libellé du badge produit d'appel (lu par les lecteurs d'écran)", name: "starterBadgeLabel", widget: "string" }
-              - { label: "Texte du bouton dans les Shoppable Photos", name: "shoppableCta", widget: "string" }
-              - { label: "Texte du lien vers le guide (pied de page)", name: "footerGuideLinkText", widget: "string" }
-
-  - name: "site2"
-    label: "Vitrine 2 : Réglages"
-    files:
-      - file: "src/data/site2.json"
-        label: "Infos créateur (vitrine 2)"
-        name: "site2"
-        fields: *siteFields
-
-  - name: "lists"
-    label: "Vitrine 1 : Listes d'idées"
-    folder: "src/content/lists"
+  - name: "vitrines"
+    label: "Vitrines"
+    folder: "src/content/vitrines"
     create: true
+    delete: true
     slug: "{{slug}}"
+    identifier_field: "name"
     extension: "yaml"
     format: "yaml"
     reorder: true
-    fields: &listsFields
-      - { label: "Titre de la liste (affiché en en-tête)", name: "title", widget: "string" }
+    fields:
       - {
-          label: "Libellé court (affiché dans l'onglet, ex. « Routine du soir »)",
-          name: "tabLabel",
+          label: "Nom / Pseudo",
+          name: "name",
           widget: "string",
-          required: false,
-          hint: "Laissez vide pour réutiliser le titre complet — mais un libellé de 1 à 3 mots évite que l'onglet déborde sur mobile.",
+          hint: "Sert aussi de titre pour cette vitrine dans le sélecteur en haut du site.",
         }
-      - { label: "Icône (emoji)", name: "icon", widget: "string", required: false }
+      - { label: "Handle réseaux (ex. @pseudo)", name: "handle", widget: "string" }
+      - { label: "Phrase d'accroche", name: "tagline", widget: "string" }
       - {
-          label: "Phrase d'accroche (optionnel)",
-          name: "description",
-          widget: "string",
-          required: false,
-          hint: "Courte phrase affichée sous le titre de cette liste (ex. « Le matériel indispensable pour démarrer sans se ruiner »). Laissez vide pour ne rien afficher.",
+          label: "Description SEO (aperçu Google / réseaux)",
+          name: "metaDescription",
+          widget: "text",
+          hint: "Résume le thème de cette vitrine en 1-2 phrases.",
         }
+      - { label: "Avatar", name: "avatar", widget: "image" }
       - {
-          label: "Ordre d'affichage",
-          name: "order",
-          widget: "number",
-          value_type: "int",
-          default: 1,
-          hint: "Plus petit = affiché en premier. Plus simple : depuis la liste des « Listes d'idées », bouton « Réorganiser » puis flèches ↑↓ sur chaque entrée — ce champ se met à jour automatiquement.",
+          label: "Image de partage (réseaux sociaux)",
+          name: "ogImage",
+          widget: "image",
+          required: false,
+          hint: "Aperçu affiché quand le lien de cette vitrine est partagé ou collé ailleurs (Instagram, WhatsApp, etc.). Format recommandé : 1200×630px. Laissez vide pour garder l'image par défaut.",
         }
-      - label: "Produits"
-        name: "products"
+      - { label: "Tag Amazon (ex. moncompte-21)", name: "amazonTag", widget: "string" }
+      - {
+          label: "Afficher les prix sur cette vitrine",
+          name: "showPrices",
+          widget: "boolean",
+          default: false,
+          hint: "⚠️ Laissez désactivé tant que vous n'avez pas accès à la Creators API / Product Advertising API d'Amazon (accès obtenu après 3 ventes qualifiées, voir guide de déploiement étape 0). Sans cet accès, afficher un prix saisi à la main est interdit par l'Operating Agreement Amazon Partenaires — les prix changent en permanence et doivent venir d'un appel en temps réel, jamais d'une valeur fixe. Tant que c'est désactivé, les cartes produits affichent « Voir le prix → » sans montrer de chiffre.",
+        }
+      - label: "Réseaux sociaux"
+        name: "socials"
         widget: "list"
         required: false
-        summary: "{{title}} — {{price}} €"
-        hint: "Cas simple : produits directement listés ici. Si vous utilisez « Sous-idées » ci-dessous à la place, laissez ce champ vide."
-        fields: &productFields
-          - { label: "Titre produit", name: "title", widget: "string" }
+        summary: "{{platform}}"
+        hint: "Facultatif : vous pouvez laisser cette liste vide si vous ne voulez afficher aucun réseau social."
+        fields:
           - {
-              label: "Étiquette (optionnel)",
-              name: "badge",
+              label: "Plateforme",
+              name: "platform",
               widget: "string",
-              required: false,
-              hint: "Ex. « Meilleure vente », « Coup de cœur », « Nouveauté ». Laissez vide sinon. ⚠️ N'utilisez que des mentions vraies : une fausse promotion ou un faux « bestseller » est une pratique commerciale trompeuse interdite (Code de la consommation).",
+              hint: "Icône et couleur reconnues pour : Instagram, TikTok, YouTube, Facebook, Pinterest, X (Twitter), Snapchat, Twitch. Toute autre valeur tapée ici fonctionne aussi (icône générique).",
             }
-          - { label: "Prix indicatif (€)", name: "price", widget: "number", value_type: "float" }
+          - { label: "URL", name: "url", widget: "string" }
+      - label: "Textes de l'interface"
+        name: "uiText"
+        widget: "object"
+        collapsed: true
+        hint: "Tous les libellés affichés sur cette vitrine, modifiables ici sans toucher au code."
+        fields:
           - {
-              label: "Prix de référence avant réduction (€, optionnel)",
-              name: "originalPrice",
-              widget: "number",
-              value_type: "float",
-              required: false,
-              hint: "⚠️ Laissez vide si aucune vraie réduction en cours. Si rempli, ce prix doit être un prix réellement pratiqué sur ce produit dans les 30 derniers jours (réglementation française sur les annonces de réduction de prix) — à mettre à jour régulièrement, jamais laissé au hasard.",
+              label: "Badge mention légale",
+              name: "legalBadge",
+              widget: "string",
+              hint: "⚠️ Formulation imposée par la loi française (« Collaboration commerciale » ou « Publicité » uniquement — pas « ad », « collab », « partner »).",
             }
-          - { label: "Photo", name: "image", widget: "image" }
-          - { label: "Lien affilié (amzn.to ou amazon.fr)", name: "affiliateUrl", widget: "string" }
           - {
-              label: "Produit d'appel (< 20 €, à placer en tête de liste)",
-              name: "isStarterProduct",
-              widget: "boolean",
-              default: false,
-              required: false,
+              label: "Texte de la mention légale Amazon",
+              name: "legalDisclosure",
+              widget: "text",
+              hint: "⚠️ Mention contractuelle Amazon Partenaires — à garder proche du texte d'origine.",
             }
-      - label: "Sous-idées (optionnel)"
-        name: "subIdeas"
+          - { label: "Titre section « Listes d'idées »", name: "ideaListsHeading", widget: "string" }
+          - { label: "Titre section « Shoppable Photos »", name: "shoppablePhotosHeading", widget: "string" }
+          - { label: "Sous-titre section « Shoppable Photos »", name: "shoppablePhotosSubtitle", widget: "string" }
+          - { label: "Mention « Lien affilié »", name: "affiliateLinkLabel", widget: "string" }
+          - { label: "Texte du bouton quand le prix est masqué", name: "priceHiddenCta", widget: "string" }
+          - { label: "Libellé du badge produit d'appel (lu par les lecteurs d'écran)", name: "starterBadgeLabel", widget: "string" }
+          - { label: "Texte du bouton dans les Shoppable Photos", name: "shoppableCta", widget: "string" }
+          - { label: "Texte du lien vers le guide (pied de page)", name: "footerGuideLinkText", widget: "string" }
+      - label: "Listes d'idées"
+        name: "lists"
         widget: "list"
         required: false
         summary: "{{title}}"
-        hint: "Cas avancé : regroupe les produits par sous-thème à l'intérieur de cette liste (ex. « Leurres souples », « Leurres durs », « Rangement »). Si vous remplissez ceci, le champ « Produits » ci-dessus est ignoré."
+        hint: "Pour réordonner : faites glisser une liste par sa poignée directement dans cet éditeur (son ordre d'affichage sur le site suit sa position ici)."
         fields:
-          - { label: "Titre de la sous-idée", name: "title", widget: "string" }
+          - { label: "Titre de la liste (affiché en en-tête)", name: "title", widget: "string" }
+          - {
+              label: "Libellé court (affiché dans l'onglet, ex. « Routine du soir »)",
+              name: "tabLabel",
+              widget: "string",
+              required: false,
+              hint: "Laissez vide pour réutiliser le titre complet — mais un libellé de 1 à 3 mots évite que l'onglet déborde sur mobile.",
+            }
+          - { label: "Icône (emoji)", name: "icon", widget: "string", required: false }
+          - {
+              label: "Phrase d'accroche (optionnel)",
+              name: "description",
+              widget: "string",
+              required: false,
+              hint: "Courte phrase affichée sous le titre de cette liste. Laissez vide pour ne rien afficher.",
+            }
           - label: "Produits"
             name: "products"
             widget: "list"
+            required: false
             summary: "{{title}} — {{price}} €"
-            fields: *productFields
-
-  - name: "lists2"
-    label: "Vitrine 2 : Listes d'idées"
-    folder: "src/content/lists2"
-    create: true
-    slug: "{{slug}}"
-    extension: "yaml"
-    format: "yaml"
-    reorder: true
-    fields: *listsFields
-
-  - name: "photos"
-    label: "Vitrine 1 : Shoppable Photos"
-    folder: "src/content/photos"
-    create: true
-    slug: "{{slug}}"
-    extension: "yaml"
-    format: "yaml"
-    reorder: true
-    fields: &photosFields
-      - { label: "Titre", name: "title", widget: "string" }
-      - {
-          label: "Ordre d'affichage",
-          name: "order",
-          widget: "number",
-          value_type: "int",
-          default: 1,
-          hint: "Plus petit = affiché en premier. Plus simple : depuis la liste des « Shoppable Photos », bouton « Réorganiser » puis flèches ↑↓ — ce champ se met à jour automatiquement.",
-        }
-      - { label: "Photo", name: "image", widget: "image" }
-      - { label: "Largeur réelle (px)", name: "imageWidth", widget: "number", value_type: "int" }
-      - { label: "Hauteur réelle (px)", name: "imageHeight", widget: "number", value_type: "int" }
-      - label: "Pastilles cliquables"
-        name: "hotspots"
+            hint: "Cas simple : produits directement listés ici. Si vous utilisez « Sous-idées » ci-dessous à la place, laissez ce champ vide."
+            fields: &productFields
+              - { label: "Titre produit", name: "title", widget: "string" }
+              - {
+                  label: "Étiquette (optionnel)",
+                  name: "badge",
+                  widget: "string",
+                  required: false,
+                  hint: "Ex. « Meilleure vente », « Coup de cœur », « Nouveauté ». Laissez vide sinon. ⚠️ N'utilisez que des mentions vraies : une fausse promotion ou un faux « bestseller » est une pratique commerciale trompeuse interdite (Code de la consommation).",
+                }
+              - { label: "Prix indicatif (€)", name: "price", widget: "number", value_type: "float" }
+              - {
+                  label: "Prix de référence avant réduction (€, optionnel)",
+                  name: "originalPrice",
+                  widget: "number",
+                  value_type: "float",
+                  required: false,
+                  hint: "⚠️ Laissez vide si aucune vraie réduction en cours. Si rempli, ce prix doit être un prix réellement pratiqué sur ce produit dans les 30 derniers jours (réglementation française sur les annonces de réduction de prix) — à mettre à jour régulièrement, jamais laissé au hasard.",
+                }
+              - { label: "Photo", name: "image", widget: "image" }
+              - { label: "Lien affilié (amzn.to ou amazon.fr)", name: "affiliateUrl", widget: "string" }
+              - {
+                  label: "Produit d'appel (< 20 €, à placer en tête de liste)",
+                  name: "isStarterProduct",
+                  widget: "boolean",
+                  default: false,
+                  required: false,
+                }
+          - label: "Sous-idées (optionnel)"
+            name: "subIdeas"
+            widget: "list"
+            required: false
+            summary: "{{title}}"
+            hint: "Cas avancé : regroupe les produits par sous-thème à l'intérieur de cette liste (ex. « Leurres souples », « Leurres durs », « Rangement »). Si vous remplissez ceci, le champ « Produits » ci-dessus est ignoré."
+            fields:
+              - { label: "Titre de la sous-idée", name: "title", widget: "string" }
+              - label: "Produits"
+                name: "products"
+                widget: "list"
+                summary: "{{title}} — {{price}} €"
+                fields: *productFields
+      - label: "Shoppable Photos"
+        name: "photos"
         widget: "list"
+        required: false
         summary: "{{title}}"
-        hint: "Une pastille = un point cliquable sur la photo. Pour la repositionner : ouvrez la photo dans un nouvel onglet (clic droit sur l'aperçu → Ouvrir l'image dans un nouvel onglet), repérez à l'œil l'endroit voulu, puis estimez sa position en % : 0 = tout à gauche/en haut, 100 = tout à droite/en bas, 50 = centre. Une pastille par défaut est déjà présente à la création d'une nouvelle photo (en haut à gauche) : modifiez ses champs ci-dessous (position, titre, prix, lien) pour la personnaliser, ou supprimez-la avec le bouton de suppression de l'entrée si vous n'en avez pas besoin."
+        hint: "Pour réordonner : faites glisser une photo par sa poignée directement dans cet éditeur."
         fields:
-          - { label: "Position horizontale (% depuis la gauche, 0-100)", name: "x", widget: "number", value_type: "float" }
-          - { label: "Position verticale (% depuis le haut, 0-100)", name: "y", widget: "number", value_type: "float" }
-          - { label: "Titre produit", name: "title", widget: "string" }
-          - { label: "Prix indicatif (€)", name: "price", widget: "number", value_type: "float" }
-          - { label: "Lien affilié", name: "affiliateUrl", widget: "string" }
-
-  - name: "photos2"
-    label: "Vitrine 2 : Shoppable Photos"
-    folder: "src/content/photos2"
-    create: true
-    slug: "{{slug}}"
-    extension: "yaml"
-    format: "yaml"
-    reorder: true
-    fields: *photosFields
+          - { label: "Titre", name: "title", widget: "string" }
+          - { label: "Photo", name: "image", widget: "image" }
+          - { label: "Largeur réelle (px)", name: "imageWidth", widget: "number", value_type: "int" }
+          - { label: "Hauteur réelle (px)", name: "imageHeight", widget: "number", value_type: "int" }
+          - label: "Pastilles cliquables"
+            name: "hotspots"
+            widget: "list"
+            summary: "{{title}}"
+            hint: "Une pastille = un point cliquable sur la photo. Pour la repositionner : ouvrez la photo dans un nouvel onglet (clic droit sur l'aperçu → Ouvrir l'image dans un nouvel onglet), repérez à l'œil l'endroit voulu, puis estimez sa position en % : 0 = tout à gauche/en haut, 100 = tout à droite/en bas, 50 = centre. Une pastille par défaut est déjà présente à la création d'une nouvelle photo (en haut à gauche) : modifiez ses champs ci-dessous (position, titre, prix, lien) pour la personnaliser, ou supprimez-la avec le bouton de suppression de l'entrée si vous n'en avez pas besoin."
+            fields:
+              - { label: "Position horizontale (% depuis la gauche, 0-100)", name: "x", widget: "number", value_type: "float" }
+              - { label: "Position verticale (% depuis le haut, 0-100)", name: "y", widget: "number", value_type: "float" }
+              - { label: "Titre produit", name: "title", widget: "string" }
+              - { label: "Prix indicatif (€)", name: "price", widget: "number", value_type: "float" }
+              - { label: "Lien affilié", name: "affiliateUrl", widget: "string" }

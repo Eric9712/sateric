@@ -5,8 +5,7 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { load } from 'js-yaml';
 
-const LISTS_DIRS = ['lists', 'lists2'].map((d) => fileURLToPath(new URL(`../src/content/${d}/`, import.meta.url)));
-const PHOTOS_DIRS = ['photos', 'photos2'].map((d) => fileURLToPath(new URL(`../src/content/${d}/`, import.meta.url)));
+const VITRINES_DIR = fileURLToPath(new URL('../src/content/vitrines/', import.meta.url));
 
 function collectYamlFiles(dirPath) {
   return readdirSync(dirPath)
@@ -14,34 +13,30 @@ function collectYamlFiles(dirPath) {
     .map((f) => join(dirPath, f));
 }
 
-// { url, source: "fichier > produit" }
+// { url, source: "vitrine > liste/photo > produit" }
 const links = [];
 
-function addProductLinks(products, filename, context) {
+function addProductLinks(products, vitrineName, context) {
   for (const p of products ?? []) {
-    if (p.affiliateUrl) links.push({ url: p.affiliateUrl, source: `${filename} > ${context} > ${p.title}` });
+    if (p.affiliateUrl) links.push({ url: p.affiliateUrl, source: `${vitrineName} > ${context} > ${p.title}` });
   }
 }
 
-for (const dir of LISTS_DIRS) {
-  for (const file of collectYamlFiles(dir)) {
-    const data = load(readFileSync(file, 'utf8'));
-    const filename = file.split(/[\\/]/).pop();
-    if (!data) continue;
-    addProductLinks(data.products, filename, data.title ?? '(sans titre)');
-    for (const sub of data.subIdeas ?? []) {
-      addProductLinks(sub.products, filename, sub.title);
+for (const file of collectYamlFiles(VITRINES_DIR)) {
+  const data = load(readFileSync(file, 'utf8'));
+  if (!data) continue;
+  const vitrineName = data.name ?? file.split(/[\\/]/).pop();
+
+  for (const list of data.lists ?? []) {
+    addProductLinks(list.products, vitrineName, list.title);
+    for (const sub of list.subIdeas ?? []) {
+      addProductLinks(sub.products, vitrineName, `${list.title} > ${sub.title}`);
     }
   }
-}
 
-for (const dir of PHOTOS_DIRS) {
-  for (const file of collectYamlFiles(dir)) {
-    const data = load(readFileSync(file, 'utf8'));
-    const filename = file.split(/[\\/]/).pop();
-    if (!data) continue;
-    for (const h of data.hotspots ?? []) {
-      if (h.affiliateUrl) links.push({ url: h.affiliateUrl, source: `${filename} > pastille > ${h.title}` });
+  for (const photo of data.photos ?? []) {
+    for (const h of photo.hotspots ?? []) {
+      if (h.affiliateUrl) links.push({ url: h.affiliateUrl, source: `${vitrineName} > pastille (${photo.title}) > ${h.title}` });
     }
   }
 }

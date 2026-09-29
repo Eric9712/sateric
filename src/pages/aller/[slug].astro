@@ -5,7 +5,7 @@
 // production, sans dépendre d'une fonctionnalité propre à un hébergeur.
 // noindex : cette page n'est qu'un relais, elle ne doit pas être indexée.
 import { getCollection } from 'astro:content';
-import { productRedirectSlug, hotspotRedirectSlug } from '../../lib/redirectSlug.mjs';
+import { productRedirectSlug, hotspotRedirectSlug, nestedItemId } from '../../lib/redirectSlug.mjs';
 
 export async function getStaticPaths() {
   const paths = [];
@@ -17,27 +17,26 @@ export async function getStaticPaths() {
     paths.push({ params: { slug }, props: { target, title } });
   }
 
-  for (const collectionName of ['lists', 'lists2']) {
-    const entries = await getCollection(collectionName);
-    for (const entry of entries) {
-      for (const p of entry.data.products) {
-        addPath(productRedirectSlug(entry.id, p.title), p.affiliateUrl, p.title);
+  const vitrines = await getCollection('vitrines');
+  for (const vitrine of vitrines) {
+    vitrine.data.lists.forEach((list, i) => {
+      const listId = nestedItemId(vitrine.id, i, list.title);
+      for (const p of list.products) {
+        addPath(productRedirectSlug(listId, p.title), p.affiliateUrl, p.title);
       }
-      for (const sub of entry.data.subIdeas) {
+      for (const sub of list.subIdeas) {
         for (const p of sub.products) {
-          addPath(productRedirectSlug(entry.id, p.title), p.affiliateUrl, p.title);
+          addPath(productRedirectSlug(listId, p.title), p.affiliateUrl, p.title);
         }
       }
-    }
-  }
+    });
 
-  for (const collectionName of ['photos', 'photos2']) {
-    const entries = await getCollection(collectionName);
-    for (const entry of entries) {
-      for (const h of entry.data.hotspots) {
-        addPath(hotspotRedirectSlug(entry.id, h.title), h.affiliateUrl, h.title);
+    vitrine.data.photos.forEach((photo, i) => {
+      const photoId = nestedItemId(vitrine.id, i, photo.title);
+      for (const h of photo.hotspots) {
+        addPath(hotspotRedirectSlug(photoId, h.title), h.affiliateUrl, h.title);
       }
-    }
+    });
   }
 
   return paths;

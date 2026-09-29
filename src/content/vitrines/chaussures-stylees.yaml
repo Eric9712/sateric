@@ -1,0 +1,52 @@
+order: 2
+name: Chaussures stylées
+handle: '@boss rico'
+tagline: Mes chaussures
+metaDescription: Chaussures stylées
+avatar: /images/avatar-placeholder.svg
+ogImage: ''
+amazonTag: votretag-21
+showPrices: false
+socials: []
+uiText:
+  legalBadge: Collaboration commerciale
+  legalDisclosure: En tant que Partenaire Amazon, je réalise un bénéfice sur les achats remplissant les conditions requises.
+  ideaListsHeading: Mes listes d'idées
+  shoppablePhotosHeading: En situation
+  shoppablePhotosSubtitle: Touchez les pastilles sur les photos pour voir les produits.
+  affiliateLinkLabel: Lien affilié
+  priceHiddenCta: Voir le prix →
+  starterBadgeLabel: Coup de cœur
+  shoppableCta: Voir sur Amazon
+  footerGuideLinkText: Cadre légal & règles du programme Amazon Partenaires
+lists:
+  - title: Exemple de liste (à modifier dans l'admin)
+    tabLabel: Exemple
+    icon: ✨
+    description: ''
+    products:
+      - title: Exemple de produit à remplacer
+        badge: ''
+        price: 9.9
+        originalPrice: null
+        image: /images/placeholder-product.svg
+        affiliateUrl: https://amzn.to/REMPLACER-EXEMPLE
+        isStarterProduct: false
+    subIdeas: []
+  - title: test
+    tabLabel: test
+    icon: ''
+    description: ''
+    products: []
+    subIdeas: []
+photos:
+  - title: Exemple de photo (à remplacer dans l'admin)
+    image: /images/placeholder-photo-spot.svg
+    imageWidth: 1200
+    imageHeight: 1500
+    hotspots:
+      - x: 50
+        'y': 50
+        title: Exemple de produit
+        price: 9.9
+        affiliateUrl: https://amzn.to/REMPLACER-EXEMPLE

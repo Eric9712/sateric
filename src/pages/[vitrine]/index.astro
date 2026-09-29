@@ -1,0 +1,38 @@
+---
+// Une page par vitrine autre que celle d'accueil (voir src/pages/index.astro).
+// La vitrine d'accueil n'a volontairement pas sa propre page ici : elle ne
+// doit exister qu'à une seule adresse (/) pour éviter le contenu dupliqué.
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import VitrinePage from '../../components/VitrinePage.astro';
+
+interface Props {
+  vitrine: CollectionEntry<'vitrines'>;
+  vitrines: CollectionEntry<'vitrines'>[];
+}
+
+export async function getStaticPaths() {
+  const vitrines = (await getCollection('vitrines')).sort((a, b) => a.data.order - b.data.order);
+  const home = vitrines[0];
+
+  return vitrines
+    .filter((v) => v.id !== home.id)
+    .map((v) => ({ params: { vitrine: v.id }, props: { vitrine: v, vitrines } }));
+}
+
+const { vitrine, vitrines } = Astro.props;
+const home = vitrines[0];
+const site = vitrine.data;
+---
+
+<BaseLayout title={`${site.name} — Mes recommandations`} description={site.metaDescription} ogImage={site.ogImage}>
+  <VitrinePage
+    vitrine={vitrine}
+    switcherSites={vitrines.map((v) => ({
+      name: v.data.name,
+      href: v.id === home.id ? '/' : `/${v.id}`,
+      active: v.id === vitrine.id,
+    }))}
+  />
+</BaseLayout>

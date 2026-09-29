@@ -18,3 +18,10 @@ export function productRedirectSlug(listId, title) {
 export function hotspotRedirectSlug(photoId, title) {
   return `photo-${slugify(photoId)}--${slugify(title)}`;
 }
+
+// Identifiant stable d'une liste ou d'une photo nichée dans une vitrine
+// (elles n'ont plus de fichier propre depuis le passage aux vitrines).
+// L'index garantit l'unicité même si deux listes partagent le même titre.
+export function nestedItemId(vitrineId, index, title) {
+  return `${vitrineId}-${index}-${slugify(title)}`;
+}

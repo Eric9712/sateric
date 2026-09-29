@@ -1,49 +1,24 @@
 ---
+// Page d'accueil = la vitrine avec le plus petit "order" (même convention
+// que le tri des listes/photos : "plus petit = affiché en premier"). Pour
+// changer la vitrine d'accueil, il suffit de lui donner l'ordre le plus bas
+// depuis l'admin (bouton "Réorganiser").
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import SiteSwitcher from '../components/SiteSwitcher.astro';
-import TabsIdeaLists from '../components/TabsIdeaLists.astro';
-import ShoppablePhoto from '../components/ShoppablePhoto.astro';
-import Footer from '../components/Footer.astro';
-import ProductListSchema from '../components/ProductListSchema.astro';
-import site from '../data/site.json';
-import site2 from '../data/site2.json';
+import VitrinePage from '../components/VitrinePage.astro';
 
-const lists = (await getCollection('lists')).sort((a, b) => a.data.order - b.data.order);
-const photos = (await getCollection('photos')).sort((a, b) => a.data.order - b.data.order);
+const vitrines = (await getCollection('vitrines')).sort((a, b) => a.data.order - b.data.order);
+const home = vitrines[0];
+const site = home.data;
 ---
 
-<BaseLayout
-  title={`${site.name} — Mes recommandations`}
-  description={site.metaDescription}
-  ogImage={site.ogImage}
->
-  <ProductListSchema site={site} lists={lists} photos={photos} />
-  <SiteSwitcher
-    sites={[
-      { name: site.name, href: '/', active: true },
-      { name: site2.name, href: '/vitrine-2', active: false },
-    ]}
+<BaseLayout title={`${site.name} — Mes recommandations`} description={site.metaDescription} ogImage={site.ogImage}>
+  <VitrinePage
+    vitrine={home}
+    switcherSites={vitrines.map((v) => ({
+      name: v.data.name,
+      href: v.id === home.id ? '/' : `/${v.id}`,
+      active: v.id === home.id,
+    }))}
   />
-  <Header site={site} />
-
-  <main>
-    <TabsIdeaLists site={site} lists={lists} />
-
-    <section aria-labelledby="shoppable-heading" class="px-4 pb-6">
-      <div class="max-w-xl lg:max-w-5xl mx-auto rounded-3xl bg-gradient-to-br from-accent-400/10 to-brand-100/40 p-4 lg:p-6 shadow-sm ring-1 ring-black/5">
-        <h2 id="shoppable-heading" class="mb-3 flex items-center gap-2 text-lg font-extrabold text-ink-900">
-          <span class="h-5 w-1.5 rounded-full bg-gradient-to-b from-brand-500 to-accent-500" aria-hidden="true" />
-          {site.uiText.shoppablePhotosHeading}
-        </h2>
-        <p class="mb-3 text-sm text-neutral-600">{site.uiText.shoppablePhotosSubtitle}</p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {photos.map((photo) => <ShoppablePhoto site={site} photo={photo} />)}
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <Footer site={site} />
 </BaseLayout>

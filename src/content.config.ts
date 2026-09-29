@@ -15,61 +15,74 @@ const productSchema = z.object({
   isStarterProduct: z.boolean().optional().default(false),
 });
 
-// Fabriques réutilisées par les deux vitrines (site 1 : lists/photos,
-// site 2 : lists2/photos2) pour que leurs schémas restent identiques et
-// ne divergent jamais accidentellement.
-const makeListsCollection = (base: string) =>
-  defineCollection({
-    loader: glob({ pattern: '**/*.yaml', base }),
-    schema: z.object({
+const listSchema = z.object({
+  title: z.string(),
+  tabLabel: z.string().optional(),
+  icon: z.string().optional(),
+  description: z.string().optional(),
+  // Cas simple : produits directement dans la liste.
+  products: z.array(productSchema).optional().default([]),
+  // Cas avancé : produits groupés par sous-idée (ex. "Leurres souples",
+  // "Leurres durs"...). Si renseigné, prend le pas sur `products` ci-dessus.
+  subIdeas: z
+    .array(
+      z.object({
+        title: z.string(),
+        products: z.array(productSchema),
+      })
+    )
+    .optional()
+    .default([]),
+});
+
+const photoSchema = z.object({
+  title: z.string(),
+  image: z.string(),
+  imageWidth: z.number(),
+  imageHeight: z.number(),
+  hotspots: z.array(
+    z.object({
+      x: z.number().min(0).max(100),
+      y: z.number().min(0).max(100),
       title: z.string(),
-      tabLabel: z.string().optional(),
-      icon: z.string().optional(),
-      description: z.string().optional(),
-      order: z.number().default(0),
-      // Cas simple : produits directement dans la liste.
-      products: z.array(productSchema).optional().default([]),
-      // Cas avancé : produits groupés par sous-idée (ex. "Leurres souples",
-      // "Leurres durs"...). Si renseigné, prend le pas sur `products` ci-dessus.
-      subIdeas: z
-        .array(
-          z.object({
-            title: z.string(),
-            products: z.array(productSchema),
-          })
-        )
-        .optional()
-        .default([]),
+      price: z.number(),
+      affiliateUrl: z.string().url(),
+    })
+  ),
+});
+
+// Une vitrine = un storefront complet et autonome (nom, réseaux, textes,
+// listes d'idées, Shoppable Photos). Nombre illimité, géré depuis l'admin
+// ("+Nouveau" / supprimer une entrée) comme n'importe quelle autre
+// collection — plus besoin de toucher au code pour ajouter une vitrine.
+const vitrines = defineCollection({
+  loader: glob({ pattern: '**/*.yaml', base: './src/content/vitrines' }),
+  schema: z.object({
+    order: z.number().default(0),
+    name: z.string(),
+    handle: z.string(),
+    tagline: z.string(),
+    metaDescription: z.string(),
+    avatar: z.string(),
+    ogImage: z.string().optional(),
+    amazonTag: z.string(),
+    showPrices: z.boolean().default(false),
+    socials: z.array(z.object({ platform: z.string(), url: z.string() })).optional().default([]),
+    uiText: z.object({
+      legalBadge: z.string(),
+      legalDisclosure: z.string(),
+      ideaListsHeading: z.string(),
+      shoppablePhotosHeading: z.string(),
+      shoppablePhotosSubtitle: z.string(),
+      affiliateLinkLabel: z.string(),
+      priceHiddenCta: z.string(),
+      starterBadgeLabel: z.string(),
+      shoppableCta: z.string(),
+      footerGuideLinkText: z.string(),
     }),
-  });
+    lists: z.array(listSchema).optional().default([]),
+    photos: z.array(photoSchema).optional().default([]),
+  }),
+});
 
-const makePhotosCollection = (base: string) =>
-  defineCollection({
-    loader: glob({ pattern: '**/*.yaml', base }),
-    schema: z.object({
-      title: z.string(),
-      order: z.number().default(0),
-      image: z.string(),
-      imageWidth: z.number(),
-      imageHeight: z.number(),
-      hotspots: z.array(
-        z.object({
-          x: z.number().min(0).max(100),
-          y: z.number().min(0).max(100),
-          title: z.string(),
-          price: z.number(),
-          affiliateUrl: z.string().url(),
-        })
-      ),
-    }),
-  });
-
-const lists = makeListsCollection('./src/content/lists');
-const photos = makePhotosCollection('./src/content/photos');
-
-// Vitrine 2 : deuxième storefront indépendant, géré séparément dans l'admin
-// (contenu propre, même structure).
-const lists2 = makeListsCollection('./src/content/lists2');
-const photos2 = makePhotosCollection('./src/content/photos2');
-
-export const collections = { lists, photos, lists2, photos2 };
+export const collections = { vitrines };

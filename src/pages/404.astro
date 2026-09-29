@@ -1,6 +1,9 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import site from '../data/site.json';
+
+const vitrines = (await getCollection('vitrines')).sort((a, b) => a.data.order - b.data.order);
+const site = vitrines[0].data;
 ---
 
 <BaseLayout title={`Page introuvable — ${site.name}`} description="Cette page n'existe pas ou plus.">
