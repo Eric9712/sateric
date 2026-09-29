@@ -1,0 +1,65 @@
+---
+// Lien affilié "propre" (ex. /aller/canne-moulinet--fil-de-peche-nylon-100m)
+// au lieu d'exposer directement l'URL Amazon brute. Redirection statique
+// (meta-refresh + JS) : fonctionne à l'identique en local, en preview et en
+// production, sans dépendre d'une fonctionnalité propre à un hébergeur.
+// noindex : cette page n'est qu'un relais, elle ne doit pas être indexée.
+import { getCollection } from 'astro:content';
+import { productRedirectSlug, hotspotRedirectSlug } from '../../lib/redirectSlug.mjs';
+
+export async function getStaticPaths() {
+  const paths = [];
+  const seen = new Set();
+
+  function addPath(slug, target, title) {
+    if (seen.has(slug)) return; // collision de titres : on garde la 1ère occurrence
+    seen.add(slug);
+    paths.push({ params: { slug }, props: { target, title } });
+  }
+
+  for (const collectionName of ['lists', 'lists2']) {
+    const entries = await getCollection(collectionName);
+    for (const entry of entries) {
+      for (const p of entry.data.products) {
+        addPath(productRedirectSlug(entry.id, p.title), p.affiliateUrl, p.title);
+      }
+      for (const sub of entry.data.subIdeas) {
+        for (const p of sub.products) {
+          addPath(productRedirectSlug(entry.id, p.title), p.affiliateUrl, p.title);
+        }
+      }
+    }
+  }
+
+  for (const collectionName of ['photos', 'photos2']) {
+    const entries = await getCollection(collectionName);
+    for (const entry of entries) {
+      for (const h of entry.data.hotspots) {
+        addPath(hotspotRedirectSlug(entry.id, h.title), h.affiliateUrl, h.title);
+      }
+    }
+  }
+
+  return paths;
+}
+
+const { target, title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <title>Redirection…</title>
+  </head>
+  <body>
+    <p>
+      Redirection vers « {title} » sur Amazon… <a href={target} rel="sponsored noopener">Cliquez ici si rien ne se passe</a>.
+    </p>
+    <script define:vars={{ target }}>
+      location.replace(target);
+    </script>
+  </body>
+</html>

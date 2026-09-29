@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import CookieConsent from '../components/CookieConsent.astro';
 
 interface Props {
   title: string;
@@ -77,6 +78,7 @@ const ogImageURL = new URL(ogImage, Astro.site);
   </head>
   <body class="min-h-screen flex flex-col bg-canvas">
     <slot />
+    <CookieConsent />
   </body>
 </html>
 

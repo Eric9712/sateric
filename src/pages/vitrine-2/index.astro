@@ -9,6 +9,7 @@ import SiteSwitcher from '../../components/SiteSwitcher.astro';
 import TabsIdeaLists from '../../components/TabsIdeaLists.astro';
 import ShoppablePhoto from '../../components/ShoppablePhoto.astro';
 import Footer from '../../components/Footer.astro';
+import ProductListSchema from '../../components/ProductListSchema.astro';
 import site from '../../data/site2.json';
 import site1 from '../../data/site.json';
 
@@ -21,6 +22,7 @@ const photos = (await getCollection('photos2')).sort((a, b) => a.data.order - b.
   description={site.metaDescription}
   ogImage={site.ogImage}
 >
+  <ProductListSchema site={site} lists={lists} photos={photos} />
   <SiteSwitcher
     sites={[
       { name: site1.name, href: '/', active: false },

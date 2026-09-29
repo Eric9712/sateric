@@ -1,0 +1,75 @@
+---
+// Bandeau de consentement. Rien sur ce site n'exige de consentement
+// aujourd'hui : Cloudflare Web Analytics (chargé dans BaseLayout) est
+// nativement sans cookie, et aucun pixel publicitaire n'est intégré. Ce
+// bandeau prépare l'avenir : tout script de mesure/publicité ajouté plus
+// tard doit d'abord appeler window.hasTrackingConsent() et ne se charger
+// que si le résultat est true, pour rester conforme RGPD/CNIL dès son
+// ajout, sans devoir reconstruire ce mécanisme à ce moment-là.
+---
+
+<div
+  id="cookie-consent"
+  hidden
+  class="fixed inset-x-0 bottom-0 z-50 border-t border-neutral-200 bg-white p-4 shadow-[0_-4px_16px_rgba(0,0,0,0.08)]"
+>
+  <div class="max-w-xl lg:max-w-5xl mx-auto flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
+    <p class="text-xs text-neutral-600">
+      Ce site fonctionne sans cookie de suivi. Si des outils de mesure d'audience ou publicitaires sont ajoutés à
+      l'avenir, ils ne se déclencheront qu'avec votre accord.
+    </p>
+    <div class="flex shrink-0 gap-2">
+      <button
+        type="button"
+        data-consent="refused"
+        class="tap-target rounded-full border border-neutral-300 px-4 py-2 text-xs font-semibold text-ink-900"
+      >
+        Refuser
+      </button>
+      <button
+        type="button"
+        data-consent="accepted"
+        class="tap-target rounded-full bg-gradient-to-r from-brand-600 to-accent-600 px-4 py-2 text-xs font-bold text-white"
+      >
+        Accepter
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const STORAGE_KEY = 'cookie-consent';
+
+  function getConsent(): 'accepted' | 'refused' | null {
+    try {
+      return localStorage.getItem(STORAGE_KEY) as 'accepted' | 'refused' | null;
+    } catch {
+      return null;
+    }
+  }
+
+  declare global {
+    interface Window {
+      hasTrackingConsent: () => boolean;
+    }
+  }
+  window.hasTrackingConsent = () => getConsent() === 'accepted';
+
+  const banner = document.getElementById('cookie-consent');
+  if (banner && !getConsent()) {
+    banner.hidden = false;
+  }
+
+  banner?.querySelectorAll<HTMLButtonElement>('[data-consent]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      try {
+        localStorage.setItem(STORAGE_KEY, btn.dataset.consent!);
+      } catch {
+        // stockage indisponible (navigation privée stricte) : on masque quand
+        // même le bandeau pour cette visite, sans persister le choix.
+      }
+      banner.hidden = true;
+      window.dispatchEvent(new CustomEvent('cookieconsentchange'));
+    });
+  });
+</script>
