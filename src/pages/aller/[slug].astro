@@ -55,7 +55,7 @@ const { target, title } = Astro.props;
   </head>
   <body>
     <p>
-      Redirection vers « {title} » sur Amazon… <a href={target} rel="sponsored noopener">Cliquez ici si rien ne se passe</a>.
+      Redirection vers « {title} » sur Amazon… <a href={target} rel="sponsored nofollow noopener">Cliquez ici si rien ne se passe</a>.
     </p>
     <script define:vars={{ target }}>
       location.replace(target);
