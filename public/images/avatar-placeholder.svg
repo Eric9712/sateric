@@ -1,5 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Avatar à remplacer">
-  <rect width="200" height="200" fill="#e5e7eb"/>
-  <circle cx="100" cy="80" r="36" fill="#9ca3af"/>
-  <path d="M40 176c0-38 27-64 60-64s60 26 60 64" fill="#9ca3af"/>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e8503a"/>
+      <stop offset="100%" stop-color="#c2255f"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" fill="url(#bg)"/>
+  <circle cx="100" cy="80" r="36" fill="#ffffff" fill-opacity="0.9"/>
+  <path d="M40 176c0-38 27-64 60-64s60 26 60 64" fill="#ffffff" fill-opacity="0.9"/>
 </svg>
