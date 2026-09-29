@@ -1,7 +1,7 @@
 order: 2
-name: Chaussures stylées
-handle: '@boss rico'
-tagline: Mes chaussures
+name: Mes Chaussures Stylées
+handle: ERIC S
+tagline: Ma Sélection
 metaDescription: Chaussures stylées
 avatar: /images/avatar-placeholder.svg
 ogImage: ''
@@ -46,7 +46,7 @@ photos:
     imageHeight: 1500
     hotspots:
       - x: 50
-        'y': 50
+        y: 50
         title: Exemple de produit
         price: 9.9
         affiliateUrl: https://amzn.to/REMPLACER-EXEMPLE

@@ -13,14 +13,14 @@ const { site } = Astro.props;
 ---
 
 <div class="relative z-10 w-full bg-disclosure-bg shadow-sm">
-  <div class="max-w-xl lg:max-w-5xl mx-auto px-4 py-2.5 flex flex-col gap-1 text-center">
+  <div class="max-w-xl lg:max-w-5xl mx-auto px-4 py-1.5 flex flex-wrap items-center justify-center gap-x-2 gap-y-0.5 text-center">
     <span
-      class="inline-flex self-center items-center gap-1.5 rounded-full bg-disclosure-border/25 px-3 py-1 text-sm font-bold text-disclosure-text"
+      class="inline-flex shrink-0 items-center gap-1 rounded-full bg-disclosure-border/25 px-2 py-0.5 text-[11px] font-bold text-disclosure-text"
     >
-      <span class="flex h-4 w-4 items-center justify-center rounded-full bg-disclosure-text/15 text-[10px]" aria-hidden="true">📢</span>
+      <span aria-hidden="true">📢</span>
       {site.uiText.legalBadge}
     </span>
-    <p class="text-xs text-disclosure-text leading-snug">
+    <p class="text-[11px] text-disclosure-text leading-tight">
       {site.uiText.legalDisclosure}
     </p>
   </div>
