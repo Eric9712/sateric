@@ -6,6 +6,7 @@ import TabsIdeaLists from '../components/TabsIdeaLists.astro';
 import ShoppablePhoto from '../components/ShoppablePhoto.astro';
 import Footer from '../components/Footer.astro';
 import site from '../data/site.json';
+import site2 from '../data/site2.json';
 
 const lists = (await getCollection('lists')).sort((a, b) => a.data.order - b.data.order);
 const photos = (await getCollection('photos')).sort((a, b) => a.data.order - b.data.order);
@@ -35,5 +36,5 @@ const photos = (await getCollection('photos')).sort((a, b) => a.data.order - b.d
     </section>
   </main>
 
-  <Footer site={site} />
+  <Footer site={site} crossLink={{ href: '/vitrine-2', label: `Découvrir : ${site2.name} →` }} />
 </BaseLayout>
