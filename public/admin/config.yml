@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: VOTRE-USER/VOTRE-REPO # ex. philouuone/site-influenceur-amazon
+  repo: Eric9712/sateric
   branch: main
   base_url: https://sveltia-cms-auth.VOTRE-SOUS-DOMAINE.workers.dev
   auth_endpoint: auth

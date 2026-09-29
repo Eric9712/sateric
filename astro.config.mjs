@@ -7,8 +7,13 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  // Remplacez par votre domaine définitif avant le déploiement (voir guide de déploiement).
-  site: 'https://votre-domaine.fr',
+  // Domaine canonique choisi : sans "www" (même si www.sateric.com est aussi
+  // actif). Comme les balises canoniques de chaque page sont construites à
+  // partir de cette valeur (et non du nom d'hôte réellement utilisé par le
+  // visiteur), les deux adresses restent utilisables sans créer de contenu
+  // dupliqué aux yeux de Google : toutes les pages déclarent sateric.com
+  // comme référence, qu'on y accède via www ou non.
+  site: 'https://sateric.com',
 
   // Le serveur de dev Astro ne résout pas /admin (ni /admin/) vers
   // public/admin/index.html tout seul : redirection explicite pour le confort
