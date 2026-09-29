@@ -31,7 +31,7 @@ const { lists } = Astro.props;
             data-active={i === 0 ? 'true' : 'false'}
             class="tap-target whitespace-nowrap rounded-full border border-neutral-200 bg-white px-4 text-sm font-semibold text-ink-900 shadow-sm transition-all data-[active=true]:border-transparent data-[active=true]:bg-gradient-to-r data-[active=true]:from-brand-600 data-[active=true]:to-accent-600 data-[active=true]:text-white data-[active=true]:shadow-md data-[active=true]:scale-[1.03]"
           >
-            {list.data.icon} {list.data.tabLabel ?? list.data.title}
+            {list.data.icon} {list.data.tabLabel || list.data.title}
           </button>
         ))
       }
@@ -40,7 +40,7 @@ const { lists } = Astro.props;
     {
       lists.map((list, i) => (
         <div role="tabpanel" id={`panel-${list.id}`} aria-labelledby={`tab-${list.id}`} hidden={i !== 0} class="pt-4">
-          <p class="mb-3 text-sm text-neutral-500">{list.data.title}</p>
+          {list.data.description && <p class="mb-3 text-sm text-neutral-500">{list.data.description}</p>}
 
           {list.data.subIdeas.length > 0 ? (
             <div class="flex flex-col gap-6">
@@ -50,10 +50,11 @@ const { lists } = Astro.props;
                     <span class="h-3.5 w-1 rounded-full bg-accent-500" aria-hidden="true" />
                     {subIdea.title}
                   </h3>
-                  <div class="grid grid-cols-3 gap-2 sm:gap-3 lg:grid-cols-5 lg:gap-4">
+                  <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 lg:gap-4">
                     {subIdea.products.map((product) => (
                       <ProductCard
                         title={product.title}
+                        badge={product.badge}
                         price={product.price}
                         originalPrice={product.originalPrice}
                         image={product.image}
@@ -67,10 +68,11 @@ const { lists } = Astro.props;
               ))}
             </div>
           ) : (
-            <div class="grid grid-cols-3 gap-2 sm:gap-3 lg:grid-cols-5 lg:gap-4">
+            <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 lg:gap-4">
               {list.data.products.map((product) => (
                 <ProductCard
                   title={product.title}
+                  badge={product.badge}
                   price={product.price}
                   originalPrice={product.originalPrice}
                   image={product.image}

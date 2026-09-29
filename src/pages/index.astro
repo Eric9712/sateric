@@ -14,6 +14,7 @@ const photos = (await getCollection('photos')).sort((a, b) => a.data.order - b.d
 <BaseLayout
   title={`${site.name} — Mes recommandations`}
   description={site.metaDescription}
+  ogImage={site.ogImage}
 >
   <Header />
 

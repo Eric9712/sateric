@@ -26,6 +26,13 @@ collections:
               hint: "Résume le thème de la vitrine en 1-2 phrases. Utile si vous changez de thème plus tard (pêche, beauté, high-tech...) sans toucher au code.",
             }
           - { label: "Avatar", name: "avatar", widget: "image" }
+          - {
+              label: "Image de partage (réseaux sociaux)",
+              name: "ogImage",
+              widget: "image",
+              required: false,
+              hint: "Aperçu affiché quand le lien du site est partagé ou collé ailleurs (Instagram, WhatsApp, etc.). Format recommandé : 1200×630px. Laissez vide pour garder l'image par défaut.",
+            }
           - { label: "Tag Amazon (ex. moncompte-21)", name: "amazonTag", widget: "string" }
           - {
               label: "Afficher les prix sur le site",
@@ -37,7 +44,9 @@ collections:
           - label: "Réseaux sociaux"
             name: "socials"
             widget: "list"
+            required: false
             summary: "{{platform}}"
+            hint: "Facultatif : vous pouvez laisser cette liste vide si vous ne voulez afficher aucun réseau social."
             fields:
               - {
                   label: "Plateforme",
@@ -92,6 +101,13 @@ collections:
         }
       - { label: "Icône (emoji)", name: "icon", widget: "string", required: false }
       - {
+          label: "Phrase d'accroche (optionnel)",
+          name: "description",
+          widget: "string",
+          required: false,
+          hint: "Courte phrase affichée sous le titre de cette liste (ex. « Le matériel indispensable pour démarrer sans se ruiner »). Laissez vide pour ne rien afficher.",
+        }
+      - {
           label: "Ordre d'affichage",
           name: "order",
           widget: "number",
@@ -107,6 +123,13 @@ collections:
         hint: "Cas simple : produits directement listés ici. Si vous utilisez « Sous-idées » ci-dessous à la place, laissez ce champ vide."
         fields: &productFields
           - { label: "Titre produit", name: "title", widget: "string" }
+          - {
+              label: "Étiquette (optionnel)",
+              name: "badge",
+              widget: "string",
+              required: false,
+              hint: "Ex. « Meilleure vente », « Coup de cœur », « Nouveauté ». Laissez vide sinon. ⚠️ N'utilisez que des mentions vraies : une fausse promotion ou un faux « bestseller » est une pratique commerciale trompeuse interdite (Code de la consommation).",
+            }
           - { label: "Prix indicatif (€)", name: "price", widget: "number", value_type: "float" }
           - {
               label: "Prix de référence avant réduction (€, optionnel)",
@@ -164,9 +187,10 @@ collections:
         name: "hotspots"
         widget: "list"
         summary: "{{title}}"
+        hint: "Une pastille = un point cliquable sur la photo. Pour la repositionner : ouvrez la photo dans un nouvel onglet (clic droit sur l'aperçu → Ouvrir l'image dans un nouvel onglet), repérez à l'œil l'endroit voulu, puis estimez sa position en % : 0 = tout à gauche/en haut, 100 = tout à droite/en bas, 50 = centre. Une pastille par défaut est déjà présente à la création d'une nouvelle photo (en haut à gauche) : modifiez ses champs ci-dessous (position, titre, prix, lien) pour la personnaliser, ou supprimez-la avec le bouton de suppression de l'entrée si vous n'en avez pas besoin."
         fields:
-          - { label: "Position horizontale (% depuis la gauche)", name: "x", widget: "number", value_type: "float" }
-          - { label: "Position verticale (% depuis le haut)", name: "y", widget: "number", value_type: "float" }
+          - { label: "Position horizontale (% depuis la gauche, 0-100)", name: "x", widget: "number", value_type: "float" }
+          - { label: "Position verticale (% depuis le haut, 0-100)", name: "y", widget: "number", value_type: "float" }
           - { label: "Titre produit", name: "title", widget: "string" }
           - { label: "Prix indicatif (€)", name: "price", widget: "number", value_type: "float" }
           - { label: "Lien affilié", name: "affiliateUrl", widget: "string" }
