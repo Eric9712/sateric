@@ -1,0 +1,50 @@
+vitrine: le-repaire-du-pecheur
+order: 4
+title: Ma tenue et protection pour une journée pêche
+tabLabel: Tenue & protection
+icon: 🧢
+description: ''
+products:
+  - title: Casquette anti-UV
+    badge: ''
+    price: 12.9
+    originalPrice: null
+    image: /images/placeholder-product.svg
+    affiliateUrl: https://amzn.to/REMPLACER19
+    isStarterProduct: true
+  - title: Lunettes polarisantes
+    badge: ''
+    price: 27.9
+    originalPrice: null
+    image: /images/placeholder-product.svg
+    affiliateUrl: https://amzn.to/REMPLACER20
+    isStarterProduct: false
+  - title: Cuissardes de pêche respirantes
+    badge: ''
+    price: 64.9
+    originalPrice: null
+    image: /images/placeholder-product.svg
+    affiliateUrl: https://amzn.to/REMPLACER21
+    isStarterProduct: false
+  - title: Veste imperméable de pêche
+    badge: ''
+    price: 44.9
+    originalPrice: null
+    image: /images/placeholder-product.svg
+    affiliateUrl: https://amzn.to/REMPLACER22
+    isStarterProduct: false
+  - title: Gants de pêche sans doigts
+    badge: ''
+    price: 14.9
+    originalPrice: null
+    image: /images/placeholder-product.svg
+    affiliateUrl: https://amzn.to/REMPLACER23
+    isStarterProduct: false
+  - title: Crème solaire résistante à l'eau
+    badge: ''
+    price: 9.9
+    originalPrice: null
+    image: /images/placeholder-product.svg
+    affiliateUrl: https://amzn.to/REMPLACER24
+    isStarterProduct: false
+subIdeas: []

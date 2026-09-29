@@ -1,39 +1,15 @@
 ---
 import ProductCard from './ProductCard.astro';
+import type { CollectionEntry } from 'astro:content';
 import type { SiteData } from '../types';
-import { productRedirectSlug, nestedItemId } from '../lib/redirectSlug.mjs';
-
-interface Product {
-  title: string;
-  badge?: string;
-  price: number;
-  originalPrice?: number | null;
-  image: string;
-  affiliateUrl: string;
-  isStarterProduct?: boolean;
-}
-
-interface ListData {
-  title: string;
-  tabLabel?: string;
-  icon?: string;
-  description?: string;
-  products: Product[];
-  subIdeas: { title: string; products: Product[] }[];
-}
+import { productRedirectSlug } from '../lib/redirectSlug.mjs';
 
 interface Props {
   site: SiteData;
-  vitrineId: string;
-  lists: ListData[];
+  lists: CollectionEntry<'lists'>[];
 }
 
-const { site, vitrineId, lists } = Astro.props;
-// Identifiant stable par liste (pour les ids DOM et les liens /aller/...),
-// dérivé du titre. Les listes n'ont plus leur propre fichier depuis le
-// passage aux vitrines : leur ordre d'affichage suit directement l'ordre
-// dans lequel elles sont rangées dans l'éditeur (glisser-déposer).
-const listIds = lists.map((list, i) => nestedItemId(vitrineId, i, list.title));
+const { site, lists } = Astro.props;
 ---
 
 <section aria-labelledby="idea-lists-heading" class="px-4 py-6">
@@ -49,15 +25,15 @@ const listIds = lists.map((list, i) => nestedItemId(vitrineId, i, list.title));
           <button
             type="button"
             role="tab"
-            id={`tab-${listIds[i]}`}
-            aria-controls={`panel-${listIds[i]}`}
+            id={`tab-${list.id}`}
+            aria-controls={`panel-${list.id}`}
             aria-selected={i === 0 ? 'true' : 'false'}
             tabindex={i === 0 ? 0 : -1}
             data-tab-trigger
             data-active={i === 0 ? 'true' : 'false'}
             class="tap-target whitespace-nowrap rounded-full border border-neutral-200 bg-white px-4 text-sm font-semibold text-ink-900 shadow-sm transition-all data-[active=true]:border-transparent data-[active=true]:bg-gradient-to-r data-[active=true]:from-brand-600 data-[active=true]:to-accent-600 data-[active=true]:text-white data-[active=true]:shadow-md data-[active=true]:scale-[1.03]"
           >
-            {list.icon} {list.tabLabel || list.title}
+            {list.data.icon} {list.data.tabLabel || list.data.title}
           </button>
         ))
       }
@@ -65,15 +41,15 @@ const listIds = lists.map((list, i) => nestedItemId(vitrineId, i, list.title));
 
     {
       lists.map((list, i) => (
-        <div role="tabpanel" id={`panel-${listIds[i]}`} aria-labelledby={`tab-${listIds[i]}`} hidden={i !== 0} class="pt-4">
+        <div role="tabpanel" id={`panel-${list.id}`} aria-labelledby={`tab-${list.id}`} hidden={i !== 0} class="pt-4">
           <div class="mb-3">
-            <p class="text-sm text-neutral-500">{list.title}</p>
-            {list.description && <p class="mt-0.5 text-xs text-neutral-400">{list.description}</p>}
+            <p class="text-sm text-neutral-500">{list.data.title}</p>
+            {list.data.description && <p class="mt-0.5 text-xs text-neutral-400">{list.data.description}</p>}
           </div>
 
-          {list.subIdeas.length > 0 ? (
+          {list.data.subIdeas.length > 0 ? (
             <div class="flex flex-col gap-6">
-              {list.subIdeas.map((subIdea) => (
+              {list.data.subIdeas.map((subIdea) => (
                 <div>
                   <h3 class="mb-2 flex items-center gap-1.5 text-sm font-bold text-ink-900">
                     <span class="h-3.5 w-1 rounded-full bg-accent-500" aria-hidden="true" />
@@ -88,8 +64,8 @@ const listIds = lists.map((list, i) => nestedItemId(vitrineId, i, list.title));
                         price={product.price}
                         originalPrice={product.originalPrice}
                         image={product.image}
-                        affiliateUrl={`/aller/${productRedirectSlug(listIds[i], product.title)}`}
-                        listTitle={`${list.title} — ${subIdea.title}`}
+                        affiliateUrl={`/aller/${productRedirectSlug(list.id, product.title)}`}
+                        listTitle={`${list.data.title} — ${subIdea.title}`}
                         isStarterProduct={product.isStarterProduct}
                       />
                     ))}
@@ -99,7 +75,7 @@ const listIds = lists.map((list, i) => nestedItemId(vitrineId, i, list.title));
             </div>
           ) : (
             <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 lg:gap-4">
-              {list.products.map((product) => (
+              {list.data.products.map((product) => (
                 <ProductCard
                   site={site}
                   title={product.title}
@@ -107,8 +83,8 @@ const listIds = lists.map((list, i) => nestedItemId(vitrineId, i, list.title));
                   price={product.price}
                   originalPrice={product.originalPrice}
                   image={product.image}
-                  affiliateUrl={`/aller/${productRedirectSlug(listIds[i], product.title)}`}
-                  listTitle={list.title}
+                  affiliateUrl={`/aller/${productRedirectSlug(list.id, product.title)}`}
+                  listTitle={list.data.title}
                   isStarterProduct={product.isStarterProduct}
                 />
               ))}

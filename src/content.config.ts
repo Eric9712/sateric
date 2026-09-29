@@ -15,46 +15,12 @@ const productSchema = z.object({
   isStarterProduct: z.boolean().optional().default(false),
 });
 
-const listSchema = z.object({
-  title: z.string(),
-  tabLabel: z.string().optional(),
-  icon: z.string().optional(),
-  description: z.string().optional(),
-  // Cas simple : produits directement dans la liste.
-  products: z.array(productSchema).optional().default([]),
-  // Cas avancé : produits groupés par sous-idée (ex. "Leurres souples",
-  // "Leurres durs"...). Si renseigné, prend le pas sur `products` ci-dessus.
-  subIdeas: z
-    .array(
-      z.object({
-        title: z.string(),
-        products: z.array(productSchema),
-      })
-    )
-    .optional()
-    .default([]),
-});
-
-const photoSchema = z.object({
-  title: z.string(),
-  image: z.string(),
-  imageWidth: z.number(),
-  imageHeight: z.number(),
-  hotspots: z.array(
-    z.object({
-      x: z.number().min(0).max(100),
-      y: z.number().min(0).max(100),
-      title: z.string(),
-      price: z.number(),
-      affiliateUrl: z.string().url(),
-    })
-  ),
-});
-
-// Une vitrine = un storefront complet et autonome (nom, réseaux, textes,
-// listes d'idées, Shoppable Photos). Nombre illimité, géré depuis l'admin
-// ("+Nouveau" / supprimer une entrée) comme n'importe quelle autre
-// collection — plus besoin de toucher au code pour ajouter une vitrine.
+// Une vitrine = un storefront complet et autonome (nom, réseaux, textes).
+// Nombre illimité, géré depuis l'admin ("+Nouveau" / supprimer une entrée).
+// Les listes d'idées et Shoppable Photos vivent dans leurs propres
+// collections ci-dessous, chacune reliée à sa vitrine par le champ "vitrine"
+// — séparation demandée pour ne pas mélanger réglages du site et produits
+// dans un même formulaire.
 const vitrines = defineCollection({
   loader: glob({ pattern: '**/*.yaml', base: './src/content/vitrines' }),
   schema: z.object({
@@ -80,9 +46,53 @@ const vitrines = defineCollection({
       shoppableCta: z.string(),
       footerGuideLinkText: z.string(),
     }),
-    lists: z.array(listSchema).optional().default([]),
-    photos: z.array(photoSchema).optional().default([]),
   }),
 });
 
-export const collections = { vitrines };
+const lists = defineCollection({
+  loader: glob({ pattern: '**/*.yaml', base: './src/content/lists' }),
+  schema: z.object({
+    vitrine: z.string(),
+    order: z.number().default(0),
+    title: z.string(),
+    tabLabel: z.string().optional(),
+    icon: z.string().optional(),
+    description: z.string().optional(),
+    // Cas simple : produits directement dans la liste.
+    products: z.array(productSchema).optional().default([]),
+    // Cas avancé : produits groupés par sous-idée (ex. "Leurres souples",
+    // "Leurres durs"...). Si renseigné, prend le pas sur `products` ci-dessus.
+    subIdeas: z
+      .array(
+        z.object({
+          title: z.string(),
+          products: z.array(productSchema),
+        })
+      )
+      .optional()
+      .default([]),
+  }),
+});
+
+const photos = defineCollection({
+  loader: glob({ pattern: '**/*.yaml', base: './src/content/photos' }),
+  schema: z.object({
+    vitrine: z.string(),
+    order: z.number().default(0),
+    title: z.string(),
+    image: z.string(),
+    imageWidth: z.number(),
+    imageHeight: z.number(),
+    hotspots: z.array(
+      z.object({
+        x: z.number().min(0).max(100),
+        y: z.number().min(0).max(100),
+        title: z.string(),
+        price: z.number(),
+        affiliateUrl: z.string().url(),
+      })
+    ),
+  }),
+});
+
+export const collections = { vitrines, lists, photos };

@@ -1,0 +1,26 @@
+vitrine: le-repaire-du-pecheur
+order: 1
+title: Les pepites
+tabLabel: Canne
+icon: 🎣
+description: ''
+products: []
+subIdeas:
+  - title: Cannes sufcasting
+    products:
+      - title: Gralara Canne à Pêche Surfcasting Brillant Canne Surfcasting pour Plage
+        badge: ''
+        price: 84
+        originalPrice: null
+        image: /images/uploads/canne surfcasting test.jpg
+        affiliateUrl: https://www.amazon.fr/Gralara-Canne-Surfcasting-Brillant-Champagne/dp/B0H8FH3DVS/ref=sr_1_2_sspa?__mk_fr_FR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=2AS180CMS4Z9H&dib=eyJ2IjoiMSJ9.j0ldiPSRYx5IOA4xe4h8IqbNr5VL2KfIfNl4QyBE_nO2zH7ZrzOGCJSUfxxTPu12g_Nob343OuYsVpXlnJpxVmPCh1vGWiZyYYjRjQawvomzlLL82vKkT-6CD4XwMD621QIkOH1E560LL5tqY_szDk1jcGSOXN0rVYbvjIuZMpUXv93n5x1syqDtUxQDgBnj-NVwvG_ME2qenfLwJnzKtEeYQWl42W0PTFUVVwymJDY._dphFUgv6uc6Q4yaP_RmTNI9NyrzTvjpPZYj6at3X1A&dib_tag=se&keywords=CANNE%2Bsurfcasting&qid=1790671824&s=sports&sprefix=canne%2Bsurfcasting%2Csports%2C138&sr=1-2-spons&ufe=app_do%3Aamzn1.fos.49fccda8-a887-4188-817b-b9a64bb30e43&aref=VGiysU5mBS&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1
+        isStarterProduct: false
+  - title: Cannes spinning
+    products:
+      - title: Mitchell Adventure 2 Canne à pêche en composite de verre durable avec guides en acier inoxydable pour pêche en eau douce et en mer
+        badge: Mitchell Adventure 2
+        price: 21
+        originalPrice: null
+        image: /images/uploads/canne mitchelle.jpg
+        affiliateUrl: https://amzn.to/REMPLACER-MITCHELL
+        isStarterProduct: false

@@ -1,23 +1,16 @@
 ---
+import type { CollectionEntry } from 'astro:content';
 import type { SiteData } from '../types';
-import { hotspotRedirectSlug, nestedItemId } from '../lib/redirectSlug.mjs';
+import { hotspotRedirectSlug } from '../lib/redirectSlug.mjs';
 
 interface Props {
   site: SiteData;
-  vitrineId: string;
-  photoIndex: number;
-  photo: {
-    title: string;
-    image: string;
-    imageWidth: number;
-    imageHeight: number;
-    hotspots: { x: number; y: number; title: string; price: number; affiliateUrl: string }[];
-  };
+  photo: CollectionEntry<'photos'>;
 }
 
-const { site, vitrineId, photoIndex, photo } = Astro.props;
-const { title, image, imageWidth, imageHeight, hotspots } = photo;
-const photoId = nestedItemId(vitrineId, photoIndex, title);
+const { site, photo: photoEntry } = Astro.props;
+const { title, image, imageWidth, imageHeight, hotspots } = photoEntry.data;
+const photoId = photoEntry.id;
 const showPrices = site.showPrices === true;
 const formatPrice = (n: number) => new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(n);
 // Marge de sécurité : une pastille tout au bord (0 ou 100 %) se ferait

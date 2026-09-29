@@ -1,0 +1,15 @@
+vitrine: chaussures-stylees
+order: 1
+title: Exemple de liste (à modifier dans l'admin)
+tabLabel: Exemple
+icon: ✨
+description: ''
+products:
+  - title: Exemple de produit à remplacer
+    badge: ''
+    price: 9.9
+    originalPrice: null
+    image: /images/placeholder-product.svg
+    affiliateUrl: https://amzn.to/REMPLACER-EXEMPLE
+    isStarterProduct: false
+subIdeas: []

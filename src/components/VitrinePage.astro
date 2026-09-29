@@ -2,6 +2,7 @@
 // Corps de page partagé par toutes les vitrines (accueil et /<slug>), pour
 // qu'elles restent strictement identiques visuellement par construction —
 // une seule définition, jamais deux copies qui pourraient diverger.
+import { getCollection } from 'astro:content';
 import Header from './Header.astro';
 import SiteSwitcher from './SiteSwitcher.astro';
 import TabsIdeaLists from './TabsIdeaLists.astro';
@@ -18,15 +19,22 @@ interface Props {
 const { vitrine, switcherSites } = Astro.props;
 const site = vitrine.data;
 const hasSwitcher = switcherSites.length > 1;
+
+const lists = (await getCollection('lists', (l) => l.data.vitrine === vitrine.id)).sort(
+  (a, b) => a.data.order - b.data.order
+);
+const photos = (await getCollection('photos', (p) => p.data.vitrine === vitrine.id)).sort(
+  (a, b) => a.data.order - b.data.order
+);
 ---
 
-<ProductListSchema site={site} lists={site.lists} photos={site.photos} />
+<ProductListSchema site={site} lists={lists} photos={photos} />
 {hasSwitcher && <SiteSwitcher sites={switcherSites} />}
 <div class:list={hasSwitcher && 'lg:pl-52'}>
   <Header site={site} />
 
   <main>
-    <TabsIdeaLists site={site} vitrineId={vitrine.id} lists={site.lists} />
+    <TabsIdeaLists site={site} lists={lists} />
 
     <section aria-labelledby="shoppable-heading" class="px-4 pb-6">
       <div class="max-w-xl lg:max-w-5xl mx-auto rounded-3xl bg-gradient-to-br from-accent-400/10 to-brand-100/40 p-4 lg:p-6 shadow-sm ring-1 ring-black/5">
@@ -36,8 +44,8 @@ const hasSwitcher = switcherSites.length > 1;
         </h2>
         <p class="mb-3 text-sm text-neutral-600">{site.uiText.shoppablePhotosSubtitle}</p>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {site.photos.map((photo, i) => (
-            <ShoppablePhoto site={site} vitrineId={vitrine.id} photoIndex={i} photo={photo} />
+          {photos.map((photo) => (
+            <ShoppablePhoto site={site} photo={photo} />
           ))}
         </div>
       </div>

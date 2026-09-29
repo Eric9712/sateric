@@ -1,0 +1,50 @@
+vitrine: le-repaire-du-pecheur
+order: 3
+title: Pêche en bateau et en kayak
+tabLabel: Bateau & kayak
+icon: 🚣
+description: ''
+products:
+  - title: Porte-canne pour kayak
+    badge: ''
+    price: 17.9
+    originalPrice: null
+    image: /images/placeholder-product.svg
+    affiliateUrl: https://amzn.to/REMPLACER13
+    isStarterProduct: true
+  - title: Gilet de sauvetage homologué
+    badge: ''
+    price: 49.9
+    originalPrice: null
+    image: /images/placeholder-product.svg
+    affiliateUrl: https://amzn.to/REMPLACER14
+    isStarterProduct: false
+  - title: Ancre pliable pour kayak
+    badge: ''
+    price: 24.9
+    originalPrice: null
+    image: /images/placeholder-product.svg
+    affiliateUrl: https://amzn.to/REMPLACER15
+    isStarterProduct: false
+  - title: Glacière souple étanche
+    badge: ''
+    price: 29.9
+    originalPrice: null
+    image: /images/placeholder-product.svg
+    affiliateUrl: https://amzn.to/REMPLACER16
+    isStarterProduct: false
+  - title: Sondeur portable de pêche
+    badge: ''
+    price: 59.9
+    originalPrice: 79.9
+    image: /images/placeholder-product.svg
+    affiliateUrl: https://amzn.to/REMPLACER17
+    isStarterProduct: false
+  - title: Caisse de rangement étanche pour kayak
+    badge: ''
+    price: 34.9
+    originalPrice: null
+    image: /images/placeholder-product.svg
+    affiliateUrl: https://amzn.to/REMPLACER18
+    isStarterProduct: false
+subIdeas: []

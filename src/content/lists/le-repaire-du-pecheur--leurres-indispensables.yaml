@@ -1,0 +1,56 @@
+vitrine: le-repaire-du-pecheur
+order: 2
+title: Leurres indispensables
+tabLabel: leurres
+icon: 🐟
+description: ''
+products: []
+subIdeas:
+  - title: Leurres souples
+    products:
+      - title: Leurres souples assortis (lot de 20)
+        badge: ''
+        price: 14.9
+        originalPrice: null
+        image: /images/placeholder-product.svg
+        affiliateUrl: https://amzn.to/REMPLACER7
+        isStarterProduct: true
+      - title: Bas de ligne fluorocarbone
+        badge: ''
+        price: 12.99
+        originalPrice: null
+        image: /images/placeholder-product.svg
+        affiliateUrl: https://amzn.to/REMPLACER11
+        isStarterProduct: false
+  - title: Leurres durs & cuillères
+    products:
+      - title: Cuillères ondulantes (lot de 5)
+        badge: ''
+        price: 16.9
+        originalPrice: null
+        image: /images/placeholder-product.svg
+        affiliateUrl: https://amzn.to/REMPLACER8
+        isStarterProduct: false
+      - title: Poissons nageurs
+        badge: ''
+        price: 22
+        originalPrice: null
+        image: /images/placeholder-product.svg
+        affiliateUrl: https://amzn.to/REMPLACER9
+        isStarterProduct: false
+  - title: Rangement
+    products:
+      - title: Boîte de rangement étanche pour leurres
+        badge: ''
+        price: 18.9
+        originalPrice: null
+        image: /images/placeholder-product.svg
+        affiliateUrl: https://amzn.to/REMPLACER10
+        isStarterProduct: false
+      - title: Émerillons agrafés (lot de 50)
+        badge: ''
+        price: 7.9
+        originalPrice: null
+        image: /images/placeholder-product.svg
+        affiliateUrl: https://amzn.to/REMPLACER12
+        isStarterProduct: false

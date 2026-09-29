@@ -6,18 +6,13 @@
 // note/avis (Review, AggregateRating) : aucun avis n'est réellement
 // collecté sur ce site, en inventer serait une pratique commerciale
 // trompeuse (même principe que le champ "Étiquette" des produits).
+import type { CollectionEntry } from 'astro:content';
 import type { SiteData } from '../types';
-
-interface Product {
-  title: string;
-  image: string;
-  price: number;
-}
 
 interface Props {
   site: SiteData;
-  lists: { products: Product[]; subIdeas: { products: Product[] }[] }[];
-  photos: { image: string; hotspots: { title: string; price: number }[] }[];
+  lists: CollectionEntry<'lists'>[];
+  photos: CollectionEntry<'photos'>[];
 }
 
 const { site, lists, photos } = Astro.props;
@@ -25,13 +20,13 @@ const { site, lists, photos } = Astro.props;
 const items: { name: string; image: string; price: number }[] = [];
 
 for (const list of lists) {
-  for (const p of list.products) items.push({ name: p.title, image: p.image, price: p.price });
-  for (const sub of list.subIdeas) {
+  for (const p of list.data.products) items.push({ name: p.title, image: p.image, price: p.price });
+  for (const sub of list.data.subIdeas) {
     for (const p of sub.products) items.push({ name: p.title, image: p.image, price: p.price });
   }
 }
 for (const photo of photos) {
-  for (const h of photo.hotspots) items.push({ name: h.title, image: photo.image, price: h.price });
+  for (const h of photo.data.hotspots) items.push({ name: h.title, image: photo.data.image, price: h.price });
 }
 
 const pageUrl = Astro.url.href;

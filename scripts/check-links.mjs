@@ -6,11 +6,21 @@ import { fileURLToPath } from 'node:url';
 import { load } from 'js-yaml';
 
 const VITRINES_DIR = fileURLToPath(new URL('../src/content/vitrines/', import.meta.url));
+const LISTS_DIR = fileURLToPath(new URL('../src/content/lists/', import.meta.url));
+const PHOTOS_DIR = fileURLToPath(new URL('../src/content/photos/', import.meta.url));
 
 function collectYamlFiles(dirPath) {
   return readdirSync(dirPath)
     .filter((f) => f.endsWith('.yaml') || f.endsWith('.yml'))
     .map((f) => join(dirPath, f));
+}
+
+const vitrineNames = {};
+for (const file of collectYamlFiles(VITRINES_DIR)) {
+  const data = load(readFileSync(file, 'utf8'));
+  if (!data) continue;
+  const id = file.split(/[\\/]/).pop().replace(/\.ya?ml$/, '');
+  vitrineNames[id] = data.name ?? id;
 }
 
 // { url, source: "vitrine > liste/photo > produit" }
@@ -22,22 +32,24 @@ function addProductLinks(products, vitrineName, context) {
   }
 }
 
-for (const file of collectYamlFiles(VITRINES_DIR)) {
+for (const file of collectYamlFiles(LISTS_DIR)) {
   const data = load(readFileSync(file, 'utf8'));
   if (!data) continue;
-  const vitrineName = data.name ?? file.split(/[\\/]/).pop();
+  const vitrineName = vitrineNames[data.vitrine] ?? data.vitrine ?? '(vitrine inconnue)';
 
-  for (const list of data.lists ?? []) {
-    addProductLinks(list.products, vitrineName, list.title);
-    for (const sub of list.subIdeas ?? []) {
-      addProductLinks(sub.products, vitrineName, `${list.title} > ${sub.title}`);
-    }
+  addProductLinks(data.products, vitrineName, data.title);
+  for (const sub of data.subIdeas ?? []) {
+    addProductLinks(sub.products, vitrineName, `${data.title} > ${sub.title}`);
   }
+}
 
-  for (const photo of data.photos ?? []) {
-    for (const h of photo.hotspots ?? []) {
-      if (h.affiliateUrl) links.push({ url: h.affiliateUrl, source: `${vitrineName} > pastille (${photo.title}) > ${h.title}` });
-    }
+for (const file of collectYamlFiles(PHOTOS_DIR)) {
+  const data = load(readFileSync(file, 'utf8'));
+  if (!data) continue;
+  const vitrineName = vitrineNames[data.vitrine] ?? data.vitrine ?? '(vitrine inconnue)';
+
+  for (const h of data.hotspots ?? []) {
+    if (h.affiliateUrl) links.push({ url: h.affiliateUrl, source: `${vitrineName} > pastille (${data.title}) > ${h.title}` });
   }
 }
 

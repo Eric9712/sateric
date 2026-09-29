@@ -5,7 +5,7 @@
 // production, sans dépendre d'une fonctionnalité propre à un hébergeur.
 // noindex : cette page n'est qu'un relais, elle ne doit pas être indexée.
 import { getCollection } from 'astro:content';
-import { productRedirectSlug, hotspotRedirectSlug, nestedItemId } from '../../lib/redirectSlug.mjs';
+import { productRedirectSlug, hotspotRedirectSlug } from '../../lib/redirectSlug.mjs';
 
 export async function getStaticPaths() {
   const paths = [];
@@ -17,26 +17,23 @@ export async function getStaticPaths() {
     paths.push({ params: { slug }, props: { target, title } });
   }
 
-  const vitrines = await getCollection('vitrines');
-  for (const vitrine of vitrines) {
-    vitrine.data.lists.forEach((list, i) => {
-      const listId = nestedItemId(vitrine.id, i, list.title);
-      for (const p of list.products) {
-        addPath(productRedirectSlug(listId, p.title), p.affiliateUrl, p.title);
+  const lists = await getCollection('lists');
+  for (const list of lists) {
+    for (const p of list.data.products) {
+      addPath(productRedirectSlug(list.id, p.title), p.affiliateUrl, p.title);
+    }
+    for (const sub of list.data.subIdeas) {
+      for (const p of sub.products) {
+        addPath(productRedirectSlug(list.id, p.title), p.affiliateUrl, p.title);
       }
-      for (const sub of list.subIdeas) {
-        for (const p of sub.products) {
-          addPath(productRedirectSlug(listId, p.title), p.affiliateUrl, p.title);
-        }
-      }
-    });
+    }
+  }
 
-    vitrine.data.photos.forEach((photo, i) => {
-      const photoId = nestedItemId(vitrine.id, i, photo.title);
-      for (const h of photo.hotspots) {
-        addPath(hotspotRedirectSlug(photoId, h.title), h.affiliateUrl, h.title);
-      }
-    });
+  const photos = await getCollection('photos');
+  for (const photo of photos) {
+    for (const h of photo.data.hotspots) {
+      addPath(hotspotRedirectSlug(photo.id, h.title), h.affiliateUrl, h.title);
+    }
   }
 
   return paths;
