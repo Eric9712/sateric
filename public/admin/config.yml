@@ -36,6 +36,13 @@ collections:
         }
       - { label: "Avatar", name: "avatar", widget: "image" }
       - {
+          label: "Image de couverture (bannière en haut de la vitrine)",
+          name: "coverImage",
+          widget: "image",
+          required: false,
+          hint: "Grande image affichée en haut de la vitrine, derrière l'avatar. Format recommandé : au moins 1200×400px, format paysage. Laissez vide pour garder le fond dégradé par défaut.",
+        }
+      - {
           label: "Image de partage (réseaux sociaux)",
           name: "ogImage",
           widget: "image",
@@ -160,6 +167,14 @@ collections:
               widget: "boolean",
               default: false,
               required: false,
+            }
+          - {
+              label: "Produit vedette (mis en avant en haut de la vitrine)",
+              name: "featured",
+              widget: "boolean",
+              default: false,
+              required: false,
+              hint: "Un seul produit vedette par vitrine à la fois. Si vous en cochez plusieurs, seul le premier trouvé s'affiche.",
             }
       - label: "Sous-idées (optionnel)"
         name: "subIdeas"

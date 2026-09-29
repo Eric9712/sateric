@@ -1,0 +1,50 @@
+---
+// Copie l'URL de la page actuelle (donc de la bonne vitrine) — pratique
+// pour la recoller souvent dans plusieurs bios de réseaux sociaux.
+---
+
+<button
+  type="button"
+  data-copy-link-button
+  aria-label="Copier le lien de cette page"
+  class="tap-target inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-neutral-100 text-neutral-600 transition-transform active:scale-90 hover:bg-neutral-200"
+>
+  <svg
+    data-copy-link-icon
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+  </svg>
+</button>
+
+<script>
+  const DEFAULT_LABEL = 'Copier le lien de cette page';
+  const LINK_ICON = document.querySelector<SVGElement>('[data-copy-link-icon]')?.innerHTML ?? '';
+  const CHECK_ICON = '<path d="M20 6 9 17l-5-5"/>';
+
+  document.addEventListener('click', async (event) => {
+    const button = (event.target as HTMLElement)?.closest<HTMLButtonElement>('[data-copy-link-button]');
+    if (!button) return;
+    const icon = button.querySelector<SVGElement>('[data-copy-link-icon]');
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      button.setAttribute('aria-label', 'Lien copié !');
+      if (icon) icon.innerHTML = CHECK_ICON;
+      setTimeout(() => {
+        button.setAttribute('aria-label', DEFAULT_LABEL);
+        if (icon) icon.innerHTML = LINK_ICON;
+      }, 1500);
+    } catch {
+      // Presse-papiers indisponible (contexte non sécurisé, permission refusée) : pas d'action.
+    }
+  });
+</script>

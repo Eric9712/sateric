@@ -13,6 +13,9 @@ const productSchema = z.object({
   image: z.string(),
   affiliateUrl: z.string().url(),
   isStarterProduct: z.boolean().optional().default(false),
+  // Un seul produit vedette par vitrine, affiché en grand avant les onglets.
+  // Si plusieurs produits sont marqués, seul le premier trouvé s'affiche.
+  featured: z.boolean().optional().default(false),
 });
 
 // Une vitrine = un storefront complet et autonome (nom, réseaux, textes).
@@ -30,6 +33,7 @@ const vitrines = defineCollection({
     tagline: z.string(),
     metaDescription: z.string(),
     avatar: z.string(),
+    coverImage: z.string().optional(),
     ogImage: z.string().optional(),
     amazonTag: z.string(),
     showPrices: z.boolean().default(false),

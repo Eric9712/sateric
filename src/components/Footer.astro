@@ -3,9 +3,10 @@ import type { SiteData } from '../types';
 
 interface Props {
   site: SiteData;
+  qrHref: string;
 }
 
-const { site } = Astro.props;
+const { site, qrHref } = Astro.props;
 const year = new Date().getFullYear();
 ---
 
@@ -13,6 +14,9 @@ const year = new Date().getFullYear();
   <div class="max-w-xl lg:max-w-5xl mx-auto px-4 py-6 text-center text-xs text-neutral-500 flex flex-col gap-2">
     <a href="/guide" class="font-semibold text-brand-600">
       {site.uiText.footerGuideLinkText}
+    </a>
+    <a href={qrHref} download class="font-semibold text-brand-600">
+      📱 Télécharger le QR code de cette page
     </a>
     <p>© {year} {site.name}. Liens affiliés Amazon — voir mentions ci-dessus.</p>
   </div>

@@ -10,6 +10,7 @@ import { fallbackSite } from '../lib/defaultSite';
 // produit) : on y affiche le nom de la vitrine d'accueil.
 const vitrines = (await getCollection('vitrines')).sort((a, b) => a.data.order - b.data.order);
 const site = vitrines[0]?.data ?? fallbackSite;
+const qrHref = vitrines[0] ? `/qr/${vitrines[0].id}.svg` : '/';
 
 const storyTemplate = `📢 Collaboration commerciale
 Lien en bio 🔗`;
@@ -117,5 +118,5 @@ Cette vidéo contient des liens affiliés Amazon. En tant que Partenaire Amazon,
     </section>
   </main>
 
-  <Footer site={site} />
+  <Footer site={site} qrHref={qrHref} />
 </BaseLayout>

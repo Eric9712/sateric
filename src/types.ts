@@ -4,6 +4,7 @@ export interface SiteData {
   tagline: string;
   metaDescription: string;
   avatar: string;
+  coverImage?: string;
   ogImage?: string;
   amazonTag: string;
   showPrices: boolean;

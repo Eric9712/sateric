@@ -5,15 +5,17 @@
 import { getCollection } from 'astro:content';
 import Header from './Header.astro';
 import SiteSwitcher from './SiteSwitcher.astro';
+import FeaturedProduct from './FeaturedProduct.astro';
 import TabsIdeaLists from './TabsIdeaLists.astro';
 import ShoppablePhoto from './ShoppablePhoto.astro';
 import Footer from './Footer.astro';
 import ProductListSchema from './ProductListSchema.astro';
 import type { CollectionEntry } from 'astro:content';
+import { productRedirectSlug } from '../lib/redirectSlug.mjs';
 
 interface Props {
   vitrine: CollectionEntry<'vitrines'>;
-  switcherSites: { name: string; href: string; active: boolean }[];
+  switcherSites: { id: string; name: string; href: string; avatar: string; active: boolean }[];
 }
 
 const { vitrine, switcherSites } = Astro.props;
@@ -26,6 +28,25 @@ const lists = (await getCollection('lists', (l) => l.data.vitrine === vitrine.id
 const photos = (await getCollection('photos', (p) => p.data.vitrine === vitrine.id)).sort(
   (a, b) => a.data.order - b.data.order
 );
+
+// Un seul produit vedette : le premier trouvé, tous statuts confondus
+// (produits directs puis sous-idées, dans l'ordre des listes).
+let featured: { product: (typeof lists)[number]['data']['products'][number]; listId: string; listTitle: string } | null = null;
+for (const list of lists) {
+  const direct = list.data.products.find((p) => p.featured);
+  if (direct) {
+    featured = { product: direct, listId: list.id, listTitle: list.data.title };
+    break;
+  }
+  for (const sub of list.data.subIdeas) {
+    const nested = sub.products.find((p) => p.featured);
+    if (nested) {
+      featured = { product: nested, listId: list.id, listTitle: `${list.data.title} — ${sub.title}` };
+      break;
+    }
+  }
+  if (featured) break;
+}
 ---
 
 <ProductListSchema site={site} lists={lists} photos={photos} />
@@ -34,6 +55,20 @@ const photos = (await getCollection('photos', (p) => p.data.vitrine === vitrine.
   <Header site={site} />
 
   <main>
+    {
+      featured && (
+        <FeaturedProduct
+          site={site}
+          title={featured.product.title}
+          badge={featured.product.badge}
+          price={featured.product.price}
+          originalPrice={featured.product.originalPrice}
+          image={featured.product.image}
+          affiliateUrl={`/aller/${productRedirectSlug(featured.listId, featured.product.title)}`}
+          listTitle={featured.listTitle}
+        />
+      )
+    }
     <TabsIdeaLists site={site} lists={lists} />
 
     <section aria-labelledby="shoppable-heading" class="px-4 pb-6">
@@ -52,5 +87,5 @@ const photos = (await getCollection('photos', (p) => p.data.vitrine === vitrine.
     </section>
   </main>
 
-  <Footer site={site} />
+  <Footer site={site} qrHref={`/qr/${vitrine.id}.svg`} />
 </div>

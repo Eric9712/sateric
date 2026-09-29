@@ -1,5 +1,6 @@
 ---
 import LegalBanner from './LegalBanner.astro';
+import CopyLinkButton from './CopyLinkButton.astro';
 import type { SiteData } from '../types';
 
 interface Props {
@@ -57,20 +58,30 @@ const genericSocialStyle = {
 <header class="border-b border-neutral-100 bg-white">
   <LegalBanner site={site} />
 
-  <div class="max-w-xl lg:max-w-5xl mx-auto px-4 py-4">
-    <div class="flex items-center gap-4">
-      <img
-        src={site.avatar}
-        alt={`Photo de profil de ${site.name}`}
-        width="64"
-        height="64"
-        class="h-16 w-16 shrink-0 rounded-full ring-2 ring-brand-100 object-cover"
-        loading="eager"
-      />
+  <!--
+    Bannière : vraie photo si fournie, sinon dégradé de marque par défaut
+    (jamais un bloc vide qui aurait l'air cassé). L'avatar chevauche le bas
+    de la bannière (marge négative), motif "page de profil" classique.
+  -->
+  <div class="h-28 sm:h-36 w-full overflow-hidden bg-gradient-to-br from-brand-500 to-accent-600">
+    {site.coverImage && <img src={site.coverImage} alt="" class="h-full w-full object-cover" />}
+  </div>
+
+  <div class="max-w-xl lg:max-w-5xl mx-auto px-4 pb-4">
+    <img
+      src={site.avatar}
+      alt={`Photo de profil de ${site.name}`}
+      width="80"
+      height="80"
+      class="-mt-10 h-20 w-20 shrink-0 rounded-full ring-4 ring-white object-cover shadow-md"
+      loading="eager"
+    />
+    <div class="mt-2 flex items-center gap-2">
       <div class="min-w-0 flex-1">
         <h1 class="truncate text-lg font-extrabold text-ink-900">{site.name}</h1>
         <p class="truncate text-sm font-semibold text-brand-600">{site.handle}</p>
       </div>
+      <CopyLinkButton />
       {
         site.socials.length > 0 && (
           <nav class="flex shrink-0 gap-2" aria-label="Réseaux sociaux">

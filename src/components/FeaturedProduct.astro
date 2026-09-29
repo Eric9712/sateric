@@ -1,0 +1,72 @@
+---
+// Grande carte unique tout en haut de la vitrine (avant les onglets), pour
+// mettre en avant le produit marqué "vedette" dans l'admin. Reprend la même
+// logique prix/réduction que ProductCard, en plus grand.
+import type { SiteData } from '../types';
+
+interface Props {
+  site: SiteData;
+  title: string;
+  badge?: string;
+  price: number;
+  originalPrice?: number | null;
+  image: string;
+  affiliateUrl: string;
+  listTitle: string;
+}
+
+const { site, title, price, originalPrice, image, affiliateUrl, listTitle } = Astro.props;
+
+const showPrices = site.showPrices === true;
+const priceLabel = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(price);
+const hasDiscount = showPrices && typeof originalPrice === 'number' && originalPrice > price;
+const originalPriceLabel = hasDiscount
+  ? new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(originalPrice)
+  : null;
+const discountPercent = hasDiscount ? Math.round((1 - price / originalPrice) * 100) : null;
+---
+
+<section aria-labelledby="featured-heading" class="px-4 pt-4">
+  <a
+    href={affiliateUrl}
+    target="_blank"
+    rel="sponsored nofollow noopener"
+    data-product-click
+    data-product-title={title}
+    data-list-title={`Vedette — ${listTitle}`}
+    data-product-price={price}
+    class="group relative mx-auto flex max-w-xl overflow-hidden rounded-3xl bg-gradient-to-br from-ink-900 to-ink-900/90 shadow-lg transition-transform active:scale-[0.98] lg:max-w-5xl"
+  >
+    <div class="w-32 shrink-0 overflow-hidden bg-white/10 sm:w-48">
+      <img src={image} alt={title} loading="eager" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" />
+    </div>
+    <div class="flex flex-1 flex-col justify-center gap-1.5 p-4">
+      <span id="featured-heading" class="inline-flex w-fit items-center gap-1 rounded-full bg-white/15 px-2.5 py-1 text-[11px] font-bold text-white">
+        ⭐ Produit du moment
+      </span>
+      <h2 class="text-base font-extrabold leading-snug text-white sm:text-lg">{title}</h2>
+      {
+        showPrices ? (
+          <div class="flex flex-wrap items-baseline gap-x-2">
+            <span class="text-xl font-extrabold text-white">{priceLabel}</span>
+            {hasDiscount && <span class="text-sm text-white/50 line-through">{originalPriceLabel}</span>}
+            {hasDiscount && (
+              <span class="rounded-full bg-white px-2 py-0.5 text-xs font-extrabold text-ink-900">-{discountPercent}%</span>
+            )}
+          </div>
+        ) : (
+          <p class="text-sm font-bold text-white">{site.uiText.priceHiddenCta}</p>
+        )
+      }
+      <p class="text-[11px] text-white/50">{site.uiText.affiliateLinkLabel}</p>
+    </div>
+  </a>
+</section>
+
+<!--
+  Pas de script de suivi ici : le listener global posé par ProductCard.astro
+  capte aussi ces clics (même attribut data-product-click), comme le fait
+  déjà ShoppablePhoto.astro. Éviter un deuxième listener identique, qui
+  ferait compter chaque clic deux fois côté Zaraz.
+-->
+
