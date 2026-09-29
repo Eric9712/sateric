@@ -24,5 +24,10 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  integrations: [sitemap()]
+  integrations: [
+    // Exclut /aller/* : ce sont des pages de redirection (noindex), pas du
+    // contenu à faire indexer — les lister dans le sitemap contredirait leur
+    // propre balise noindex et gaspillerait le budget de crawl de Google.
+    sitemap({ filter: (page) => !page.includes('/aller/') }),
+  ]
 });
