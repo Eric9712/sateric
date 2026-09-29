@@ -5,8 +5,8 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { load } from 'js-yaml';
 
-const LISTS_DIR = fileURLToPath(new URL('../src/content/lists/', import.meta.url));
-const PHOTOS_DIR = fileURLToPath(new URL('../src/content/photos/', import.meta.url));
+const LISTS_DIRS = ['lists', 'lists2'].map((d) => fileURLToPath(new URL(`../src/content/${d}/`, import.meta.url)));
+const PHOTOS_DIRS = ['photos', 'photos2'].map((d) => fileURLToPath(new URL(`../src/content/${d}/`, import.meta.url)));
 
 function collectYamlFiles(dirPath) {
   return readdirSync(dirPath)
@@ -23,22 +23,26 @@ function addProductLinks(products, filename, context) {
   }
 }
 
-for (const file of collectYamlFiles(LISTS_DIR)) {
-  const data = load(readFileSync(file, 'utf8'));
-  const filename = file.split(/[\\/]/).pop();
-  if (!data) continue;
-  addProductLinks(data.products, filename, data.title ?? '(sans titre)');
-  for (const sub of data.subIdeas ?? []) {
-    addProductLinks(sub.products, filename, sub.title);
+for (const dir of LISTS_DIRS) {
+  for (const file of collectYamlFiles(dir)) {
+    const data = load(readFileSync(file, 'utf8'));
+    const filename = file.split(/[\\/]/).pop();
+    if (!data) continue;
+    addProductLinks(data.products, filename, data.title ?? '(sans titre)');
+    for (const sub of data.subIdeas ?? []) {
+      addProductLinks(sub.products, filename, sub.title);
+    }
   }
 }
 
-for (const file of collectYamlFiles(PHOTOS_DIR)) {
-  const data = load(readFileSync(file, 'utf8'));
-  const filename = file.split(/[\\/]/).pop();
-  if (!data) continue;
-  for (const h of data.hotspots ?? []) {
-    if (h.affiliateUrl) links.push({ url: h.affiliateUrl, source: `${filename} > pastille > ${h.title}` });
+for (const dir of PHOTOS_DIRS) {
+  for (const file of collectYamlFiles(dir)) {
+    const data = load(readFileSync(file, 'utf8'));
+    const filename = file.split(/[\\/]/).pop();
+    if (!data) continue;
+    for (const h of data.hotspots ?? []) {
+      if (h.affiliateUrl) links.push({ url: h.affiliateUrl, source: `${filename} > pastille > ${h.title}` });
+    }
   }
 }
 
