@@ -1,27 +1,56 @@
 ---
-// Colonne verticale permettant de basculer entre les vitrines : cliquer sur
-// le titre d'une vitrine y amène directement. Sur mobile (pas assez de
-// place pour une vraie colonne latérale), s'affiche en bloc vertical pleine
-// largeur tout en haut de la page ; à partir de lg:, devient une colonne
-// fixe sur le bord gauche de l'écran.
+// Sélecteur de vitrines : cliquer sur une vitrine y amène directement.
+// Mobile : rangée horizontale d'avatars (façon stories), pas la place pour
+// une vraie colonne. Desktop (lg:) : colonne verticale fixe à gauche.
+// Chaque vitrine a sa propre couleur d'accent, dérivée automatiquement de
+// son identifiant (aucun réglage à faire côté admin) : un simple hash du
+// slug donne une teinte HSL stable et distincte par vitrine.
 interface Props {
-  sites: { name: string; href: string; active: boolean }[];
+  sites: { id: string; name: string; href: string; avatar: string; active: boolean }[];
 }
 
 const { sites } = Astro.props;
+
+function hueFor(id: string) {
+  let hash = 0;
+  for (let i = 0; i < id.length; i++) hash = (hash * 31 + id.charCodeAt(i)) >>> 0;
+  return hash % 360;
+}
+
+const withColor = sites.map((s) => ({ ...s, color: `hsl(${hueFor(s.id)}, 70%, 50%)` }));
 ---
 
-<nav
-  aria-label="Changer de vitrine"
-  class="border-b border-neutral-200 bg-ink-900 px-4 py-3 lg:fixed lg:inset-y-0 lg:left-0 lg:w-52 lg:border-b-0 lg:border-r lg:px-4 lg:py-6"
->
-  <div class="flex flex-col gap-1">
+<nav aria-label="Changer de vitrine" class="lg:fixed lg:inset-y-0 lg:left-0 lg:w-52 lg:border-r lg:border-neutral-200">
+  {/* Mobile : rangée d'avatars façon stories */}
+  <div class="flex gap-3 overflow-x-auto border-b border-neutral-200 bg-white px-4 py-3 lg:hidden">
     {
-      sites.map((s) =>
+      withColor.map((s) => (
+        <a
+          href={s.href}
+          aria-current={s.active ? 'page' : undefined}
+          aria-label={s.name}
+          class="tap-target flex shrink-0 flex-col items-center"
+        >
+          <img
+            src={s.avatar}
+            alt=""
+            class="h-12 w-12 rounded-full object-cover"
+            style={`box-shadow: 0 0 0 ${s.active ? 3 : 2}px ${s.color}; opacity: ${s.active ? 1 : 0.55};`}
+          />
+        </a>
+      ))
+    }
+  </div>
+
+  {/* Desktop : colonne verticale fixe */}
+  <div class="hidden lg:flex lg:h-full lg:flex-col lg:gap-1 lg:bg-ink-900 lg:px-4 lg:py-6">
+    {
+      withColor.map((s) =>
         s.active ? (
           <span
             aria-current="page"
-            class="rounded-full bg-gradient-to-r from-brand-600 to-accent-600 px-4 py-2 text-left text-sm font-bold text-white shadow-sm"
+            class="rounded-full px-4 py-2 text-left text-sm font-bold text-white shadow-sm"
+            style={`background: ${s.color};`}
           >
             {s.name}
           </span>
@@ -29,6 +58,7 @@ const { sites } = Astro.props;
           <a
             href={s.href}
             class="tap-target rounded-full px-4 py-2 text-left text-sm font-semibold text-white/70 transition-colors hover:bg-white/10 hover:text-white"
+            style={`border-left: 3px solid ${s.color};`}
           >
             {s.name}
           </a>

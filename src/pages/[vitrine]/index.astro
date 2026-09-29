@@ -31,7 +31,9 @@ const site = vitrine.data;
   <VitrinePage
     vitrine={vitrine}
     switcherSites={vitrines.map((v) => ({
+      id: v.id,
       name: v.data.name,
+      avatar: v.data.avatar,
       href: v.id === home.id ? '/' : `/${v.id}`,
       active: v.id === vitrine.id,
     }))}
