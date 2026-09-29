@@ -10,12 +10,12 @@ public_folder: "/images/uploads"
 
 collections:
   - name: "site"
-    label: "Réglages du site"
+    label: "Vitrine 1 : Réglages"
     files:
       - file: "src/data/site.json"
         label: "Infos créateur"
         name: "site"
-        fields:
+        fields: &siteFields
           - { label: "Nom / Pseudo", name: "name", widget: "string" }
           - { label: "Handle réseaux (ex. @pseudo)", name: "handle", widget: "string" }
           - { label: "Phrase d'accroche", name: "tagline", widget: "string" }
@@ -82,15 +82,23 @@ collections:
               - { label: "Texte du bouton dans les Shoppable Photos", name: "shoppableCta", widget: "string" }
               - { label: "Texte du lien vers le guide (pied de page)", name: "footerGuideLinkText", widget: "string" }
 
+  - name: "site2"
+    label: "Vitrine 2 : Réglages"
+    files:
+      - file: "src/data/site2.json"
+        label: "Infos créateur (vitrine 2)"
+        name: "site2"
+        fields: *siteFields
+
   - name: "lists"
-    label: "Listes d'idées"
+    label: "Vitrine 1 : Listes d'idées"
     folder: "src/content/lists"
     create: true
     slug: "{{slug}}"
     extension: "yaml"
     format: "yaml"
     reorder: true
-    fields:
+    fields: &listsFields
       - { label: "Titre de la liste (affiché en en-tête)", name: "title", widget: "string" }
       - {
           label: "Libellé court (affiché dans l'onglet, ex. « Routine du soir »)",
@@ -162,15 +170,25 @@ collections:
             summary: "{{title}} — {{price}} €"
             fields: *productFields
 
+  - name: "lists2"
+    label: "Vitrine 2 : Listes d'idées"
+    folder: "src/content/lists2"
+    create: true
+    slug: "{{slug}}"
+    extension: "yaml"
+    format: "yaml"
+    reorder: true
+    fields: *listsFields
+
   - name: "photos"
-    label: "Shoppable Photos"
+    label: "Vitrine 1 : Shoppable Photos"
     folder: "src/content/photos"
     create: true
     slug: "{{slug}}"
     extension: "yaml"
     format: "yaml"
     reorder: true
-    fields:
+    fields: &photosFields
       - { label: "Titre", name: "title", widget: "string" }
       - {
           label: "Ordre d'affichage",
@@ -194,3 +212,13 @@ collections:
           - { label: "Titre produit", name: "title", widget: "string" }
           - { label: "Prix indicatif (€)", name: "price", widget: "number", value_type: "float" }
           - { label: "Lien affilié", name: "affiliateUrl", widget: "string" }
+
+  - name: "photos2"
+    label: "Vitrine 2 : Shoppable Photos"
+    folder: "src/content/photos2"
+    create: true
+    slug: "{{slug}}"
+    extension: "yaml"
+    format: "yaml"
+    reorder: true
+    fields: *photosFields

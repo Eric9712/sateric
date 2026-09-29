@@ -1,12 +1,13 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import site from '../data/site.json';
+import type { SiteData } from '../types';
 
 interface Props {
-  photo: CollectionEntry<'photos'>;
+  site: SiteData;
+  photo: CollectionEntry<'photos'> | CollectionEntry<'photos2'>;
 }
 
-const { photo } = Astro.props;
+const { site, photo } = Astro.props;
 const { title, image, imageWidth, imageHeight, hotspots } = photo.data;
 const showPrices = site.showPrices === true;
 const formatPrice = (n: number) => new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(n);

@@ -1,7 +1,8 @@
 ---
-import site from '../data/site.json';
+import type { SiteData } from '../types';
 
 interface Props {
+  site: SiteData;
   title: string;
   badge?: string;
   price: number;
@@ -12,7 +13,8 @@ interface Props {
   isStarterProduct?: boolean;
 }
 
-const { title, badge, price, originalPrice, image, affiliateUrl, listTitle, isStarterProduct = false } = Astro.props;
+const { site, title, badge, price, originalPrice, image, affiliateUrl, listTitle, isStarterProduct = false } =
+  Astro.props;
 
 // Sans accès Creators API (ex-PA-API), afficher un prix saisi à la main est
 // interdit par l'Operating Agreement Amazon Partenaires (le prix affiché doit

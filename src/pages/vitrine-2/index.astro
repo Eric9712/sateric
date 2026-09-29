@@ -1,14 +1,17 @@
 ---
+// Deuxième vitrine, indépendante de la page d'accueil : son propre nom, sa
+// propre description, ses propres listes/photos, gérés séparément dans
+// l'admin ("Vitrine 2 : ..."). Même structure de page que l'accueil.
 import { getCollection } from 'astro:content';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import TabsIdeaLists from '../components/TabsIdeaLists.astro';
-import ShoppablePhoto from '../components/ShoppablePhoto.astro';
-import Footer from '../components/Footer.astro';
-import site from '../data/site.json';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import TabsIdeaLists from '../../components/TabsIdeaLists.astro';
+import ShoppablePhoto from '../../components/ShoppablePhoto.astro';
+import Footer from '../../components/Footer.astro';
+import site from '../../data/site2.json';
 
-const lists = (await getCollection('lists')).sort((a, b) => a.data.order - b.data.order);
-const photos = (await getCollection('photos')).sort((a, b) => a.data.order - b.data.order);
+const lists = (await getCollection('lists2')).sort((a, b) => a.data.order - b.data.order);
+const photos = (await getCollection('photos2')).sort((a, b) => a.data.order - b.data.order);
 ---
 
 <BaseLayout

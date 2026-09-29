@@ -1,6 +1,12 @@
 ---
 import LegalBanner from './LegalBanner.astro';
-import site from '../data/site.json';
+import type { SiteData } from '../types';
+
+interface Props {
+  site: SiteData;
+}
+
+const { site } = Astro.props;
 
 // Icônes génériques (pas les logos officiels) + couleur de marque par réseau.
 // Toute plateforme non listée ici (champ libre dans /admin) retombe sur
@@ -49,7 +55,7 @@ const genericSocialStyle = {
 ---
 
 <header class="border-b border-neutral-100 bg-white">
-  <LegalBanner />
+  <LegalBanner site={site} />
 
   <div class="max-w-xl lg:max-w-5xl mx-auto px-4 py-4">
     <div class="flex items-center gap-4">

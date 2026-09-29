@@ -1,0 +1,11 @@
+order: 1
+title: "Exemple de photo (à remplacer dans l'admin)"
+image: "/images/placeholder-photo-spot.svg"
+imageWidth: 1200
+imageHeight: 1500
+hotspots:
+  - x: 50
+    y: 50
+    title: "Exemple de produit"
+    price: 9.90
+    affiliateUrl: "https://amzn.to/REMPLACER-EXEMPLE"

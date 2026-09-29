@@ -1,5 +1,11 @@
 ---
-import site from '../data/site.json';
+import type { SiteData } from '../types';
+
+interface Props {
+  site: SiteData;
+}
+
+const { site } = Astro.props;
 const year = new Date().getFullYear();
 ---
 

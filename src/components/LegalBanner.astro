@@ -3,7 +3,13 @@
 // du programme Amazon Partenaires. Éditable via /admin (avec avertissement) :
 // "Collaboration commerciale" et le texte de bénéfice sont des formulations
 // imposées, à ne pas remplacer par "ad"/"collab"/"partner" etc.
-import site from '../data/site.json';
+import type { SiteData } from '../types';
+
+interface Props {
+  site: SiteData;
+}
+
+const { site } = Astro.props;
 ---
 
 <div class="relative z-10 w-full bg-disclosure-bg shadow-sm">
