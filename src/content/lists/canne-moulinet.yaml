@@ -1,31 +1,49 @@
-title: "Ma canne et mon moulinet pour débuter"
-tabLabel: "Canne & moulinet"
-icon: "🎣"
 order: 1
+title: Ma canne
+tabLabel: Canne & moulinet
+icon: 🎣
+description: ''
 products:
-  - title: "Fil de pêche nylon 100m"
-    price: 9.90
-    image: "/images/placeholder-product.svg"
-    affiliateUrl: "https://amzn.to/REMPLACER1"
+  - title: Fil de pêche nylon 100m
+    badge: ''
+    price: 9.9
+    originalPrice: null
+    image: /images/placeholder-product.svg
+    affiliateUrl: https://amzn.to/REMPLACER1
     isStarterProduct: true
-  - title: "Canne télescopique 2,10m"
-    price: 34.90
-    originalPrice: 44.90
-    image: "/images/placeholder-product.svg"
-    affiliateUrl: "https://amzn.to/REMPLACER2"
-  - title: "Moulinet spinning taille 2000"
-    price: 42.00
-    image: "/images/uploads/pasted-image-1790642631833.png"
-    affiliateUrl: "https://amzn.to/REMPLACER3"
-  - title: "Hameçons assortis (boîte de 100)"
-    price: 11.90
-    image: "/images/placeholder-product.svg"
-    affiliateUrl: "https://amzn.to/REMPLACER4"
-  - title: "Plombs de pêche assortis"
-    price: 8.50
-    image: "/images/placeholder-product.svg"
-    affiliateUrl: "https://amzn.to/REMPLACER5"
-  - title: "Épuisette pliable"
-    price: 19.90
-    image: "/images/placeholder-product.svg"
-    affiliateUrl: "https://amzn.to/REMPLACER6"
+  - title: Canne télescopique 2,10m
+    badge: ''
+    price: 34.9
+    originalPrice: 44.9
+    image: /images/placeholder-product.svg
+    affiliateUrl: https://amzn.to/REMPLACER2
+    isStarterProduct: false
+  - title: Moulinet spinning taille 2000
+    badge: ''
+    price: 42
+    originalPrice: null
+    image: /images/uploads/pasted-image-1790642631833.png
+    affiliateUrl: https://amzn.to/REMPLACER3
+    isStarterProduct: false
+  - title: Hameçons assortis (boîte de 100)
+    badge: ''
+    price: 11.9
+    originalPrice: null
+    image: /images/placeholder-product.svg
+    affiliateUrl: https://amzn.to/REMPLACER4
+    isStarterProduct: false
+  - title: Plombs de pêche assortis
+    badge: ''
+    price: 8.5
+    originalPrice: null
+    image: /images/placeholder-product.svg
+    affiliateUrl: https://amzn.to/REMPLACER5
+    isStarterProduct: false
+  - title: Épuisette pliable
+    badge: ''
+    price: 19.9
+    originalPrice: null
+    image: /images/placeholder-product.svg
+    affiliateUrl: https://amzn.to/REMPLACER6
+    isStarterProduct: false
+subIdeas: []
