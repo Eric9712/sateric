@@ -46,6 +46,8 @@ collections:
     folder: "src/content/lists"
     create: true
     slug: "{{slug}}"
+    extension: "yaml"
+    format: "yaml"
     fields:
       - { label: "Titre de la liste (affiché en en-tête)", name: "title", widget: "string" }
       - {
@@ -102,6 +104,8 @@ collections:
     folder: "src/content/photos"
     create: true
     slug: "{{slug}}"
+    extension: "yaml"
+    format: "yaml"
     fields:
       - { label: "Titre", name: "title", widget: "string" }
       - { label: "Photo", name: "image", widget: "image" }
