@@ -5,6 +5,7 @@
   "metaDescription": "Retrouvez tout mon matériel de pêche recommandé : cannes, leurres, accessoires bateau/kayak et tenue. Liens affiliés Amazon.",
   "avatar": "/images/avatar-placeholder.svg",
   "amazonTag": "votretag-21",
+  "showPrices": false,
   "socials": [
     { "platform": "Instagram", "url": "https://instagram.com/votrepseudo" },
     { "platform": "TikTok", "url": "https://tiktok.com/@votrepseudo" },

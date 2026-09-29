@@ -27,6 +27,13 @@ collections:
             }
           - { label: "Avatar", name: "avatar", widget: "image" }
           - { label: "Tag Amazon (ex. moncompte-21)", name: "amazonTag", widget: "string" }
+          - {
+              label: "Afficher les prix sur le site",
+              name: "showPrices",
+              widget: "boolean",
+              default: false,
+              hint: "⚠️ Laissez désactivé tant que vous n'avez pas accès à la Creators API / Product Advertising API d'Amazon (accès obtenu après 3 ventes qualifiées, voir guide de déploiement étape 0). Sans cet accès, afficher un prix saisi à la main est interdit par l'Operating Agreement Amazon Partenaires — les prix changent en permanence et doivent venir d'un appel en temps réel, jamais d'une valeur fixe. Tant que c'est désactivé, les cartes produits affichent « Voir le prix → » sans montrer de chiffre.",
+            }
           - label: "Réseaux sociaux"
             name: "socials"
             widget: "list"
