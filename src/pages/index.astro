@@ -9,16 +9,37 @@ import VitrinePage from '../components/VitrinePage.astro';
 
 const vitrines = (await getCollection('vitrines')).sort((a, b) => a.data.order - b.data.order);
 const home = vitrines[0];
-const site = home.data;
 ---
 
-<BaseLayout title={`${site.name} — Mes recommandations`} description={site.metaDescription} ogImage={site.ogImage}>
-  <VitrinePage
-    vitrine={home}
-    switcherSites={vitrines.map((v) => ({
-      name: v.data.name,
-      href: v.id === home.id ? '/' : `/${v.id}`,
-      active: v.id === home.id,
-    }))}
-  />
-</BaseLayout>
+{
+  home ? (
+    <BaseLayout title={`${home.data.name} — Mes recommandations`} description={home.data.metaDescription} ogImage={home.data.ogImage}>
+      <VitrinePage
+        vitrine={home}
+        switcherSites={vitrines.map((v) => ({
+          name: v.data.name,
+          href: v.id === home.id ? '/' : `/${v.id}`,
+          active: v.id === home.id,
+        }))}
+      />
+    </BaseLayout>
+  ) : (
+    // La collection "vitrines" est vide (toutes supprimées depuis l'admin,
+    // ou site jamais initialisé) : message dédié plutôt qu'un plantage.
+    <BaseLayout title="Aucune vitrine configurée" description="Ce site n'a pas encore de vitrine.">
+      <main class="flex flex-1 flex-col items-center justify-center gap-4 px-4 py-16 text-center">
+        <span class="text-6xl" aria-hidden="true">🛠️</span>
+        <h1 class="text-2xl font-extrabold text-ink-900">Aucune vitrine configurée</h1>
+        <p class="max-w-xs text-sm text-neutral-600">
+          Ce site n'a pas encore de vitrine. Créez-en une depuis l'administration pour qu'elle apparaisse ici.
+        </p>
+        <a
+          href="/admin"
+          class="tap-target mt-2 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-brand-600 to-accent-600 px-6 py-3 text-sm font-bold text-white shadow-sm transition-transform active:scale-95"
+        >
+          Aller à l'administration
+        </a>
+      </main>
+    </BaseLayout>
+  )
+}

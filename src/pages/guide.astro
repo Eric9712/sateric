@@ -4,11 +4,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import CommissionTable from '../components/CommissionTable.astro';
 import CopyableTemplate from '../components/CopyableTemplate.astro';
 import Footer from '../components/Footer.astro';
+import { fallbackSite } from '../lib/defaultSite';
 
 // Page commune à toutes les vitrines (contenu non spécifique à un thème
 // produit) : on y affiche le nom de la vitrine d'accueil.
 const vitrines = (await getCollection('vitrines')).sort((a, b) => a.data.order - b.data.order);
-const site = vitrines[0].data;
+const site = vitrines[0]?.data ?? fallbackSite;
 
 const storyTemplate = `📢 Collaboration commerciale
 Lien en bio 🔗`;
