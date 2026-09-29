@@ -1,0 +1,21 @@
+# Vérifie chaque semaine que les liens affiliés Amazon répondent toujours.
+# Un échec de ce workflow envoie une notification par e-mail (comportement
+# par défaut de GitHub Actions) — c'est l'alerte "lien cassé".
+# Ne s'active qu'une fois ce dépôt poussé sur GitHub (voir guide de déploiement).
+name: Vérification des liens affiliés
+
+on:
+  schedule:
+    - cron: "0 7 * * 1" # tous les lundis à 7h UTC
+  workflow_dispatch: {}
+
+jobs:
+  check-links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npm run check-links
