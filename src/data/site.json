@@ -1,5 +1,5 @@
 {
-  "name": "boss rico",
+  "name": "Le Repaire du Pêcheur",
   "handle": "@Boseerico",
   "tagline": "Le Repaire du Pêcheur",
   "metaDescription": "Retrouvez tout mon matériel de pêche recommandé : cannes, leurres, accessoires bateau/kayak et tenue. Liens affiliés Amazon.",
@@ -7,18 +7,6 @@
   "ogImage": "",
   "amazonTag": "votretag-21",
   "showPrices": false,
-  "uiText": {
-    "legalBadge": "Collaboration commerciale",
-    "legalDisclosure": "En tant que Partenaire Amazon, je réalise un bénéfice sur les achats remplissant les conditions requises.",
-    "ideaListsHeading": "Mes listes d'idées",
-    "shoppablePhotosHeading": "En situation",
-    "shoppablePhotosSubtitle": "Touchez les pastilles sur les photos pour voir les produits.",
-    "affiliateLinkLabel": "Lien affilié",
-    "priceHiddenCta": "Voir le prix →",
-    "starterBadgeLabel": "Coup de cœur",
-    "shoppableCta": "Voir sur Amazon",
-    "footerGuideLinkText": "Cadre légal & règles du programme Amazon Partenaires"
-  },
   "socials": [
     {
       "platform": "Instagram",
@@ -32,5 +20,17 @@
       "platform": "YouTube",
       "url": "https://youtube.com/@votrepseudo"
     }
-  ]
+  ],
+  "uiText": {
+    "legalBadge": "Collaboration commerciale",
+    "legalDisclosure": "En tant que Partenaire Amazon, je réalise un bénéfice sur les achats remplissant les conditions requises.",
+    "ideaListsHeading": "Mes listes d'idées",
+    "shoppablePhotosHeading": "En situation",
+    "shoppablePhotosSubtitle": "Touchez les pastilles sur les photos pour voir les produits.",
+    "affiliateLinkLabel": "Lien affilié",
+    "priceHiddenCta": "Voir le prix →",
+    "starterBadgeLabel": "Coup de cœur",
+    "shoppableCta": "Voir sur Amazon",
+    "footerGuideLinkText": "Cadre légal & règles du programme Amazon Partenaires"
+  }
 }

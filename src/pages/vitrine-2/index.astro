@@ -5,6 +5,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
+import SiteSwitcher from '../../components/SiteSwitcher.astro';
 import TabsIdeaLists from '../../components/TabsIdeaLists.astro';
 import ShoppablePhoto from '../../components/ShoppablePhoto.astro';
 import Footer from '../../components/Footer.astro';
@@ -20,6 +21,12 @@ const photos = (await getCollection('photos2')).sort((a, b) => a.data.order - b.
   description={site.metaDescription}
   ogImage={site.ogImage}
 >
+  <SiteSwitcher
+    sites={[
+      { name: site1.name, href: '/', active: false },
+      { name: site.name, href: '/vitrine-2', active: true },
+    ]}
+  />
   <Header site={site} />
 
   <main>
@@ -39,5 +46,5 @@ const photos = (await getCollection('photos2')).sort((a, b) => a.data.order - b.
     </section>
   </main>
 
-  <Footer site={site} crossLink={{ href: '/', label: `Découvrir : ${site1.name} →` }} />
+  <Footer site={site} />
 </BaseLayout>
