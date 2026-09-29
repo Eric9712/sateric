@@ -20,22 +20,29 @@ const { title, image, imageWidth, imageHeight, hotspots } = photo;
 const photoId = nestedItemId(vitrineId, photoIndex, title);
 const showPrices = site.showPrices === true;
 const formatPrice = (n: number) => new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(n);
+// Marge de sécurité : une pastille tout au bord (0 ou 100 %) se ferait
+// à moitié couper par l'angle arrondi de la photo — on la garde toujours
+// entièrement visible et cliquable, quelle que soit la position saisie.
+const clampPercent = (n: number) => Math.min(94, Math.max(6, n));
 ---
 
-<figure class="relative w-full overflow-hidden rounded-2xl bg-neutral-100 shadow-md ring-1 ring-black/5">
-  <img
-    src={image}
-    alt={title}
-    width={imageWidth}
-    height={imageHeight}
-    loading="lazy"
-    decoding="async"
-    class="w-full h-auto"
-  />
+<figure class="w-full overflow-hidden rounded-2xl bg-neutral-100 shadow-md ring-1 ring-black/5">
+  {/* Positionnement des pastilles calculé sur cette zone (juste la photo),
+      pas sur toute la <figure> qui inclut aussi la légende en dessous. */}
+  <div class="relative">
+    <img
+      src={image}
+      alt={title}
+      width={imageWidth}
+      height={imageHeight}
+      loading="lazy"
+      decoding="async"
+      class="block w-full h-auto"
+    />
 
-  {
-    hotspots.map((h, i) => (
-      <div class="absolute" style={`left:${h.x}%; top:${h.y}%; transform: translate(-50%, -50%);`}>
+    {
+      hotspots.map((h, i) => (
+        <div class="absolute" style={`left:${clampPercent(h.x)}%; top:${clampPercent(h.y)}%; transform: translate(-50%, -50%);`}>
         <button
           type="button"
           class="tap-target relative flex items-center justify-center rounded-full bg-white/90 shadow-lg ring-2 ring-brand-500"
@@ -76,7 +83,8 @@ const formatPrice = (n: number) => new Intl.NumberFormat('fr-FR', { style: 'curr
         </div>
       </div>
     ))
-  }
+    }
+  </div>
   <figcaption class="bg-white px-3 py-2 text-sm font-semibold text-ink-900">{title}</figcaption>
 </figure>
 
