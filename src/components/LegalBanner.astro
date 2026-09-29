@@ -1,7 +1,9 @@
 ---
 // Mentions légales obligatoires : loi influenceurs 2023 (DGCCRF) + conditions
-// du programme Amazon Partenaires. Ne pas reformuler "Collaboration commerciale"
-// (les termes "ad", "collab", "partner" seuls sont jugés insuffisants).
+// du programme Amazon Partenaires. Éditable via /admin (avec avertissement) :
+// "Collaboration commerciale" et le texte de bénéfice sont des formulations
+// imposées, à ne pas remplacer par "ad"/"collab"/"partner" etc.
+import site from '../data/site.json';
 ---
 
 <div class="relative z-10 w-full bg-disclosure-bg shadow-sm">
@@ -10,11 +12,10 @@
       class="inline-flex self-center items-center gap-1.5 rounded-full bg-disclosure-border/25 px-3 py-1 text-sm font-bold text-disclosure-text"
     >
       <span class="flex h-4 w-4 items-center justify-center rounded-full bg-disclosure-text/15 text-[10px]" aria-hidden="true">📢</span>
-      Collaboration commerciale
+      {site.uiText.legalBadge}
     </span>
     <p class="text-xs text-disclosure-text leading-snug">
-      En tant que Partenaire Amazon, je réalise un bénéfice sur les achats
-      remplissant les conditions requises.
+      {site.uiText.legalDisclosure}
     </p>
   </div>
 </div>

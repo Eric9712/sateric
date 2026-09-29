@@ -60,9 +60,9 @@ const formatPrice = (n: number) => new Intl.NumberFormat('fr-FR', { style: 'curr
             data-product-price={h.price}
             class="tap-target mt-2 flex items-center justify-center rounded-full bg-gradient-to-r from-brand-600 to-accent-600 px-2 py-1.5 text-xs font-bold text-white shadow-sm transition-transform active:scale-95"
           >
-            Voir sur Amazon
+            {site.uiText.shoppableCta}
           </a>
-          <p class="mt-1 text-[10px] text-neutral-500">Lien affilié</p>
+          <p class="mt-1 text-[10px] text-neutral-500">{site.uiText.affiliateLinkLabel}</p>
         </div>
       </div>
     ))

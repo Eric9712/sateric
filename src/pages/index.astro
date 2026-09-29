@@ -24,9 +24,9 @@ const photos = await getCollection('photos');
       <div class="max-w-xl lg:max-w-5xl mx-auto rounded-3xl bg-gradient-to-br from-accent-400/10 to-brand-100/40 p-4 lg:p-6 shadow-sm ring-1 ring-black/5">
         <h2 id="shoppable-heading" class="mb-3 flex items-center gap-2 text-lg font-extrabold text-ink-900">
           <span class="h-5 w-1.5 rounded-full bg-gradient-to-b from-brand-500 to-accent-500" aria-hidden="true" />
-          En situation
+          {site.uiText.shoppablePhotosHeading}
         </h2>
-        <p class="mb-3 text-sm text-neutral-600">Touchez les pastilles sur les photos pour voir les produits.</p>
+        <p class="mb-3 text-sm text-neutral-600">{site.uiText.shoppablePhotosSubtitle}</p>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {photos.map((photo) => <ShoppablePhoto photo={photo} />)}
         </div>

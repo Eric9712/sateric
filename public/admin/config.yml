@@ -37,9 +37,41 @@ collections:
           - label: "Réseaux sociaux"
             name: "socials"
             widget: "list"
+            summary: "{{platform}}"
             fields:
-              - { label: "Plateforme", name: "platform", widget: "select", options: ["Instagram", "TikTok", "YouTube"] }
+              - {
+                  label: "Plateforme",
+                  name: "platform",
+                  widget: "string",
+                  hint: "Icône et couleur reconnues pour : Instagram, TikTok, YouTube, Facebook, Pinterest, X (Twitter), Snapchat, Twitch. Toute autre valeur tapée ici fonctionne aussi (icône générique).",
+                }
               - { label: "URL", name: "url", widget: "string" }
+          - label: "Textes de l'interface"
+            name: "uiText"
+            widget: "object"
+            collapsed: true
+            hint: "Tous les libellés affichés sur le site, modifiables ici sans toucher au code."
+            fields:
+              - {
+                  label: "Badge mention légale",
+                  name: "legalBadge",
+                  widget: "string",
+                  hint: "⚠️ Formulation imposée par la loi française (« Collaboration commerciale » ou « Publicité » uniquement — pas « ad », « collab », « partner »).",
+                }
+              - {
+                  label: "Texte de la mention légale Amazon",
+                  name: "legalDisclosure",
+                  widget: "text",
+                  hint: "⚠️ Mention contractuelle Amazon Partenaires — à garder proche du texte d'origine.",
+                }
+              - { label: "Titre section « Listes d'idées »", name: "ideaListsHeading", widget: "string" }
+              - { label: "Titre section « Shoppable Photos »", name: "shoppablePhotosHeading", widget: "string" }
+              - { label: "Sous-titre section « Shoppable Photos »", name: "shoppablePhotosSubtitle", widget: "string" }
+              - { label: "Mention « Lien affilié »", name: "affiliateLinkLabel", widget: "string" }
+              - { label: "Texte du bouton quand le prix est masqué", name: "priceHiddenCta", widget: "string" }
+              - { label: "Libellé du badge produit d'appel (lu par les lecteurs d'écran)", name: "starterBadgeLabel", widget: "string" }
+              - { label: "Texte du bouton dans les Shoppable Photos", name: "shoppableCta", widget: "string" }
+              - { label: "Texte du lien vers le guide (pied de page)", name: "footerGuideLinkText", widget: "string" }
 
   - name: "lists"
     label: "Listes d'idées"

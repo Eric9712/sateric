@@ -47,7 +47,7 @@ const discountPercent = hasDiscount ? Math.round((1 - price / originalPrice) * 1
     isStarterProduct && (
       <span class="absolute top-1.5 left-1.5 z-10 flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-brand-600 to-accent-600 text-xs shadow-md">
         <span aria-hidden="true">🔥</span>
-        <span class="sr-only">Coup de cœur</span>
+        <span class="sr-only">{site.uiText.starterBadgeLabel}</span>
       </span>
     )
   }
@@ -78,10 +78,10 @@ const discountPercent = hasDiscount ? Math.round((1 - price / originalPrice) * 1
           {hasDiscount && <span class="text-[10px] text-neutral-400 line-through">{originalPriceLabel}</span>}
         </div>
       ) : (
-        <p class="mt-auto pt-1 text-[11px] font-bold text-brand-600">Voir le prix →</p>
+        <p class="mt-auto pt-1 text-[11px] font-bold text-brand-600">{site.uiText.priceHiddenCta}</p>
       )
     }
-    <p class="text-[9px] text-neutral-400">Lien affilié</p>
+    <p class="text-[9px] text-neutral-400">{site.uiText.affiliateLinkLabel}</p>
   </div>
 </a>
 
