@@ -80,6 +80,7 @@ collections:
     slug: "{{slug}}"
     extension: "yaml"
     format: "yaml"
+    reorder: true
     fields:
       - { label: "Titre de la liste (affiché en en-tête)", name: "title", widget: "string" }
       - {
@@ -90,7 +91,14 @@ collections:
           hint: "Laissez vide pour réutiliser le titre complet — mais un libellé de 1 à 3 mots évite que l'onglet déborde sur mobile.",
         }
       - { label: "Icône (emoji)", name: "icon", widget: "string", required: false }
-      - { label: "Ordre d'affichage", name: "order", widget: "number", value_type: "int", default: 1 }
+      - {
+          label: "Ordre d'affichage",
+          name: "order",
+          widget: "number",
+          value_type: "int",
+          default: 1,
+          hint: "Plus petit = affiché en premier. Plus simple : depuis la liste des « Listes d'idées », bouton « Réorganiser » puis flèches ↑↓ sur chaque entrée — ce champ se met à jour automatiquement.",
+        }
       - label: "Produits"
         name: "products"
         widget: "list"
@@ -138,8 +146,17 @@ collections:
     slug: "{{slug}}"
     extension: "yaml"
     format: "yaml"
+    reorder: true
     fields:
       - { label: "Titre", name: "title", widget: "string" }
+      - {
+          label: "Ordre d'affichage",
+          name: "order",
+          widget: "number",
+          value_type: "int",
+          default: 1,
+          hint: "Plus petit = affiché en premier. Plus simple : depuis la liste des « Shoppable Photos », bouton « Réorganiser » puis flèches ↑↓ — ce champ se met à jour automatiquement.",
+        }
       - { label: "Photo", name: "image", widget: "image" }
       - { label: "Largeur réelle (px)", name: "imageWidth", widget: "number", value_type: "int" }
       - { label: "Hauteur réelle (px)", name: "imageHeight", widget: "number", value_type: "int" }

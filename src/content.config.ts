@@ -41,6 +41,7 @@ const photos = defineCollection({
   loader: glob({ pattern: '**/*.yaml', base: './src/content/photos' }),
   schema: z.object({
     title: z.string(),
+    order: z.number().default(0),
     image: z.string(),
     imageWidth: z.number(),
     imageHeight: z.number(),
